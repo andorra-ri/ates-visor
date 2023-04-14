@@ -1,0 +1,65 @@
+{
+  "root": true,
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended",
+    "@vue/eslint-config-typescript/recommended"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["vue", "@typescript-eslint"],
+  "rules": {
+    "max-len": ["error", {
+      "code": 100,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true
+    }],
+    "no-param-reassign": ["error", { "props": false }],
+    "object-curly-newline": ["error", { "multiline": true }],
+    "arrow-parens": ["error", "as-needed"],
+    "object-shorthand": ["error", "always", { "avoidQuotes": false }],
+    "no-nested-ternary": "off",
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "import/no-absolute-path": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "vue/component-tags-order": ["error", { "order": ["template", "script", "style"] }],
+    "vue/multi-word-component-names": "off",
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "never"
+    }],
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": 3,
+      "multiline": 1
+    }],
+    "vue/singleline-html-element-content-newline": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { "ts": "never" }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "eslint-import-resolver-custom-alias": {
+        "alias": { "/@": "./src" },
+        "extensions": [".ts", ".json", ".vue", ".yaml"]
+      }
+    }
+  }
+}
