@@ -56,3 +56,26 @@ layers:
           name: borders
           labels:
             white: false
+  
+  TERRAIN:
+    name: terrain
+    under: borders
+    legend:
+      terrain: true
+    layers:
+      - name: terrain
+        type: fill
+        paint:
+          fill-color: [match, [get, grade],
+            SIMPLE, '#c7df8b',
+            CHALLENGING, '#3681b6',
+            COMPLEX, '#434343',
+            transparent]
+          fill-opacity: 0.5
+        metadata:
+          name: terrain
+          labels:
+            SIMPLE: simple
+            CHALLENGING: challenging
+            COMPLET: complex
+            other: false
