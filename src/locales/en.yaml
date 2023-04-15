@@ -1,1 +1,6 @@
 ates: Avalanche Terrain Exposure Scale
+
+map:
+  legend:
+    borders:
+      title: Borders

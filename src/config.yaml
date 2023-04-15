@@ -1,0 +1,58 @@
+map:
+  center: [1.570498, 42.540997]
+  zoom: 11
+  minZoom: 10
+  maxZoom: 16
+  maxBounds: [[1.3, 42.3], [1.8, 42.8]]
+  style: mapbox://styles/mapbox/outdoors-v12
+
+  legend:
+    toggler: true
+    collapsed: false
+    layers: []
+
+  controls:
+    Styles:
+      position: top-right
+      styles:
+        - name: Mapbox Outdoors
+          url: mapbox://styles/mapbox/outdoors-v12
+          label: Topogràfic
+        - name: Mapbox Satellite
+          url: mapbox://styles/mapbox/satellite-v9
+          label: Satèl·lit
+    Navigation:
+      position: top-right
+      showZoom: true
+      showCompass: true
+      visualizePitch: true
+    Terrain:
+      position: top-right
+      pitch: 60
+      exaggeration: 1
+      sky:
+        sky-type: atmosphere
+        sky-atmosphere-sun: [0.0, 0.0]
+        sky-atmosphere-sun-intensity: 15
+    Scale:
+      position: bottom-left
+      maxWidth: 100
+      unit: metric
+
+layers:
+  BORDERS:
+    name: borders
+    source: /layers/andorra_borders.geojson
+    legend:
+      borders: true
+    layers:
+      - name: borders
+        type: line
+        paint:
+          line-color: white
+          line-dasharray: [4, 2, 1, 2]
+          line-width: 2
+        metadata:
+          name: borders
+          labels:
+            white: false
