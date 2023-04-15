@@ -1,4 +1,6 @@
 import { camelizeKeys } from 'humps';
+import { adaptTerrain, adaptRoute } from './adapters';
+import type { Terrain, Route } from './types';
 
 const { VITE_SUPABASE_URL, VITE_SUPABASE_TOKEN } = import.meta.env;
 
@@ -12,4 +14,14 @@ const query = async <T>(endpoint: string) => {
   } catch {
     throw new Error('ERROR_SUPABASE_LOAD');
   }
+};
+
+export const getTerrains = async () => {
+  const terrains = await query<Terrain[]>('/terrains');
+  return terrains.map(adaptTerrain);
+};
+
+export const getRoutes = async () => {
+  const routes = await query<Route[]>('/routes');
+  return routes.map(adaptRoute);
 };

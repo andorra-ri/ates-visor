@@ -1,11 +1,4 @@
-import type { Ref, DeepReadonly } from 'vue';
-import type { Point, LineString, Polygon, MultiPolygon } from '@turf/helpers';
-
-/* UTILITY TYPES */
-export type MaybeRef<T> = T | Ref<T>;
-export type MaybeReadonly<T> = T | DeepReadonly<T>;
-
-/* DOMAIN TYPES */
+import type { Polygon, MultiPolygon } from '@turf/helpers';
 
 export type Grade = 'SIMPLE' | 'CHALLENGING' | 'COMPLEX';
 
@@ -15,15 +8,20 @@ export type Terrain = {
   id: string;
   grade: Grade;
   geometry: Polygon | MultiPolygon;
+  updatedAt: string;
+  createdAt: string;
 };
 
 export type Route = {
-  name: string;
   code: string;
+  name: string;
   grade: Grade;
-  duration: number;
-  distance: number;
   verticalDrop: number;
   orientation: Orientation[];
   circular: boolean;
+  duration: number;
+  distance: number;
+  createdAt: string;
+  updatedAt: string;
+  _link: string;
 };

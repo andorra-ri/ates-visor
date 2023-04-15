@@ -4,3 +4,8 @@ map:
   legend:
     borders:
       title: Borders
+    terrain:
+      title: Terrain
+      simple: Simple
+      challenging: Challenging
+      complex: Complex
