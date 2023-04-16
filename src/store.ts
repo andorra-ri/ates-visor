@@ -1,4 +1,4 @@
-import { reactive, readonly } from 'vue';
+import { reactive } from 'vue';
 import { supabase } from '/@/services';
 import type { Terrain, Route } from '/@/types';
 
@@ -21,7 +21,7 @@ const loadRoutes = async () => {
 };
 
 export default {
-  state: readonly(state),
+  state,
   loadTerrain,
   loadRoutes,
 };
