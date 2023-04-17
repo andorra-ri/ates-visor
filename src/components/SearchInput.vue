@@ -1,11 +1,14 @@
 <template>
   <label class="label">
     <em>{{ t('search') }}</em>
-    <input
-      v-model="searchFor"
-      :placeholder="props.placeholder || t('search_placeholder')"
-      size="10"
-      type="text">
+    <div class="input">
+      <span class="icon magnifier" />
+      <input
+        v-model="searchFor"
+        :placeholder="props.placeholder || t('search_placeholder')"
+        size="15"
+        type="text">
+    </div>
   </label>
 </template>
 
