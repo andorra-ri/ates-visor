@@ -1,9 +1,11 @@
 <template>
   <div id="map" />
+  <Toolbar />
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
+import { Toolbar } from '/@/layouts';
 import { createMap, useMap } from '/@/composables';
 import store from '/@/store';
 import { json } from '/@/utils';

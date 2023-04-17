@@ -1,5 +1,32 @@
 ates: Avalanche Terrain Exposure Scale
 
+search: Search
+search_placeholder: Search
+filter: Filter
+sort: Sort
+sort_placeholder: Select
+none: None
+
+grade:
+  SIMPLE: Simple
+  CHALLENGING: Challenging
+  COMPLEX: Complex
+
+sorter:
+  name: Name
+  distance: Distance
+  duration: Duration
+  grade: Grade
+
+route:
+  label: Route
+  select_route: Choose a route
+  empty: No routes available
+  search_for: Search for routes
+  fields:
+    duration: Duration
+    distance: Distance
+
 map:
   legend:
     borders:
