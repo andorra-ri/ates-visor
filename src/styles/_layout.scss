@@ -1,0 +1,34 @@
+%container {
+  background: var(--color-bg, #fff);
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
+}
+
+%container-strong {
+  @extend %container;
+
+  border: 0;
+  box-shadow:
+    0 0 0 0.125rem var(--color-border),
+    0 0.25rem 0.75rem 0 var(--color-border);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: 1rem / 1 var(--font-family), sans-serif;
+}
+
+#app {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+[data-empty]:empty::before {
+  content: attr(data-empty);
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0.5;
+}

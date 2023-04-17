@@ -17,5 +17,13 @@ export default defineConfig({
       { find: '/@', replacement: path.resolve(__dirname, './src') },
     ],
   },
-  css: { postcss: { plugins: [autoprefixer] } },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "./src/styles/layout.scss";
+        `,
+      },
+    },
+    postcss: { plugins: [autoprefixer] } },
 });
