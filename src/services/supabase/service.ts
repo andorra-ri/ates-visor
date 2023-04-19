@@ -1,6 +1,6 @@
 import { camelizeKeys } from 'humps';
-import { adaptTerrain, adaptListRoute, adaptRoute } from './adapters';
-import type { Terrain, ListRoute, Route } from './types';
+import { adaptTerrain, adaptListRoute, adaptRoute, adaptWaypoint } from './adapters';
+import type { Terrain, ListRoute, Route, Waypoint } from './types';
 
 type QueryOptions = {
   qs?: Record<string, string>;
@@ -43,4 +43,15 @@ export const getRoute = async (code: string) => {
     },
   });
   return adaptRoute(route);
+};
+
+export const getWaypoints = async (routeCode: string) => {
+  const fields = ['name:name_ca', 'description:description_ca', '*'];
+  const waypoints = await query<Waypoint[]>('waypoints', {
+    qs: {
+      select: fields.join(','),
+      route_codes: `cs.{${routeCode}}`,
+    },
+  });
+  return waypoints.map(adaptWaypoint);
 };

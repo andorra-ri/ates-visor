@@ -1,4 +1,4 @@
-import type { LineString, Polygon, MultiPolygon } from '@turf/helpers';
+import type { Point, LineString, Polygon, MultiPolygon } from '@turf/helpers';
 
 export type Grade = 'SIMPLE' | 'CHALLENGING' | 'COMPLEX';
 
@@ -40,3 +40,11 @@ export type Route = {
 
 export type ListRoute = Omit<Route, 'description' | 'trails'>;
 
+export type Waypoint = {
+  id: number;
+  kind: 'DECISION' | 'ALERT';
+  name: string;
+  description: string;
+  routeCodes: string[];
+  geometry: Point;
+};

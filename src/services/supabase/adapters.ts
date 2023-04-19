@@ -3,8 +3,9 @@ import type {
   Trail as TrailDTO,
   Route as RouteDTO,
   ListRoute as ListRouteDTO,
+  Waypoint as WaypointDTO,
 } from './types';
-import type { Terrain, Trail, Route, ListRoute } from '/@/types';
+import type { Terrain, Trail, Route, ListRoute, Waypoint } from '/@/types';
 
 export const adaptTerrain = (terrain: TerrainDTO): Terrain => terrain;
 
@@ -22,4 +23,9 @@ export const adaptRoute = (route: RouteDTO): Route => {
   const { createdAt, updatedAt, ...rest } = route;
   const trails = route.trails.map(adaptTrail);
   return { ...rest, trails };
+};
+
+export const adaptWaypoint = (waypoint: WaypointDTO): Waypoint => {
+  const { routeCodes, ...rest } = waypoint;
+  return rest;
 };

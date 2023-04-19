@@ -37,4 +37,11 @@ export type Route = {
 };
 
 export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance'>;
+
+export type Waypoint = {
+  id: number;
+  kind: 'DECISION' | 'ALERT';
+  name: string;
+  description: string;
+  geometry: Point;
 };
