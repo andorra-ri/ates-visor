@@ -35,19 +35,19 @@ import { Dropdown, PickList, SearchInput, SortInput } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import RouteFilters from './RouteFilters.vue';
-import type { Route, Grade } from '/@/types';
+import type { ListRoute, Grade } from '/@/types';
 
 const props = defineProps<{
-  routes: Route[];
+  routes: ListRoute[];
 }>();
 
 const emit = defineEmits<{(event: 'select', code: string | undefined): void;}>();
 
-const { sort, sorters } = useSorters<Route>();
-const { filter } = useFilters<Route>();
+const { sort, sorters } = useSorters<ListRoute>();
+const { filter } = useFilters<ListRoute>();
 
 const GRADES: Grade[] = ['SIMPLE', 'CHALLENGING', 'COMPLEX'];
-const SORTERS: Record<string, Sorter<Route>> = {
+const SORTERS: Record<string, Sorter<ListRoute>> = {
   name: sorters.ON(route => route.name, sorters.ASC),
   grade: sorters.ON(route => route.grade, sorters.LIST(GRADES)),
   distance: sorters.ON(route => route.distance, sorters.ASC),
@@ -66,7 +66,7 @@ const routes = sort([
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
 
-const selected = ref<Route>();
+const selected = ref<ListRoute>();
 watch(selected, route => emit('select', route?.code));
 
 const { t } = useI18n();

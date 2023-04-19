@@ -1,6 +1,25 @@
-import type { Terrain as STerrain, Route as SRoute } from './types';
-import type { Terrain, Route } from '/@/types';
+import type {
+  Terrain as TerrainDTO,
+  Trail as TrailDTO,
+  Route as RouteDTO,
+  ListRoute as ListRouteDTO,
+} from './types';
+import type { Terrain, Trail, Route, ListRoute } from '/@/types';
 
-export const adaptTerrain = (terrain: STerrain): Terrain => terrain;
+export const adaptTerrain = (terrain: TerrainDTO): Terrain => terrain;
 
-export const adaptRoute = (route: SRoute): Route => route;
+export const adaptListRoute = (route: ListRouteDTO): ListRoute => {
+  const { code, name, grade, duration, distance } = route;
+  return { code, name, grade, duration, distance };
+};
+
+export const adaptTrail = (trail: TrailDTO): Trail => {
+  const { main, down, geometry } = trail;
+  return { main, down, geometry };
+};
+
+export const adaptRoute = (route: RouteDTO): Route => {
+  const { createdAt, updatedAt, ...rest } = route;
+  const trails = route.trails.map(adaptTrail);
+  return { ...rest, trails };
+};

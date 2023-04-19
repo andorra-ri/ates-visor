@@ -5,10 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { RouteSelect } from './partials';
 import store from '/@/store';
-import type { Route } from '/@/types';
 
 </script>
 

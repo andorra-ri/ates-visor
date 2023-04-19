@@ -17,13 +17,24 @@ export type Terrain = {
   geometry: Polygon | MultiPolygon;
 };
 
+export type Trail = {
+  main: boolean;
+  down: boolean;
+  geometry: LineString;
+};
+
 export type Route = {
-  name: string;
   code: string;
+  name: string;
+  description: string;
   grade: Grade;
   duration: number;
   distance: number;
   verticalDrop: number;
   orientation: Orientation[];
   circular: boolean;
+  trails: Trail[];
+};
+
+export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance'>;
 };

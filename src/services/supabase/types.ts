@@ -1,4 +1,4 @@
-import type { Polygon, MultiPolygon } from '@turf/helpers';
+import type { LineString, Polygon, MultiPolygon } from '@turf/helpers';
 
 export type Grade = 'SIMPLE' | 'CHALLENGING' | 'COMPLEX';
 
@@ -12,16 +12,31 @@ export type Terrain = {
   createdAt: string;
 };
 
+export type Trail = {
+  id: number;
+  main: boolean;
+  down: boolean;
+  duration: number;
+  routeCode: string;
+  geometry: LineString;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type Route = {
   code: string;
   name: string;
+  description: string;
   grade: Grade;
+  duration: number;
+  distance: number;
   verticalDrop: number;
   orientation: Orientation[];
   circular: boolean;
-  duration: number;
-  distance: number;
+  trails: Trail[];
   createdAt: string;
   updatedAt: string;
-  _link: string;
 };
+
+export type ListRoute = Omit<Route, 'description' | 'trails'>;
+

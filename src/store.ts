@@ -1,10 +1,10 @@
 import { reactive } from 'vue';
 import { supabase } from '/@/services';
-import type { Terrain, Route } from '/@/types';
+import type { Terrain, ListRoute } from '/@/types';
 
 type State = {
   terrain: Terrain[];
-  routes: Route[];
+  routes: ListRoute[];
 };
 
 const state = reactive<State>({
