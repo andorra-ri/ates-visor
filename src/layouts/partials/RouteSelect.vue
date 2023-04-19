@@ -3,7 +3,7 @@
     <template #toggle>
       <div class="route-select__toggle label">
         <em>{{ t('route.label') }}</em>
-        {{ props.modelValue?.name || t('route.select_route') }}
+        {{ selected?.name || t('route.select_route') }}
       </div>
     </template>
     <div class="route-select__panel">
@@ -13,7 +13,7 @@
         <RouteFilters v-model="filters.grades" />
       </aside>
       <PickList
-        v-model="route"
+        v-model="selected"
         :options="routes"
         :data-empty="t('route.empty')"
         class="route-select__list">
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRef, computed } from 'vue';
+import { ref, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, PickList, SearchInput, SortInput } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
@@ -38,11 +38,10 @@ import RouteFilters from './RouteFilters.vue';
 import type { Route, Grade } from '/@/types';
 
 const props = defineProps<{
-  modelValue: Route | undefined;
   routes: Route[];
 }>();
 
-const emit = defineEmits<{(event: 'update:modelValue', value: Route | undefined): void;}>();
+const emit = defineEmits<{(event: 'select', code: string | undefined): void;}>();
 
 const { sort, sorters } = useSorters<Route>();
 const { filter } = useFilters<Route>();
@@ -67,10 +66,8 @@ const routes = sort([
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
 
-const route = computed({
-  get: () => props.modelValue,
-  set: value => emit('update:modelValue', value),
-});
+const selected = ref<Route>();
+watch(selected, route => emit('select', route?.code));
 
 const { t } = useI18n();
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar">
-    <RouteSelect v-model="route" :routes="store.state.routes" />
+    <RouteSelect :routes="store.state.routes" />
   </div>
 </template>
 
@@ -10,7 +10,6 @@ import { RouteSelect } from './partials';
 import store from '/@/store';
 import type { Route } from '/@/types';
 
-const route = ref<Route>();
 </script>
 
 <style lang="scss" scoped>
