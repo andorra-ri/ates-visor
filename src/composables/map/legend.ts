@@ -10,16 +10,16 @@ const legend = new Deferred<LegendControl>();
 
 export default (map: Deferred<Map>) => {
   const createLegend = async (options: LegendControlOptions) => {
-    const resolved = await map.promise;
-    const { addControl } = useControls(resolved);
+    const _map = await map.promise;
+    const { addControl } = useControls(_map);
     const control = new LegendControl(options);
     addControl(LEGEND_NAME, 'bottom-right', control);
     legend.resolve(control);
   };
 
   const removeLegend = async () => {
-    const resolved = await map.promise;
-    const { removeControl } = useControls(resolved);
+    const _map = await map.promise;
+    const { removeControl } = useControls(_map);
     removeControl(LEGEND_NAME);
     legend.reset();
   };

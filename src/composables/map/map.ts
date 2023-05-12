@@ -11,7 +11,6 @@ const map = new Deferred<Map>();
 
 export const createMap = async (container: string | HTMLElement, options: MapOptions) => {
   const { controls = {}, ...mapOptions } = options;
-  // eslint-disable-next-line no-underscore-dangle
   const _map = await useMapbox(container, {
     accessToken: VITE_MAPBOX_TOKEN,
     ...mapOptions,
@@ -27,7 +26,6 @@ export const createMap = async (container: string | HTMLElement, options: MapOpt
   map.resolve(_map);
 };
 
-/* eslint-disable no-underscore-dangle */
 export const useMap = () => {
   const legend = useLegend(map);
   const layer = useLayer(map);

@@ -15,8 +15,8 @@ export default (map: Deferred<Map>) => {
     });
 
     (async () => {
-      const resolved = await map.promise;
-      popup.value = usePopup(resolved, _options.value);
+      const _map = await map.promise;
+      popup.value = usePopup(_map, _options.value);
     })();
 
     const bindClick = ({ lngLat, features }: MapMouseEvent) => {

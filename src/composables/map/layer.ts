@@ -16,9 +16,9 @@ export default (map: Deferred<Map>) => {
     const layer = ref<ReturnType<typeof useGeoJSON>>();
 
     (async () => {
-      const resolved = await map.promise;
       const { legend, ...layerOptions } = _options.value;
-      layer.value = useGeoJSON(resolved, adaptLayers(layerOptions));
+      const _map = await map.promise;
+      layer.value = useGeoJSON(_map, adaptLayers(layerOptions));
       if (legend) addLegendLayers(legend);
     })();
 
