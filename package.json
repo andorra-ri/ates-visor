@@ -9,6 +9,7 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@turf/bbox": "^6.5.0",
     "@turf/helpers": "^6.5.0",
     "humps": "^2.0.1",
     "mapbox-composition": "^1.11.2",

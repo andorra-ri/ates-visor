@@ -36,3 +36,7 @@ map:
       simple: Simple
       challenging: Challenging
       complex: Complex
+    route:
+      title: Routes
+      ascend: Ascent
+      descend: Descent

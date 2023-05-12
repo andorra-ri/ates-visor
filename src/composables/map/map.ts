@@ -2,6 +2,7 @@ import { useMap as useMapbox, useControls } from 'mapbox-composition';
 import useLegend from './legend';
 import useLayer from './layer';
 import usePopup from './popup';
+import useAsync from './async';
 import { Deferred } from '/@/utils';
 import type { Map, MapOptions } from './types';
 
@@ -30,6 +31,7 @@ export const useMap = () => {
   const legend = useLegend(map);
   const layer = useLayer(map);
   const popup = usePopup(map);
+  const async = useAsync(map);
 
-  return { ...legend, ...layer, ...popup };
+  return { ...legend, ...layer, ...popup, ...async };
 };

@@ -1,13 +1,14 @@
 <template>
   <div class="toolbar">
-    <RouteSelect :routes="store.state.routes" />
+    <RouteSelect
+      :routes="store.state.routes"
+      @select="store.selectRoute" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { RouteSelect } from './partials';
 import store from '/@/store';
-
 </script>
 
 <style lang="scss" scoped>

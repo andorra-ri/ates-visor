@@ -11,5 +11,6 @@ import type { MaybeRef } from '/@/types';
 export type { Map, MapOptions, PopupOptions, MapMouseEvent };
 
 export type LayerOptions = MaybeRef<{
-  legend: Record<string, LegendLayerOptions>;
+  images?: Record<string, string>;
+  legend?: Record<string, LegendLayerOptions>;
 } & GeoJSONLayerOptions>;

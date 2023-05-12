@@ -79,3 +79,55 @@ layers:
             CHALLENGING: challenging
             COMPLET: complex
             other: false
+
+  ROUTE:
+    name: route
+    legend:
+      route:
+        highlight: true
+    images:
+      ascend: /images/map/sprite_arrow_red.png
+      descend: /images/map/sprite_arrow_orange.png
+    layers:
+      - name: route
+        type: line
+        layout:
+          line-cap: round
+          line-join: round
+        paint:
+          line-width: [interpolate, [exponential, 2], [zoom], 10, 6, 16, 18]
+          line-pattern: [match, [to-number, [get, down]],
+            0, ascend,
+            1, ascend,
+            ascend]
+        metadata:
+          name: route
+          labels:
+            1: descend
+            0: ascend
+            other: false
+  
+  WAYPOINTS:
+    name: waypoints
+    images:
+      alert: /images/map/alert.png
+    layers:
+      - name: decisions
+        type: circle
+        paint:
+          circle-color: '#d90429'
+          circle-stroke-color: '#d90429'
+          circle-stroke-opacity: 0.5
+          circle-stroke-width: [interpolate, [exponential, 2], [zoom], 10, 4, 16, 25]
+          circle-radius: [interpolate, [exponential, 2], [zoom], 10, 3, 16, 15]
+          circle-pitch-alignment: map
+        filter: [==, [get, kind], DECISION]
+      - name: alerts
+        type: symbol
+        layout:
+          icon-image: alert
+          icon-anchor: bottom
+          icon-size: [interpolate, [linear], [zoom], 10, 0.1, 16, 0.75]
+          icon-rotation-alignment: viewport
+          icon-allow-overlap: true
+        filter: [==, [get, kind], ALERT]
