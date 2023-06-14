@@ -1,36 +1,28 @@
 import { ref, watch, effectScope, onUnmounted } from 'vue';
-import { useGeoJSON, useImages } from 'mapbox-composition';
+import { useGeoJSON } from 'mapbox-composition';
 import { useI18n } from 'vue-i18n';
 import useAdapters from './adapters';
 import useLegend from './legend';
+import useImages from './images';
 import type { Map, LayerOptions } from './types';
 import type { Deferred } from '/@/utils';
 
 export default (map: Deferred<Map>) => {
   const { locale } = useI18n();
   const { adaptLayers } = useAdapters();
-  const { addLegendLayers } = useLegend(map);
+  const { addLegendLayers, removeLegendLayers } = useLegend(map);
+  const { addImages, removeImages, updateImages } = useImages(map);
 
   const addLayer = (options: LayerOptions) => {
     const _options = ref(options); // eslint-disable-line no-underscore-dangle
     const layer = ref<ReturnType<typeof useGeoJSON>>();
-
-    const updateImages = async (images: Record<string, string>) => {
-      const _map = await map.promise;
-      const { addImages, removeImages } = useImages(_map);
-      removeImages(Object.keys(images));
-      addImages(images);
-    };
 
     (async () => {
       const { legend, images, ...layerOptions } = _options.value;
       const _map = await map.promise;
       layer.value = useGeoJSON(_map, adaptLayers(layerOptions));
       if (legend) addLegendLayers(legend);
-      if (images) {
-        updateImages(images);
-        _map.on('styleload', updateImages);
-      }
+      if (images) addImages(images);
     })();
 
     const scope = effectScope();
@@ -49,13 +41,16 @@ export default (map: Deferred<Map>) => {
       });
     });
 
-    onUnmounted(async () => {
-      const _map = await map.promise;
+    const removeLayer = () => {
+      const { legend, images } = _options.value;
       scope.stop();
       layer.value?.clearSource();
       layer.value = undefined;
-      _map.off('styleload', updateImages);
-    });
+      if (legend) removeLegendLayers(Object.keys(legend));
+      if (images) removeImages(Object.keys(images));
+    };
+
+    onUnmounted(removeLayer);
 
     return layer;
   };

@@ -3,6 +3,7 @@ import useLegend from './legend';
 import useLayer from './layer';
 import usePopup from './popup';
 import useAsync from './async';
+import useImages from './images';
 import { Deferred } from '/@/utils';
 import type { Map, MapOptions } from './types';
 
@@ -32,6 +33,7 @@ export const useMap = () => {
   const layer = useLayer(map);
   const popup = usePopup(map);
   const async = useAsync(map);
+  const images = useImages(map);
 
-  return { ...legend, ...layer, ...popup, ...async };
+  return { ...legend, ...layer, ...popup, ...async, ...images };
 };
