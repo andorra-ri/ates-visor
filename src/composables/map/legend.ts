@@ -1,7 +1,7 @@
 import { unref } from 'vue';
 import { useControls, type Map, type ControlOptions } from 'mapbox-composition';
 import LegendControl, { type LayerOptions as LegendLayerOptions } from 'mapboxgl-legend';
-import { Deferred } from '/@/utils';
+import { Deferred } from './utils';
 import type { MaybeRef } from '/@/types';
 
 const LEGEND_POSITION = 'bottom-right';

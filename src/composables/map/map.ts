@@ -3,7 +3,7 @@ import useLegend from './legend';
 import useLayer from './layer';
 import usePopup from './popup';
 import useAsync from './async';
-import { Deferred } from '/@/utils';
+import { Deferred, geo } from './utils';
 
 const { VITE_MAPBOX_TOKEN } = import.meta.env;
 
@@ -23,5 +23,5 @@ export const useMap = () => {
   const popup = usePopup(map);
   const async = useAsync(map);
 
-  return { ...legend, ...layer, ...popup, ...async };
+  return { ...legend, ...layer, ...popup, ...async, ...geo };
 };

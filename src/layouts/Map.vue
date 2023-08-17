@@ -6,10 +6,9 @@
 import { computed, watch, onMounted } from 'vue';
 import { createMap, useMap } from '/@/composables';
 import store from '/@/store';
-import { toFeatureCollection } from '/@/utils';
 import config from '/@/config.yaml';
 
-const { addLayer, createLegend, fitTo } = useMap();
+const { addLayer, createLegend, fitTo, toFeatureCollection } = useMap();
 
 addLayer(config.layers.BORDERS);
 
