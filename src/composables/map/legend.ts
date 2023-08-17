@@ -1,19 +1,24 @@
-import { useControls } from 'mapbox-composition';
-import LegendControl, { type LegendControlOptions, type LayerOptions } from 'mapboxgl-legend';
+import { unref } from 'vue';
+import { useControls, type Map, type ControlOptions } from 'mapbox-composition';
+import LegendControl, { type LayerOptions as LegendLayerOptions } from 'mapboxgl-legend';
 import { Deferred } from '/@/utils';
-import type { Map } from './types';
+import type { MaybeRef } from '/@/types';
 
-type AddLayer = Record<string, boolean | LayerOptions>;
+const LEGEND_POSITION = 'bottom-right';
+const LEGEND_NAME = 'legend';
 
-const LEGEND_NAME = 'LEGEND';
 const legend = new Deferred<LegendControl>();
 
+export type LegendOptions = ControlOptions<typeof LegendControl>;
+export type { LegendLayerOptions };
+
 export default (map: Deferred<Map>) => {
-  const createLegend = async (options: LegendControlOptions) => {
+  const createLegend = async (options?: MaybeRef<LegendOptions>) => {
     const _map = await map.promise;
     const { addControl } = useControls(_map);
-    const control = new LegendControl(options);
-    addControl(LEGEND_NAME, 'bottom-right', control);
+    const { position = LEGEND_POSITION, ...rest } = unref(options) || {};
+    const control = new LegendControl(rest);
+    addControl(LEGEND_NAME, position, control);
     legend.resolve(control);
   };
 
@@ -24,14 +29,15 @@ export default (map: Deferred<Map>) => {
     legend.reset();
   };
 
-  const addLegendLayers = async (layers: AddLayer) => {
-    const control = await legend.promise;
-    control.addLayers(layers);
+  const addLegendLayers = async (layers: Record<string, LegendLayerOptions> | string[]) => {
+    const _legend = await legend.promise;
+    _legend.addLayers(layers);
   };
 
-  const removeLegendLayers = async (layerIds: string[]) => {
-    const control = await legend.promise;
-    control.removeLayers(layerIds);
+  const removeLegendLayers = async (layers: Record<string, LegendLayerOptions> | string[]) => {
+    const _legend = await legend.promise;
+    const names = Array.isArray(layers) ? layers : Object.keys(layers);
+    _legend.removeLayers(names);
   };
 
   return { createLegend, removeLegend, addLegendLayers, removeLegendLayers };

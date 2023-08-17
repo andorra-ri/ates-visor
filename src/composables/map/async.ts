@@ -1,6 +1,5 @@
-import { useAsync } from 'mapbox-composition';
+import { useAsync, type Map } from 'mapbox-composition';
 import { Deferred, getBounds, type GeoJSONObject, type Featureable } from '/@/utils';
-import type { Map } from './types';
 
 type FitOptions = {
   bearing?: number;
