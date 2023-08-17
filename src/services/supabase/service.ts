@@ -34,16 +34,10 @@ export const getRoute = async (code: string) => {
   const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
   const loadRoute = query<DTO.Route>('routes', {
     headers: { Accept: 'application/vnd.pgrst.object+json' }, // Return row as a single object
-    qs: {
-      select,
-      code: `eq.${code}`,
-    },
+    qs: { select, code: `eq.${code}` },
   });
   const loadWaypoints = query<DTO.Waypoint[]>('waypoints', {
-    qs: {
-      select,
-      route_codes: `cs.{${code}}`,
-    },
+    qs: { select, route_codes: `cs.{${code}}` },
   });
   const [route, waypoints] = await Promise.all([loadRoute, loadWaypoints]);
   return adaptRoute(route, waypoints);
