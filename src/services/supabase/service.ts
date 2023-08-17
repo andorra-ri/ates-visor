@@ -10,16 +10,13 @@ type QueryOptions = {
 const { VITE_SUPABASE_URL, VITE_SUPABASE_TOKEN } = import.meta.env;
 
 const query = async <T>(endpoint: string, options?: QueryOptions) => {
-  try {
-    const url = new URL(`${VITE_SUPABASE_URL}/rest/v1/${endpoint}`);
-    url.searchParams.append('apikey', VITE_SUPABASE_TOKEN);
-    Object.entries(options?.qs || {}).forEach(([k, v]) => url.searchParams.set(k, v));
-    const response = await fetch(url, { headers: options?.headers });
-    const data = await response.json();
-    return camelizeKeys(data) as T;
-  } catch {
-    throw new Error('ERROR_SUPABASE_LOAD');
-  }
+  const url = new URL(endpoint, VITE_SUPABASE_URL);
+  url.searchParams.append('apikey', VITE_SUPABASE_TOKEN);
+  Object.entries(options?.qs || {}).forEach(([k, v]) => url.searchParams.set(k, v));
+  const response = await fetch(url, { headers: options?.headers });
+  if (!response.ok) throw new Error(`${response.status} | ${response.statusText}`);
+  const data = await response.json();
+  return camelizeKeys(data) as T;
 };
 
 export const getTerrains = async () => {
