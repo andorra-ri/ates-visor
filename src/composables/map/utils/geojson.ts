@@ -18,5 +18,5 @@ export const toFeatureCollection = (items: Featureable[]) => {
 
 export const getBounds = (item: GeoJSONObject | Featureable[]) => {
   const geojson = Array.isArray(item) ? toFeatureCollection(item) : item;
-  return bbox(geojson);
+  return bbox(geojson) as [number, number, number, number];
 };

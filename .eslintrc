@@ -29,7 +29,7 @@
     "arrow-parens": ["error", "as-needed"],
     "object-shorthand": ["error", "always", { "avoidQuotes": false }],
     "no-nested-ternary": "off",
-    "no-underscore-dangle": ["error", { "allowAfterThis": true, "allow": ["_map"] }],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true, "allow": ["_map", "_legend"] }],
     "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "import/no-absolute-path": "off",
     "import/prefer-default-export": "off",

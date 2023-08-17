@@ -1,6 +1,5 @@
-import { useAsync } from 'mapbox-composition';
-import { Deferred, getBounds, type GeoJSONObject, type Featureable } from '/@/utils';
-import type { Map } from './types';
+import { useAsync, type Map } from 'mapbox-composition';
+import { Deferred, geo, type GeoJSONObject, type Featureable } from './utils';
 
 type FitOptions = {
   bearing?: number;
@@ -16,7 +15,7 @@ export default (map: Deferred<Map>) => {
   ) => {
     const _map = await map.promise;
     const { fitBounds } = useAsync(_map);
-    const bounds = getBounds(features);
+    const bounds = geo.getBounds(features);
     fitBounds(bounds, options);
   };
 

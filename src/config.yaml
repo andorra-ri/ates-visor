@@ -41,12 +41,12 @@ map:
 
 layers:
   BORDERS:
-    name: borders
+    id: borders
     source: /layers/andorra_borders.geojson
     legend:
       borders: true
     layers:
-      - name: borders
+      - id: borders
         type: line
         paint:
           line-color: white
@@ -58,12 +58,12 @@ layers:
             white: false
   
   TERRAIN:
-    name: terrain
+    id: terrain
     under: borders
     legend:
       terrain: true
     layers:
-      - name: terrain
+      - id: terrain
         type: fill
         paint:
           fill-color: [match, [get, grade],
@@ -81,15 +81,11 @@ layers:
             other: false
 
   ROUTE:
-    name: route
-    legend:
-      route:
-        highlight: true
+    id: route
     images:
       ascend: /images/map/sprite_arrow_red.png
-      descend: /images/map/sprite_arrow_orange.png
     layers:
-      - name: route
+      - id: route
         type: line
         layout:
           line-cap: round
@@ -108,11 +104,11 @@ layers:
             other: false
   
   WAYPOINTS:
-    name: waypoints
+    id: waypoints
     images:
       alert: /images/map/alert.png
     layers:
-      - name: decisions
+      - id: decisions
         type: circle
         paint:
           circle-color: '#d90429'
@@ -122,7 +118,7 @@ layers:
           circle-radius: [interpolate, [exponential, 2], [zoom], 10, 3, 16, 15]
           circle-pitch-alignment: map
         filter: [==, [get, kind], DECISION]
-      - name: alerts
+      - id: alerts
         type: symbol
         layout:
           icon-image: alert

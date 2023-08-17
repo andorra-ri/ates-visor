@@ -1,40 +1,39 @@
-import { ref, watch, readonly, effectScope, onUnmounted } from 'vue';
-import { usePopup } from 'mapbox-composition';
-import type { Map, PopupOptions, MapMouseEvent } from './types';
+import { ref, unref, isRef, watch, readonly, effectScope, onMounted, onUnmounted } from 'vue';
+import { usePopup, type Map, type PopupOptions, type MapLayerMouseEvent } from 'mapbox-composition';
 import type { MaybeRef } from '/@/types';
 import type { Deferred } from '/@/utils';
 
 export default (map: Deferred<Map>) => {
   const addPopup = <T>(options: MaybeRef<PopupOptions>) => {
-    const _options = ref(options); // eslint-disable-line no-underscore-dangle
-
     const popup = ref<ReturnType<typeof usePopup>>();
     const state = ref<{ name: string, data: T | undefined}>({
-      name: _options.value.name,
+      name: '',
       data: undefined,
     });
 
-    (async () => {
-      const _map = await map.promise;
-      popup.value = usePopup(_map, _options.value);
-    })();
-
-    const bindClick = ({ lngLat, features }: MapMouseEvent) => {
+    const bindClick = ({ lngLat, features }: MapLayerMouseEvent) => {
       popup.value?.setLocation(lngLat);
-      state.value.data = features[0].properties;
+      state.value.data = features?.[0].properties as T;
     };
 
     const scope = effectScope();
     scope.run(() => {
-      watch(_options, ({ coordinates, content }) => {
+      if (!isRef(options)) return;
+      watch(options, ({ coordinates, content }) => {
         if (coordinates) popup.value?.setLocation(coordinates);
         if (content) popup.value?.setContent(content);
       });
     });
 
+    onMounted(async () => {
+      const _map = await map.promise;
+      popup.value = usePopup(_map, unref(options));
+      state.value.name = popup.value.name;
+    });
+
     onUnmounted(() => {
       scope.stop();
-      popup.value?.popup.remove();
+      popup.value?.clear();
       popup.value = undefined;
     });
 
