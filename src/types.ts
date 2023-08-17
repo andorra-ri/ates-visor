@@ -23,6 +23,14 @@ export type Trail = {
   geometry: LineString;
 };
 
+export type Waypoint = {
+  id: number;
+  kind: 'DECISION' | 'ALERT';
+  name: string;
+  description: string;
+  geometry: Point;
+};
+
 export type Route = {
   code: string;
   name: string;
@@ -34,14 +42,7 @@ export type Route = {
   orientation: Orientation[];
   circular: boolean;
   trails: Trail[];
+  waypoints: Waypoint[];
 };
 
 export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance'>;
-
-export type Waypoint = {
-  id: number;
-  kind: 'DECISION' | 'ALERT';
-  name: string;
-  description: string;
-  geometry: Point;
-};

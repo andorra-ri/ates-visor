@@ -23,7 +23,7 @@ addLayer(computed(() => {
 }));
 
 addLayer(computed(() => {
-  const source = toFeatureCollection(store.state.waypoints || []);
+  const source = toFeatureCollection(store.state.route?.waypoints || []);
   return { ...config.layers.WAYPOINTS, source };
 }));
 

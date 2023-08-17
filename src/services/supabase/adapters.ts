@@ -13,13 +13,14 @@ export const adaptTrail = (trail: DTO.Trail): Trail => {
   return { main, down, geometry };
 };
 
-export const adaptRoute = (route: DTO.Route, wp?: DTO.Waypoint[]): Route => {
-  const { createdAt, updatedAt, ...rest } = route;
-  const trails = route.trails.map(adaptTrail);
-  return { ...rest, trails };
-};
-
 export const adaptWaypoint = (waypoint: DTO.Waypoint): Waypoint => {
   const { routeCodes, ...rest } = waypoint;
   return rest;
+};
+
+export const adaptRoute = (route: DTO.Route, wp?: DTO.Waypoint[]): Route => {
+  const { createdAt, updatedAt, ...rest } = route;
+  const trails = route.trails.map(adaptTrail);
+  const waypoints = wp?.map(adaptWaypoint) || [];
+  return { ...rest, trails, waypoints };
 };

@@ -1,5 +1,5 @@
 import { camelizeKeys } from 'humps';
-import { adaptTerrain, adaptListRoute, adaptRoute, adaptWaypoint } from './adapters';
+import { adaptTerrain, adaptListRoute, adaptRoute } from './adapters';
 import type * as DTO from './types';
 
 type QueryOptions = {
@@ -31,24 +31,20 @@ export const getRoutes = async () => {
 };
 
 export const getRoute = async (code: string) => {
-  const fields = ['name:name_ca', 'description:description_ca', '*'];
-  const route = await query<DTO.Route>('routes', {
-    headers: { Accept: 'application/vnd.pgrst.object+json' },
+  const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
+  const loadRoute = query<DTO.Route>('routes', {
+    headers: { Accept: 'application/vnd.pgrst.object+json' }, // Return row as a single object
     qs: {
-      select: fields.join(','),
+      select,
       code: `eq.${code}`,
     },
   });
-  return adaptRoute(route);
-};
-
-export const getWaypoints = async (routeCode: string) => {
-  const fields = ['name:name_ca', 'description:description_ca', '*'];
-  const waypoints = await query<DTO.Waypoint[]>('waypoints', {
+  const loadWaypoints = query<DTO.Waypoint[]>('waypoints', {
     qs: {
-      select: fields.join(','),
-      route_codes: `cs.{${routeCode}}`,
+      select,
+      route_codes: `cs.{${code}}`,
     },
   });
-  return waypoints.map(adaptWaypoint);
+  const [route, waypoints] = await Promise.all([loadRoute, loadWaypoints]);
+  return adaptRoute(route, waypoints);
 };
