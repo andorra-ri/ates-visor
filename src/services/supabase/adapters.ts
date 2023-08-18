@@ -1,4 +1,4 @@
-import type * as DTO from './types';
+import type * as DTO from './models';
 import type { Terrain, Trail, Route, ListRoute, Waypoint } from '/@/types';
 
 export const adaptTerrain = (terrain: DTO.Terrain): Terrain => terrain;

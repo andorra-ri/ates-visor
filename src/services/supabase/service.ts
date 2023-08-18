@@ -1,6 +1,7 @@
 import { camelizeKeys } from 'humps';
 import { adaptTerrain, adaptListRoute, adaptRoute } from './adapters';
-import type * as DTO from './types';
+import { Array, Terrain, ListRoute, Route, Waypoint } from './models';
+import type * as DTO from './models';
 
 type QueryOptions = {
   qs?: Record<string, string>;
@@ -21,24 +22,37 @@ const query = async <T>(endpoint: string, options?: QueryOptions) => {
 
 export const getTerrains = async () => {
   const terrains = await query<DTO.Terrain[]>('terrains');
-  return terrains.map(adaptTerrain);
+  return Array(Terrain)
+    .parse(terrains)
+    .map(adaptTerrain);
 };
 
 export const getRoutes = async () => {
   const fields = ['code', 'name:name_ca', 'grade', 'duration', 'distance', 'vertical_drop', 'orientation', 'circular', 'created_at', 'updated_at'];
   const routes = await query<DTO.ListRoute[]>('routes', { qs: { select: fields.join(',') } });
-  return routes.map(adaptListRoute);
+  return Array(ListRoute)
+    .parse(routes)
+    .map(adaptListRoute);
 };
 
 export const getRoute = async (code: string) => {
   const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
-  const loadRoute = query<DTO.Route>('routes', {
-    headers: { Accept: 'application/vnd.pgrst.object+json' }, // Return row as a single object
-    qs: { select, code: `eq.${code}` },
-  });
-  const loadWaypoints = query<DTO.Waypoint[]>('waypoints', {
-    qs: { select, route_codes: `cs.{${code}}` },
-  });
-  const [route, waypoints] = await Promise.all([loadRoute, loadWaypoints]);
+
+  const fetchRoute = async () => {
+    const route = await query<DTO.Route>('routes', {
+      headers: { Accept: 'application/vnd.pgrst.object+json' }, // Return row as a single object
+      qs: { select, code: `eq.${code}` },
+    });
+    return Route.parse(route);
+  };
+
+  const fetchWaypoints = async () => {
+    const waypoints = await query<DTO.Waypoint[]>('waypoints', {
+      qs: { select, route_codes: `cs.{${code}}` },
+    });
+    return Array(Waypoint).parse(waypoints);
+  };
+
+  const [route, waypoints] = await Promise.all([fetchRoute(), fetchWaypoints()]);
   return adaptRoute(route, waypoints);
 };
