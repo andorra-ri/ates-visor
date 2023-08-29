@@ -25,6 +25,25 @@ body {
   height: 100vh;
 }
 
+.modal {
+  @extend %container-strong;
+
+  max-width: 80%;
+
+  &__close {
+    all: unset;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.25rem;
+    margin: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  &::backdrop { background: transparent; }
+}
+
 [data-empty]:empty::before {
   content: attr(data-empty);
   display: block;
