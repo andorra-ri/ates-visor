@@ -2,7 +2,7 @@ import { ref, unref, isRef, watch, effectScope, onMounted, onUnmounted } from 'v
 import { useGeoJSON, useImages, type Map, type GeoJSONLayerOptions } from 'mapbox-composition';
 import useLegend, { type LegendLayerOptions } from './legend';
 import type { MaybeRef } from '/@/types';
-import type { Deferred } from '/@/utils';
+import type { Deferred } from './utils';
 
 export type LayerOptions = MaybeRef<{
   images?: Record<string, string>;

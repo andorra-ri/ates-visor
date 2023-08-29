@@ -1,7 +1,7 @@
 import { ref, unref, isRef, watch, readonly, effectScope, onMounted, onUnmounted } from 'vue';
 import { usePopup, type Map, type PopupOptions, type MapLayerMouseEvent } from 'mapbox-composition';
 import type { MaybeRef } from '/@/types';
-import type { Deferred } from '/@/utils';
+import type { Deferred } from './utils';
 
 export default (map: Deferred<Map>) => {
   const addPopup = <T>(options: MaybeRef<PopupOptions>) => {
