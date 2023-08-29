@@ -9,6 +9,7 @@ import { Map, Toolbar } from '/@/layouts';
 import store from '/@/store';
 
 onMounted(() => {
+  store.loadAvalancheRisk();
   store.loadTerrain();
   store.loadRoutes();
 });

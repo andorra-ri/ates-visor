@@ -3,16 +3,13 @@
     <RouteSelect
       :routes="store.state.routes"
       @select="store.selectRoute" />
-    <AvalancheRisk :risk="risk" />
+    <AvalancheRisk :risk="store.state.avalancheRisk" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { RouteSelect, AvalancheRisk } from './partials';
 import store from '/@/store';
-
-const risk = ref<number>(2);
 </script>
 
 <style lang="scss" scoped>
