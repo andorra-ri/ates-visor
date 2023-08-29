@@ -27,6 +27,22 @@ route:
     duration: Duration
     distance: Distance
 
+avalanche:
+  bulletin: Avalanche Danger Bulletin
+  bulletin_url: http://meteo.ad/en/snowstate
+  risk:
+    - name: Unavailable
+      description: There is no available information
+    - name: Low
+      description: Triggering is possible by groups of skiers on a few very steep extreme slopes. Small natural avalanches (sluffs) are possible.
+    - name: Moderate
+      description: Triggering is possible by groups of skiers, particularly on steep slopes. Large natural avalanches may occur but are not likely.
+    - name: Considerable
+      description: Triggering is possible, even by individual skiers. The bulletin may indicate many slopes which are particularly affected. Medium and occasionally large natural avalanches may occur.
+    - name: High
+      description: Triggering is likely, even with single skiers, on many steep slopes. Frequent medium or large sized avalanches are likely.
+    - name: Extreme
+      description: Numerous large natural avalanches are likely, even on moderately steep terrain.
 map:
   legend:
     borders:
