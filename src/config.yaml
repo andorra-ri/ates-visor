@@ -1,3 +1,6 @@
+avalanches:
+  notify: https://survey123.arcgis.com/share/1d85c3ebd1e044e7835b3a1f2294ec51?portalUrl=https://sig.govern.ad/portal
+
 map:
   center: [1.570498, 42.540997]
   zoom: 11

@@ -50,6 +50,7 @@ avalanche:
     extra_caution_indications: Avalanches can be natural or human-caused. Understanding current avalanche risks is essential for safe travel. Regular slope assessments, safe habits, proper planning, group coordination, experience, and humility are crucial.
     caution: Caution
     caution_indications: Accidents are rare and conditions are suitable for avalanche terrain travel, but caution is needed. Recognizing hazards and maintaining safe travel and rescue skills are vital. 
+  notify: Notify
 
 map:
   legend:
