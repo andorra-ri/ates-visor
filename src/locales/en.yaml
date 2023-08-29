@@ -43,6 +43,14 @@ avalanche:
       description: Triggering is likely, even with single skiers, on many steep slopes. Frequent medium or large sized avalanches are likely.
     - name: Extreme
       description: Numerous large natural avalanches are likely, even on moderately steep terrain.
+  avaluator:
+    not_recommended: Not recommended
+    not_recommended_indications: Mountain travel without expert or professional knowledge is discouraged. Despite careful choices, conditions are ripe for avalanche incidents, and persistent exposure heightens the risk of an avalanche encounter.
+    extra_caution: Extra caution
+    extra_caution_indications: Avalanches can be natural or human-caused. Understanding current avalanche risks is essential for safe travel. Regular slope assessments, safe habits, proper planning, group coordination, experience, and humility are crucial.
+    caution: Caution
+    caution_indications: Accidents are rare and conditions are suitable for avalanche terrain travel, but caution is needed. Recognizing hazards and maintaining safe travel and rescue skills are vital. 
+
 map:
   legend:
     borders:

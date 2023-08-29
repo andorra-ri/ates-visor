@@ -26,6 +26,17 @@
   --font-family: rubik;
 }
 
-.SIMPLE { --color: var(--color-simple); }
-.CHALLENGING { --color: var(--color-challenging); }
-.COMPLEX { --color: var(--color-complex); }
+.SIMPLE {
+  --color: var(--color-simple);
+  --text: #333;
+}
+
+.CHALLENGING {
+  --color: var(--color-challenging);
+  --text: #fff;
+}
+
+.COMPLEX {
+  --color: var(--color-complex);
+  --text: #fff;
+}

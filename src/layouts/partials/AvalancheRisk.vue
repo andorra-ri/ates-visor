@@ -11,6 +11,10 @@
           </a>
         </p>
       </div>
+      <details class="avalanche__avaluator">
+        <summary>View the avaluator</summary>
+        <Avaluator :risk="props.risk" />
+      </details>
       <template #toggle="{ open }">
         <button class="avalanche__toggle" @click="open">
           <img :src="`/images/avalanche/risk/${props.risk}.png`" class="avalanche__risk-image">
@@ -22,7 +26,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { Modal } from '/@/components';
+import { Modal, Avaluator } from '/@/components';
 
 const { t } = useI18n();
 
@@ -60,5 +64,15 @@ const props = defineProps<{
   }
 
   &__toggle &__risk-image { height: 2rem; }
+
+  &__avaluator {
+    padding: 1rem;
+
+    summary {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
 }
 </style>
