@@ -22,7 +22,7 @@ export default (map: Deferred<Map>) => {
       removeImages(Object.keys(images));
       const { urls, ...imageOptions } = 'urls' in images ? images : { urls: images };
       addImages(urls as Record<string, string>, { ...imageOptions, persist: false });
-      _map.once('style.load', updateImages);
+      _map.once('style.load', () => updateImages(images));
     };
 
     const scope = effectScope();
