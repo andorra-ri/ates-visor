@@ -27,16 +27,16 @@
 }
 
 .SIMPLE {
-  --color: var(--color-simple);
+  --color: var(--color-simple) !important;
   --text: #333;
 }
 
 .CHALLENGING {
-  --color: var(--color-challenging);
+  --color: var(--color-challenging) !important;
   --text: #fff;
 }
 
 .COMPLEX {
-  --color: var(--color-complex);
+  --color: var(--color-complex) !important;
   --text: #fff;
 }

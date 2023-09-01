@@ -10,3 +10,26 @@ small { font-size: 0.75em; }
 a {
   color: var(--color-text);
 }
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+
+  summary & { margin: 0; }
+}
+
+.chip {
+  --color: #888;
+
+  display: inline-block;
+  font-size: 0.75em;
+  color: var(--color);
+  padding: 0.125em 0.25em;
+  background: color-mix(in srgb, var(--color) 20%, transparent);
+  margin: 1px;
+  border-radius: 0.25em;
+
+  // Hack to improve chip readibility with SIMPLE color
+  &.SIMPLE { --color: #89ae51 !important; }
+}
