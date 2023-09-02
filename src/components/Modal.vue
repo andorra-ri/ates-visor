@@ -13,6 +13,7 @@
         &times;
       </button>
     </slot>
+    <header><slot name="header" /></header>
     <section class="modal__content">
       <slot :close="closeModal" />
     </section>

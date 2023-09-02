@@ -25,13 +25,29 @@
           <p>{{ step }}</p>
         </li>
       </ul>
+      <aside v-if="route.waypoints.length" class="panel__waypoints">
+        <h4>{{ t('route.waypoints') }}</h4>
+        <ul class="panel__photos">
+          <li v-for="{ id, image, kind}, i in route.waypoints" :key="id">
+            <img :src="image" :class="['thumbnail', kind]" @click="goTo(i)">
+          </li>
+        </ul>
+      </aside>
     </details>
+    <WaypointModal
+      v-if="waypoint"
+      :waypoint="waypoint"
+      :prev="prev"
+      :next="next"
+      @close="goTo(undefined)" />
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { usePagination } from '/@/composables';
+import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
 
 const props = defineProps<{
@@ -46,6 +62,9 @@ const details = computed(() => [
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
   { id: 'drientation', value: props.route.orientation },
 ]);
+
+const { page, prev, next, goTo } = usePagination(props.route.waypoints);
+const waypoint = computed(() => page.value !== undefined && props.route.waypoints[page.value]);
 
 const routeSteps = computed(() => props.route.description.split('\n'));
 </script>
@@ -102,5 +121,33 @@ const routeSteps = computed(() => props.route.description.split('\n'));
     margin: 1rem 0.5rem;
   }
 
+  &__waypoints {
+    padding: 0 0.5rem 0.5rem;
+
+    ul {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0 0;
+      flex-wrap: wrap;
+
+      &:empty { display: none; }
+
+      li { flex: 0 0 4rem; }
+
+      .thumbnail {
+        height: 4rem;
+        width: 4rem;
+        object-fit: cover;
+        border-radius: 0.25rem;
+        cursor: pointer;
+
+        &.ALERT {
+          box-shadow:
+            0 0 0 0.125rem #ffbe0b88,
+            0 0 0 0.35rem #ffbe0b33;
+          }
+      }
+    }
+  }
 }
 </style>

@@ -28,6 +28,7 @@ export type Waypoint = {
   kind: 'DECISION' | 'ALERT';
   name: string;
   description: string;
+  image: string;
   geometry: Point;
 };
 

@@ -67,6 +67,7 @@ body {
   @extend %container-strong;
 
   max-width: 80%;
+  padding: 0;
 
   &__close {
     all: unset;
@@ -77,9 +78,20 @@ body {
     margin: 0.25rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
+    z-index: 1;
+    color: #fff;
+    mix-blend-mode: difference;
   }
 
-  &::backdrop { background: transparent; }
+  &__content { margin: 1rem; }
+
+  &::backdrop { background: #0005; }
+
+  &.ALERT { 
+    box-shadow:
+    0 0 0 0.25rem #ffbe0b88,
+    0 0 0 0.75rem #ffbe0b44;
+  }
 }
 
 [data-empty]:empty::before {
