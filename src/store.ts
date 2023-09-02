@@ -1,6 +1,6 @@
-import { reactive } from 'vue';
+import { reactive, toRefs } from 'vue';
 import { supabase, meteo } from '/@/services';
-import type { Terrain, ListRoute, Route } from '/@/types';
+import type { Terrain, ListRoute, Route, Waypoint } from '/@/types';
 
 type State = {
   terrain: Terrain[];
@@ -35,7 +35,7 @@ const selectRoute = async (routeCode: string | undefined) => {
 };
 
 export default {
-  state,
+  ...toRefs(state),
   loadAvalancheRisk,
   loadTerrain,
   loadRoutes,

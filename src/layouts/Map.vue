@@ -3,33 +3,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onMounted } from 'vue';
+import { computed, watchEffect, onMounted } from 'vue';
 import { createMap, useMap } from '/@/composables';
 import store from '/@/store';
 import config from '/@/config.yaml';
+
+const { terrain, route } = store;
 
 const { addLayer, createLegend, fitTo, toFeatureCollection } = useMap();
 
 addLayer(config.layers.BORDERS);
 
 addLayer(computed(() => {
-  const source = toFeatureCollection(store.state.terrain);
+  const source = toFeatureCollection(terrain.value);
   return { ...config.layers.TERRAIN, source };
 }));
 
 addLayer(computed(() => {
-  const source = toFeatureCollection(store.state.route?.trails || []);
+  const source = toFeatureCollection(route.value?.trails || []);
   return { ...config.layers.ROUTE, source };
 }));
 
 addLayer(computed(() => {
-  const source = toFeatureCollection(store.state.route?.waypoints || []);
+  const source = toFeatureCollection(route.value?.waypoints || []);
   return { ...config.layers.WAYPOINTS, source };
 }));
 
-watch(() => store.state.route, route => {
-  if (route) fitTo(route.trails, { padding: 50 });
-});
+watchEffect(() => route.value && fitTo(route.value.trails, { padding: 50 }));
 
 onMounted(() => {
   createMap('map', config.map);
