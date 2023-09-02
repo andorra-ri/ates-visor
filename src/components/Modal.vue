@@ -3,7 +3,8 @@
     ref="modal"
     v-bind="$attrs"
     :style="`width:${size}`"
-    class="modal">
+    class="modal"
+    @close="closeModal">
     <slot name="close" :close="closeModal">
       <button
         v-if="props.closeable"
