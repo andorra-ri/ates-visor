@@ -28,6 +28,7 @@ route:
     distance: Distance
     drop: Drop
     orientation: Orientation
+  waypoints: Waypoints
 
 avalanche:
   bulletin: Avalanche Danger Bulletin
