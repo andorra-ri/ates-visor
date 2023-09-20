@@ -1,7 +1,7 @@
 <template>
   <div class="label">
     <em>{{ t('sort') }}</em>
-    <Selector v-model="sortBy" :options="props.sorters">
+    <Selector v-model="sortBy" :options="props.sorters" clearable>
       <template #default="{ item }">
         <slot>{{ item ? t(`sorter.${item}`) : t('sort_placeholder') }}</slot>
       </template>
