@@ -56,9 +56,17 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
+const toKm = (distance: number) => Math.round(distance / 100) / 10; // distance in meters
+
+const toHours = (duration: number) => { // duration in minutes
+  const hours = Math.floor(duration / 60);
+  const minutes = `${duration % 60}`.padStart(2, '0');
+  return `${hours}h${minutes}`;
+};
+
 const details = computed(() => [
-  { id: 'distance', value: props.route.distance, unit: 'm' },
-  { id: 'duration', value: props.route.duration, unit: 'h' },
+  { id: 'distance', value: toKm(props.route.distance), unit: 'km' },
+  { id: 'duration', value: toHours(props.route.duration) },
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
   { id: 'drientation', value: props.route.orientation },
 ]);
