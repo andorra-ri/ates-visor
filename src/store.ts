@@ -1,6 +1,6 @@
 import { reactive, toRefs } from 'vue';
 import { supabase, meteo } from '/@/services';
-import type { Terrain, ListRoute, Route, Waypoint } from '/@/types';
+import type { Terrain, ListRoute, Route } from '/@/types';
 
 type State = {
   terrain: Terrain[];
