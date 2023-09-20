@@ -101,7 +101,7 @@ const routeSteps = computed(() => props.route.description.split('\n'));
         transform: rotate(45deg);
         border: 2px solid #8886;
         border-width: 0 2px 2px 0;
-        margin: 0.125rem 0.25rem 0 auto;
+        margin: -0.25rem 0.25rem 0 auto;
         transition: all 0.3s ease;
         cursor: pointer;
       }

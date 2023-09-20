@@ -66,8 +66,6 @@ const props = defineProps<{
   &__toggle &__risk-image { height: 2rem; }
 
   &__avaluator {
-    padding: 1rem;
-
     summary {
       display: flex;
       justify-content: center;
