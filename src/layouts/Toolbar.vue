@@ -1,26 +1,19 @@
 <template>
   <div class="toolbar">
     <RouteSelect
-      :routes="store.state.routes"
+      :routes="routes"
       @select="store.selectRoute" />
+    <AvalancheNotify />
+    <AvalancheRisk :risk="avalancheRisk" />
+    <RoutePanel
+      v-if="route"
+      :route="route" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouteSelect } from './partials';
+import { RouteSelect, AvalancheRisk, AvalancheNotify, RoutePanel } from './partials';
 import store from '/@/store';
+
+const { routes, route, avalancheRisk } = store;
 </script>
-
-<style lang="scss" scoped>
-.toolbar {
-  @extend %container-strong;
-
-  position: fixed;
-  margin: 0.75rem;
-  display: flex;
-  align-items: stretch;
-  z-index: 1;
-
-  & > * + * { border-left: 1px solid var(--color-border); }
-}
-</style>

@@ -1,6 +1,8 @@
 import type * as DTO from './models';
 import type { Terrain, Trail, Route, ListRoute, Waypoint } from '/@/types';
 
+const { VITE_SUPABASE_STORAGE_URL } = import.meta.env;
+
 export const adaptTerrain = (terrain: DTO.Terrain): Terrain => terrain;
 
 export const adaptListRoute = (route: DTO.ListRoute): ListRoute => {
@@ -15,7 +17,9 @@ export const adaptTrail = (trail: DTO.Trail): Trail => {
 
 export const adaptWaypoint = (waypoint: DTO.Waypoint): Waypoint => {
   const { routeCodes, ...rest } = waypoint;
-  return rest;
+  const ts = new Date().getTime();
+  const image = `${VITE_SUPABASE_STORAGE_URL}object/public/waypoints/${waypoint.id}.jpg?t=${ts}`;
+  return { ...rest, image };
 };
 
 export const adaptRoute = (route: DTO.Route, wp?: DTO.Waypoint[]): Route => {

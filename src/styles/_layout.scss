@@ -25,6 +25,75 @@ body {
   height: 100vh;
 }
 
+.toolbar {
+  @extend %container-strong;
+
+  position: fixed;
+  margin: 0.75rem;
+  display: flex;
+  align-items: stretch;
+  z-index: 1;
+
+  & > * + * { border-left: 1px solid var(--color-border); }
+
+  & > a {
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125em;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    text-decoration: none;
+    color: #0007;
+    transition: all 0.3s ease;
+
+    img {
+      height: 1.5rem;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--color-text);
+      img { opacity: 1; }
+    }
+  }
+}
+
+.panel { @extend %container-strong; }
+
+.modal {
+  @extend %container-strong;
+
+  max-width: 80%;
+  padding: 0;
+
+  &__close {
+    all: unset;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.25rem;
+    margin: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    z-index: 1;
+    color: #fff;
+    mix-blend-mode: difference;
+  }
+
+  &__content { margin: 1rem; }
+
+  &::backdrop { background: #0005; }
+
+  &.ALERT { 
+    box-shadow:
+    0 0 0 0.25rem #ffbe0b88,
+    0 0 0 0.75rem #ffbe0b44;
+  }
+}
+
 [data-empty]:empty::before {
   content: attr(data-empty);
   display: block;

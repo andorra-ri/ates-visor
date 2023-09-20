@@ -7,7 +7,7 @@
             {{ selected || props.placeholder }}
           </slot>
         </slot>
-        <span v-if="selected && props.clear" class="icon clearer" @click="clear" />
+        <span v-if="selected && props.clearable" class="icon clearer" @click="clear" />
         <span v-else class="icon chevron" />
       </div>
     </template>
@@ -35,7 +35,7 @@ const props = defineProps<{
   options: any[];
   placeholder?: string;
   keyAttr?: string;
-  clear?: boolean;
+  clearable?: boolean;
 }>();
 
 const emit = defineEmits(['update:modelValue']);
