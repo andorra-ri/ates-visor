@@ -9,7 +9,7 @@
       </summary>
       <ul class="panel__details">
         <li v-for="detail in details" :key="detail.id" class="label">
-          <em>{{ t(`route.${detail.id}`) }}</em>
+          <em>{{ t(`route.fields.${detail.id}`) }}</em>
           <div v-if="Array.isArray(detail.value)">
             <div v-for="(value, index) in detail.value" :key="index" class="chip">
               {{ value }}
@@ -68,7 +68,7 @@ const details = computed(() => [
   { id: 'distance', value: toKm(props.route.distance), unit: 'km' },
   { id: 'duration', value: toHours(props.route.duration) },
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
-  { id: 'drientation', value: props.route.orientation },
+  { id: 'orientation', value: props.route.orientation },
 ]);
 
 const { page, prev, next, goTo } = usePagination(props.route.waypoints);
@@ -90,6 +90,7 @@ const routeSteps = computed(() => props.route.description.split('\n'));
 
     summary {
       display: flex;
+      align-items: center;
       gap: 1rem;
 
       &::after {

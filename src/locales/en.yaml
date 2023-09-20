@@ -26,6 +26,8 @@ route:
   fields:
     duration: Duration
     distance: Distance
+    drop: Drop
+    orientation: Orientation
 
 avalanche:
   bulletin: Avalanche Danger Bulletin
