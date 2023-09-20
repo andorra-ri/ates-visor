@@ -1,9 +1,15 @@
 <template>
   <Dropdown class="route-select">
     <template #toggle>
-      <div class="route-select__toggle label">
-        <em>{{ t('route.label') }}</em>
-        {{ selected?.name || t('route.select_route') }}
+      <div class="route-select__toggle">
+        <div class="label">
+          <em>{{ t('route.label') }}</em>
+          {{ selected?.name || t('route.select_route') }}
+        </div>
+        <span
+          v-if="selected"
+          class="route-select__clearer"
+          @click="clear">&times;</span>
       </div>
     </template>
     <div class="route-select__panel">
@@ -67,6 +73,7 @@ const routes = sort([
 ], toRef(props, 'routes')));
 
 const selected = ref<ListRoute>();
+const clear = () => { selected.value = undefined; };
 watch(selected, route => emit('select', route?.code));
 
 const { t } = useI18n();
@@ -82,10 +89,22 @@ const { t } = useI18n();
 
   &__toggle {
     width: 17rem;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  &__clearer {
+    display: block;
+    padding: 0.125rem 0.35rem;
+    border-radius:50%;
+    margin: 0.5rem;
+    background: #0008;
+    color: #fff;
+    cursor: pointer;
   }
 
   &__filters {

@@ -28,7 +28,7 @@ const loadRoutes = async () => {
   state.routes = await supabase.getRoutes();
 };
 
-const selectRoute = async (routeCode: string | undefined) => {
+const selectRoute = async (routeCode?: string) => {
   state.route = undefined;
   if (!routeCode) return;
   state.route = await supabase.getRoute(routeCode);
