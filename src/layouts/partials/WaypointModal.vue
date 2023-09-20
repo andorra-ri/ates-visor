@@ -22,14 +22,19 @@
 </template>
 
 <script setup lang="ts">
+import { watchEffect } from 'vue';
 import { Modal } from '/@/components';
+import { useMap } from '/@/composables';
 import type { Waypoint } from '/@/types';
 
-defineProps<{
+const props = defineProps<{
   waypoint: Waypoint;
   prev?:() => void;
   next?:() => void;
 }>();
+
+const { fitTo } = useMap();
+watchEffect(() => fitTo(props.waypoint.geometry));
 </script>
 
 <style lang="scss" scoped>
