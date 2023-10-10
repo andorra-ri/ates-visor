@@ -47,6 +47,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePagination } from '/@/composables';
+import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
 
@@ -56,16 +57,8 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const toKm = (distance: number) => Math.round(distance / 100) / 10; // distance in meters
-
-const toHours = (duration: number) => { // duration in minutes
-  const hours = Math.floor(duration / 60);
-  const minutes = `${duration % 60}`.padStart(2, '0');
-  return `${hours}h${minutes}`;
-};
-
 const details = computed(() => [
-  { id: 'distance', value: toKm(props.route.distance), unit: 'km' },
+  { id: 'distance', value: toKm(props.route.distance) },
   { id: 'duration', value: toHours(props.route.duration) },
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
   { id: 'orientation', value: props.route.orientation },
