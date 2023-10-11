@@ -36,9 +36,8 @@ export const getRoutes = async () => {
 };
 
 export const getRoute = async (code: string) => {
-  const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
-
   const fetchRoute = async () => {
+    const select = ['name:name_ca', 'description:description_ca', 'arrival:arrival_ca', 'departure:departure_ca', '*'].join(',');
     const route = await query<DTO.Route>('routes', {
       headers: { Accept: 'application/vnd.pgrst.object+json' }, // Return row as a single object
       qs: { select, code: `eq.${code}` },
@@ -47,6 +46,7 @@ export const getRoute = async (code: string) => {
   };
 
   const fetchWaypoints = async () => {
+    const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
     const waypoints = await query<DTO.Waypoint[]>('waypoints', {
       qs: { select, route_codes: `cs.{${code}}` },
     });

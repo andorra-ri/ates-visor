@@ -6,6 +6,7 @@ filter: Filter
 sort: Sort
 sort_placeholder: Select
 none: None
+download_pdf: Download PDF
 
 grade:
   SIMPLE: Simple
@@ -28,6 +29,8 @@ route:
     distance: Distance
     drop: Drop
     orientation: Orientation
+    departure: Departure
+    arrival: Arrival
   waypoints: Waypoints
 
 avalanche:

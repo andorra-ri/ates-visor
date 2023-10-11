@@ -36,6 +36,8 @@ export type Route = {
   code: string;
   name: string;
   description: string;
+  arrival: string;
+  departure: string;
   grade: Grade;
   duration: number;
   distance: number;

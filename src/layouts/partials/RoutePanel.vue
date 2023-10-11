@@ -33,6 +33,11 @@
           </li>
         </ul>
       </aside>
+      <p>
+        <button class="button" @click="downloadPdf">
+          {{ t('download_pdf') }}
+        </button>
+      </p>
     </details>
     <WaypointModal
       v-if="waypoint"
@@ -46,7 +51,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { usePagination } from '/@/composables';
+import { usePagination, useMap } from '/@/composables';
+import { pdf } from '/@/services';
+import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
 
@@ -55,26 +62,26 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
-
-const toKm = (distance: number) => Math.round(distance / 100) / 10; // distance in meters
-
-const toHours = (duration: number) => { // duration in minutes
-  const hours = Math.floor(duration / 60);
-  const minutes = `${duration % 60}`.padStart(2, '0');
-  return `${hours}h${minutes}`;
-};
+const { fitTo } = useMap();
 
 const details = computed(() => [
-  { id: 'distance', value: toKm(props.route.distance), unit: 'km' },
+  { id: 'distance', value: toKm(props.route.distance) },
   { id: 'duration', value: toHours(props.route.duration) },
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
   { id: 'orientation', value: props.route.orientation },
+  { id: 'departure', value: props.route.departure },
+  { id: 'arrival', value: props.route.arrival },
 ]);
 
 const { page, prev, next, goTo } = usePagination(props.route.waypoints);
 const waypoint = computed(() => page.value !== undefined && props.route.waypoints[page.value]);
 
 const routeSteps = computed(() => props.route.description.split('\n'));
+
+const downloadPdf = async () => {
+  await fitTo(props.route.trails, { padding: 100 });
+  pdf.createPdf(props.route.name, 'route', props.route);
+};
 </script>
 
 <style lang="scss" scoped>
