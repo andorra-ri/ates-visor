@@ -18,7 +18,9 @@
           <label>
             <input v-model="selected" :value="option" type="radio">
             <slot name="option" :option="option">
-              {{ option }}
+              <slot :item="option">
+                {{ option }}
+              </slot>
             </slot>
           </label>
         </li>
