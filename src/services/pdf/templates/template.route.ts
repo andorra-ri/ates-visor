@@ -4,6 +4,7 @@ import { addColumns } from './utils';
 import type { Route } from '/@/types';
 
 const WAYPOINT_COLUMNS = 2;
+const A4_WIDTH = 595;
 
 const STYLES = {
   h1: { color: '#000', fontSize: 30, bold: true, margin: [0, 5, 0, 10] },
@@ -17,14 +18,27 @@ const STYLES = {
 export default (route: Route) => {
   const { t } = i18n.global;
 
+  const header = document.querySelector('.mapboxgl-canvas') as HTMLCanvasElement;
+  const headerHeight = header.height / (header.width / A4_WIDTH);
+
   return {
     pageSize: 'a4',
     pageMargins: [70, 70, 70, 70],
     styles: STYLES,
-    images: route.waypoints.reduce((acc, { id, image }) => ({ ...acc, [id]: image }), {}),
+    images: {
+      header: header.toDataURL(),
+      ...route.waypoints.reduce((acc, { id, image }) => ({ ...acc, [id]: image }), {}),
+    },
     content: [
+      {
+        image: header.toDataURL(),
+        width: A4_WIDTH,
+        height: headerHeight,
+        absolutePosition: { x: 0, y: 0 },
+      },
+
       // Title
-      { text: t(`grade.${route.grade}`), style: route.grade },
+      { text: t(`grade.${route.grade}`), style: route.grade, margin: [0, headerHeight, 0, 0] },
       { text: route.name, style: 'h1' },
 
       { // Route stats

@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { usePagination } from '/@/composables';
+import { usePagination, useMap } from '/@/composables';
 import { pdf } from '/@/services';
 import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
@@ -62,6 +62,7 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+const { fitTo } = useMap();
 
 const details = computed(() => [
   { id: 'distance', value: toKm(props.route.distance) },
@@ -77,7 +78,10 @@ const waypoint = computed(() => page.value !== undefined && props.route.waypoint
 
 const routeSteps = computed(() => props.route.description.split('\n'));
 
-const downloadPdf = () => pdf.createPdf(props.route.name, 'route', props.route);
+const downloadPdf = async () => {
+  await fitTo(props.route.trails, { padding: 100 });
+  pdf.createPdf(props.route.name, 'route', props.route);
+};
 </script>
 
 <style lang="scss" scoped>

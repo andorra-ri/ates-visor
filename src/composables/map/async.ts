@@ -16,7 +16,7 @@ export default (map: Deferred<Map>) => {
     const _map = await map.promise;
     const { fitBounds } = useAsync(_map);
     const bounds = geo.getBounds(features);
-    fitBounds(bounds, options);
+    return fitBounds(bounds, options);
   };
 
   return { fitTo };

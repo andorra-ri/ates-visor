@@ -12,6 +12,7 @@ const map = new Deferred<Map>();
 export const createMap = async (container: string | HTMLElement, options: MapOptions) => {
   const _map = await _createMap(container, {
     accessToken: VITE_MAPBOX_TOKEN,
+    preserveDrawingBuffer: true,
     ...options,
   });
   map.resolve(_map);
