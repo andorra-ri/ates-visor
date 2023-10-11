@@ -13,7 +13,18 @@
     </template>
     <template #topbar>
       <aside class="route-selector__filters">
-        <SearchInput v-model="searchFor" :placeholder="t('route.search_for')" />
+        <!-- Searcher -->
+        <label class="label">
+          <em>{{ t('search') }}</em>
+          <div class="input">
+            <span class="icon magnifier" />
+            <input
+              v-model="searchFor"
+              :placeholder="t('route.search_for')"
+              size="15"
+              type="text">
+          </div>
+        </label>
 
         <!-- Sorter -->
         <div class="label">
@@ -43,7 +54,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Selector, SearchInput } from '/@/components';
+import { Selector } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import RouteFilters from './RouteFilters.vue';
