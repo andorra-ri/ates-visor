@@ -14,7 +14,20 @@
     <template #topbar>
       <aside class="route-selector__filters">
         <SearchInput v-model="searchFor" :placeholder="t('route.search_for')" />
-        <SortInput v-model="sortBy" :sorters="Object.keys(SORTERS)" />
+
+        <!-- Sorter -->
+        <div class="label">
+          <em>{{ t('sort') }}</em>
+          <Selector
+            v-model="sortBy"
+            :options="Object.keys(SORTERS)"
+            clearable>
+            <template #default="{ item }">
+              {{ item ? t(`sorter.${item}`) : t('sort_placeholder') }}
+            </template>
+          </Selector>
+        </div>
+
         <RouteFilters v-model="filters.grades" />
       </aside>
     </template>
@@ -30,7 +43,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Selector, SearchInput, SortInput } from '/@/components';
+import { Selector, SearchInput } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import RouteFilters from './RouteFilters.vue';
