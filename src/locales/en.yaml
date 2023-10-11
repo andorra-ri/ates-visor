@@ -29,6 +29,8 @@ route:
     distance: Distance
     drop: Drop
     orientation: Orientation
+    departure: Departure
+    arrival: Arrival
   waypoints: Waypoints
 
 avalanche:

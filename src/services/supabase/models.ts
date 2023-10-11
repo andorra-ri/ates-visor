@@ -52,6 +52,8 @@ export const Route = z.object({
   code: z.string(),
   name: z.string(),
   description: z.string(),
+  departure: z.string(),
+  arrival: z.string(),
   grade: Grade,
   duration: z.number(),
   distance: z.number(),
@@ -64,7 +66,12 @@ export const Route = z.object({
 });
 export type Route = z.infer<typeof Route>;
 
-export const ListRoute = Route.omit({ description: true, trails: true });
+export const ListRoute = Route.omit({
+  description: true,
+  departure: true,
+  arrival: true,
+  trails: true,
+});
 export type ListRoute = z.infer<typeof ListRoute>;
 
 export const Waypoint = z.object({

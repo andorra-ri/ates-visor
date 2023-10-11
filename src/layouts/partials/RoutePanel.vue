@@ -68,6 +68,8 @@ const details = computed(() => [
   { id: 'duration', value: toHours(props.route.duration) },
   { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
   { id: 'orientation', value: props.route.orientation },
+  { id: 'departure', value: props.route.departure },
+  { id: 'arrival', value: props.route.arrival },
 ]);
 
 const { page, prev, next, goTo } = usePagination(props.route.waypoints);

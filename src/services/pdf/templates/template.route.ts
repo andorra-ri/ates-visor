@@ -45,6 +45,14 @@ export default (route: Route) => {
               { style: 'metric', text: `${route.verticalDrop}m` },
               { style: 'metric', text: route.orientation.join(', ') },
             ],
+            [
+              { style: 'h3', colSpan: 2, text: t('route.fields.departure') }, '',
+              { style: 'h3', colSpan: 2, text: t('route.fields.arrival') }, '',
+            ],
+            [
+              { colSpan: 2, text: route.departure }, '',
+              { colSpan: 2, text: route.arrival }, '',
+            ],
           ],
         },
       },
