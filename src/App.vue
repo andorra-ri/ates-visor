@@ -1,12 +1,24 @@
 <template>
   <Map />
-  <Toolbar />
+  <div class="toolbar">
+    <RouteSelect
+      :routes="routes"
+      @select="store.selectRoute" />
+    <AvalancheNotify />
+    <AvalancheRisk :risk="avalancheRisk" />
+    <RoutePanel
+      v-if="route"
+      :route="route" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { Map, Toolbar } from '/@/layouts';
+import { Map } from '/@/layouts';
+import { RouteSelect, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/layouts/partials';
 import store from '/@/store';
+
+const { routes, route, avalancheRisk } = store;
 
 onMounted(() => {
   store.loadAvalancheRisk();
