@@ -1,53 +1,59 @@
 <template>
-  <Dropdown class="route-select">
-    <template #toggle>
-      <div class="route-select__toggle">
-        <div class="label">
-          <em>{{ t('route.label') }}</em>
-          {{ selected?.name || t('route.select_route') }}
-        </div>
-        <span
-          v-if="selected"
-          class="route-select__clearer"
-          @click="clear">&times;</span>
+  <Selector
+    v-model="selected"
+    :options="routes"
+    :empty-text="t('route.empty')"
+    class="route-selector"
+    clearable>
+    <template #toggle="{ item }">
+      <div class="label">
+        <em>{{ t('route.label') }}</em>
+        {{ item?.name || t('route.select_route') }}
       </div>
     </template>
-    <div class="route-select__panel">
-      <aside class="route-select__filters">
+    <template #topbar>
+      <aside class="route-selector__filters">
         <SearchInput v-model="searchFor" :placeholder="t('route.search_for')" />
         <SortInput v-model="sortBy" :sorters="Object.keys(SORTERS)" />
         <RouteFilters v-model="filters.grades" />
       </aside>
-      <PickList
-        v-model="selected"
-        :options="routes"
-        :data-empty="t('route.empty')"
-        class="route-select__list">
-        <template #default="{ item }">
-          <div class="route-select__option">
-            <span :class="['grade', item.grade]" />
-            {{ item.name }} {{ item.distance }} - {{ item.duration }}
-          </div>
-        </template>
-      </PickList>
-    </div>
-  </Dropdown>
+    </template>
+    <template #option="{ option }">
+      <div class="route-selector__route">
+        <span :class="['grade', option.grade]" />
+        {{ option.name }}
+      </div>
+    </template>
+  </Selector>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Dropdown, PickList, SearchInput, SortInput } from '/@/components';
+import { Selector, SearchInput, SortInput } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import RouteFilters from './RouteFilters.vue';
 import type { ListRoute, Grade } from '/@/types';
 
-const props = defineProps<{
-  routes: ListRoute[];
+defineSlots<{
+  selected?:(props: { route: ListRoute | undefined }) => void;
+  option?:(props: { route: ListRoute }) => void;
 }>();
 
-const emit = defineEmits<{(event: 'select', code: string | undefined): void;}>();
+const props = defineProps<{
+  routes: ListRoute[];
+  placeholder?: string;
+}>();
+
+const emit = defineEmits<{
+  select: [code: string | undefined];
+}>();
+
+const selected = ref<ListRoute>();
+watch(selected, route => emit('select', route?.code));
+
+const { t } = useI18n();
 
 const { sort, sorters } = useSorters<ListRoute>();
 const { filter } = useFilters<ListRoute>();
@@ -71,63 +77,26 @@ const routes = sort([
   route => normalize(route.name).includes(searchFor.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
-
-const selected = ref<ListRoute>();
-const clear = () => { selected.value = undefined; };
-watch(selected, route => emit('select', route?.code));
-
-const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>
-.route-select {
-  &__panel {
-    @extend %container-strong;
-
-    margin: 0.125rem 0;
-  }
-
-  &__toggle {
-    width: 17rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  &__clearer {
-    display: block;
-    padding: 0.125rem 0.35rem;
-    border-radius:50%;
-    margin: 0.5rem;
-    background: #0008;
-    color: #fff;
-    cursor: pointer;
-  }
-
+.route-selector {
   &__filters {
     display: flex;
     border-radius: 0.25rem 0.25rem 0 0;
     border-bottom: 1px solid var(--color-border);
   }
 
-  &__list {
-    max-height: 20rem;
-    overflow: auto;
-    padding: 0.5rem 0;
-  }
-
-  &__option {
-    padding: 0.75rem 1.25rem;
+  &__route {
     display: flex;
     gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.125rem;
     cursor: pointer;
 
     :checked + &  {
       background: #f4f4f4;
-      box-shadow: 0 0 0 0.25rem #f4f4f4;
+      box-shadow: 0 0 0 0.125rem #f4f4f4;
     }
 
     .grade {
@@ -141,4 +110,8 @@ const { t } = useI18n();
     }
   }
 }
+</style>
+
+<style lang="scss">
+.route-selector .selector__panel { @extend %container-strong }
 </style>

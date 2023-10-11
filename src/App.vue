@@ -1,7 +1,7 @@
 <template>
   <Map />
   <div class="toolbar">
-    <RouteSelect
+    <RouteSelector
       :routes="routes"
       @select="store.selectRoute" />
     <AvalancheNotify />
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { Map, RouteSelect, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
+import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
 import store from '/@/store';
 
 const { routes, route, avalancheRisk } = store;
