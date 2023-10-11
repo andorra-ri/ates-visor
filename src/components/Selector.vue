@@ -11,39 +11,42 @@
         <span v-else class="icon chevron" />
       </div>
     </template>
-    <PickList
-      v-model="selected"
-      :options="props.options"
-      :key-attr="props.keyAttr"
-      class="selector__list">
-      <template #default="{ item, index }">
-        <slot name="option" :item="item" :index="index">
-          <slot :item="item">{{ item }}</slot>
-        </slot>
-      </template>
-    </PickList>
+    <div class="selector__panel">
+      <slot name="topbar" />
+      <ul class="selector__options" :data-empty="props.emptyText">
+        <li v-for="option, i in props.options" :key="i">
+          <label>
+            <input v-model="selected" :value="option" type="radio">
+            <slot name="option" :option="option">
+              {{ option }}
+            </slot>
+          </label>
+        </li>
+      </ul>
+    </div>
   </Dropdown>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue';
+<script setup lang="ts" generic="T">
 import Dropdown from './Dropdown.vue';
-import PickList from './PickList.vue';
 
-const props = defineProps<{
-  modelValue: any;
-  options: any[];
-  placeholder?: string;
-  keyAttr?: string;
-  clearable?: boolean;
+defineSlots<{
+  default?:(props: { item: T | undefined }) => void;
+  toggle?:(props: { item: T | undefined }) => void;
+  topbar?:() => void;
+  option?:(props: { option: T }) => void;
 }>();
 
-const emit = defineEmits(['update:modelValue']);
+const props = defineProps<{
+  options: T[];
+  placeholder?: string;
+  clearable?: boolean;
+  emptyText?: string
+}>();
 
-const selected = computed({
-  get: () => props.modelValue,
-  set: value => emit('update:modelValue', value),
-});
+const selected = defineModel<T>();
 
-const clear = () => { selected.value = undefined; };
+const clear = () => {
+  selected.value = undefined;
+};
 </script>
