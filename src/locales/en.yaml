@@ -6,6 +6,7 @@ filter: Filter
 sort: Sort
 sort_placeholder: Select
 none: None
+download_pdf: Download PDF
 
 grade:
   SIMPLE: Simple

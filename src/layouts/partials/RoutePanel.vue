@@ -33,6 +33,11 @@
           </li>
         </ul>
       </aside>
+      <p>
+        <button class="button" @click="downloadPdf">
+          {{ t('download_pdf') }}
+        </button>
+      </p>
     </details>
     <WaypointModal
       v-if="waypoint"
@@ -47,6 +52,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePagination } from '/@/composables';
+import { pdf } from '/@/services';
 import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
@@ -68,6 +74,8 @@ const { page, prev, next, goTo } = usePagination(props.route.waypoints);
 const waypoint = computed(() => page.value !== undefined && props.route.waypoints[page.value]);
 
 const routeSteps = computed(() => props.route.description.split('\n'));
+
+const downloadPdf = () => pdf.createPdf(props.route.name, 'route', props.route);
 </script>
 
 <style lang="scss" scoped>
