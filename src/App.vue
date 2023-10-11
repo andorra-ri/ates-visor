@@ -14,8 +14,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { Map } from '/@/layouts';
-import { RouteSelect, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/layouts/partials';
+import { Map, RouteSelect, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
 import store from '/@/store';
 
 const { routes, route, avalancheRisk } = store;
