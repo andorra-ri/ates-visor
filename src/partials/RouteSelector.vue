@@ -1,6 +1,7 @@
 <template>
   <Selector
     v-model="selected"
+    v-model:open="isOpen"
     :options="routes"
     :empty-text="t('route.empty')"
     class="route-selector"
@@ -84,6 +85,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   select: [code: string | undefined];
 }>();
+
+const isOpen = defineModel<boolean>('open', { default: false });
 
 const selected = ref<ListRoute>();
 watch(selected, route => emit('select', route?.code));
