@@ -115,6 +115,15 @@ const routes = sort([
 
 <style lang="scss" scoped>
 .route-selector {
+  width: 20rem;
+
+  .label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   &__filters {
     display: flex;
     border-radius: 0.25rem 0.25rem 0 0;
