@@ -3,7 +3,7 @@
   <div class="toolbar">
     <RouteSelector
       :routes="routes"
-      @select="store.selectRoute" />
+      @select="selectRoute" />
     <AvalancheNotify />
     <AvalancheRisk :risk="avalancheRisk" />
     <RoutePanel
@@ -17,7 +17,7 @@ import { onMounted } from 'vue';
 import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
 import store from '/@/store';
 
-const { routes, route, avalancheRisk } = store;
+const { routes, route, avalancheRisk, selectRoute } = store;
 
 onMounted(() => {
   store.loadAvalancheRisk();

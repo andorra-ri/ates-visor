@@ -39,6 +39,7 @@
           </Selector>
         </div>
 
+        <!-- Filters -->
         <div class="label">
           <em>{{ t('filter') }}</em>
           <fieldset class="filter-grade">
