@@ -1,13 +1,20 @@
 <template>
-  <div class="dropdown">
+  <div class="dropdown" @focusin="onOpen" @focusout="onClose">
     <div class="dropdown__toggle" tabindex="1">
       <slot name="toggle" />
     </div>
-    <div class="dropdown__panel">
+    <div class="dropdown__panel" tabindex="1">
       <slot />
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const isOpen = defineModel<boolean>('open', { default: false });
+
+const onOpen = () => { isOpen.value = true; };
+const onClose = () => { isOpen.value = false; };
+</script>
 
 <style lang="scss" scoped>
 .dropdown {

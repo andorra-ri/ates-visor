@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
 import path from 'path';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+// eslint-disable-next-line import/no-unresolved
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import yaml from '@modyfi/vite-plugin-yaml';
 import autoprefixer from 'autoprefixer';
@@ -8,7 +9,7 @@ import autoprefixer from 'autoprefixer';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({ script: { defineModel: true } }),
     yaml(),
     vueI18n({ include: path.resolve(__dirname, './src/locales/**') }),
   ],
@@ -25,5 +26,6 @@ export default defineConfig({
         `,
       },
     },
-    postcss: { plugins: [autoprefixer] } },
+    postcss: { plugins: [autoprefixer] },
+  },
 });

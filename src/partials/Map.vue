@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import { createMap, useMap, type MapLayerMouseEvent } from '/@/composables';
-import { WaypointModal } from './partials';
+import WaypointModal from './WaypointModal.vue';
 import store from '/@/store';
 import type { Waypoint } from '/@/types';
 import config from '/@/config.yaml';
