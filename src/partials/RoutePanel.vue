@@ -88,6 +88,7 @@ const downloadPdf = async () => {
 .panel {
   position: absolute;
   top: 100%;
+  width: 27rem;
   margin: 0.5rem 0;
   max-height: 75vh;
   overflow: auto;
