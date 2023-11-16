@@ -7,7 +7,7 @@
     class="route-selector"
     clearable>
     <template #toggle="{ item }">
-      <div class="label">
+      <div class="label toggler">
         <em>{{ t('route.label') }}</em>
         {{ item?.name || t('route.select_route') }}
       </div>
@@ -121,7 +121,7 @@ const routes = sort([
 .route-selector {
   width: 20rem;
 
-  .label {
+  .toggler {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
