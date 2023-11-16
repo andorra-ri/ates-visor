@@ -52,7 +52,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePagination, useMap } from '/@/composables';
-import { pdf } from '/@/services';
+// import { pdf } from '/@/services';
 import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
@@ -80,7 +80,7 @@ const routeSteps = computed(() => props.route.description.split('\n'));
 
 const downloadPdf = async () => {
   await fitTo(props.route.trails, { padding: 100 });
-  pdf.createPdf(props.route.name, 'route', props.route);
+  // pdf.createPdf(props.route.name, 'route', props.route);
 };
 </script>
 

@@ -1,3 +1,3 @@
 export * from './supabase';
 export * from './meteo';
-export * from './pdf';
+// export * from './pdf';
