@@ -1,3 +1,42 @@
+@import "https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap";
+@import
+  "layout",
+  "media",
+  "typography",
+  "form",
+  "map";
+
 :root {
   font-size: 16px;
+  user-select: none;
+
+  /* Colors */
+  --color-primary: #577abb;
+  --color-primary-alpha: #577abb44;
+  --color-bg: #fff;
+  --color-text: #333;
+  --color-border: #0002;
+
+  /* ATES colors */
+  --color-simple: #c7df8b;
+  --color-challenging: #3681b6;
+  --color-complex: #434343;
+
+  /* Typography */
+  --font-family: rubik;
+}
+
+.SIMPLE {
+  --color: var(--color-simple) !important;
+  --text: #333;
+}
+
+.CHALLENGING {
+  --color: var(--color-challenging) !important;
+  --text: #fff;
+}
+
+.COMPLEX {
+  --color: var(--color-complex) !important;
+  --text: #fff;
 }

@@ -1,0 +1,11 @@
+@import "mapbox-gl/dist/mapbox-gl.css";
+@import "mapbox-composition/lib/styles.css";
+@import "mapboxgl-legend/dist/style.css";
+
+#map {
+  height: 100vh;
+  width: 100vw;
+}
+
+.mapboxgl-ctrl-styles button { border-radius: 0 !important; }
+.mapboxgl-ctrl-scale { background-color: transparent; }

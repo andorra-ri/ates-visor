@@ -18,6 +18,7 @@
     },
     "types": [
       "vite/client",
+      "@intlify/unplugin-vue-i18n/messages"
     ]
   },
   "include": [

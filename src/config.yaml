@@ -1,0 +1,132 @@
+avalanches:
+  notify: https://survey123.arcgis.com/share/1d85c3ebd1e044e7835b3a1f2294ec51?portalUrl=https://sig.govern.ad/portal
+
+map:
+  center: [1.570498, 42.540997]
+  zoom: 11
+  minZoom: 10
+  maxZoom: 16
+  maxBounds: [[1.3, 42.3], [1.8, 42.8]]
+  style: mapbox://styles/markusand/clb421dmn000415qgh2579028
+
+  legend:
+    toggler: true
+    collapsed: false
+    layers: []
+
+  controls:
+    Styles:
+      position: top-right
+      styles:
+        - name: Mapbox Outdoors
+          url: mapbox://styles/markusand/clb421dmn000415qgh2579028
+          label: Topogràfic
+        - name: Mapbox Satellite
+          url: mapbox://styles/mapbox/satellite-v9
+          label: Satèl·lit
+    Navigation:
+      position: top-right
+      showZoom: true
+      showCompass: true
+      visualizePitch: true
+    Terrain:
+      position: top-right
+      pitch: 60
+      exaggeration: 1
+      sky:
+        sky-type: atmosphere
+        sky-atmosphere-sun: [0.0, 0.0]
+        sky-atmosphere-sun-intensity: 15
+    Scale:
+      position: bottom-left
+      maxWidth: 100
+      unit: metric
+
+layers:
+  BORDERS:
+    id: borders
+    source: /layers/andorra_borders.geojson
+    legend:
+      borders: true
+    layers:
+      - id: borders
+        type: line
+        paint:
+          line-color: white
+          line-dasharray: [4, 2, 1, 2]
+          line-width: 2
+        metadata:
+          name: borders
+          labels:
+            white: false
+  
+  TERRAIN:
+    id: terrain
+    under: borders
+    legend:
+      terrain: true
+    layers:
+      - id: terrain
+        type: fill
+        paint:
+          fill-color: [match, [get, grade],
+            SIMPLE, '#c7df8b',
+            CHALLENGING, '#3681b6',
+            COMPLEX, '#434343',
+            transparent]
+          fill-opacity: 0.5
+        metadata:
+          name: terrain
+          labels:
+            SIMPLE: simple
+            CHALLENGING: challenging
+            COMPLET: complex
+            other: false
+
+  ROUTE:
+    id: route
+    images:
+      ascend: /images/map/sprite_arrow_red.png
+    layers:
+      - id: route
+        type: line
+        layout:
+          line-cap: round
+          line-join: round
+        paint:
+          line-width: [interpolate, [exponential, 2], [zoom], 10, 6, 16, 18]
+          line-pattern: [match, [to-number, [get, down]],
+            0, ascend,
+            1, ascend,
+            ascend]
+        metadata:
+          name: route
+          labels:
+            1: descend
+            0: ascend
+            other: false
+  
+  WAYPOINTS:
+    id: waypoints
+    images:
+      alert: /images/map/alert.png
+    layers:
+      - id: decisions
+        type: circle
+        paint:
+          circle-color: '#d90429'
+          circle-stroke-color: '#d90429'
+          circle-stroke-opacity: 0.5
+          circle-stroke-width: [interpolate, [exponential, 2], [zoom], 10, 4, 16, 25]
+          circle-radius: [interpolate, [exponential, 2], [zoom], 10, 3, 16, 15]
+          circle-pitch-alignment: map
+        filter: [==, [get, kind], DECISION]
+      - id: alerts
+        type: symbol
+        layout:
+          icon-image: alert
+          icon-anchor: bottom
+          icon-size: [interpolate, [linear], [zoom], 10, 0.1, 16, 0.75]
+          icon-rotation-alignment: viewport
+          icon-allow-overlap: true
+        filter: [==, [get, kind], ALERT]
