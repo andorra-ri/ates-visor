@@ -8,10 +8,10 @@ type QueryOptions = {
   headers?: Record<string, string>;
 };
 
-const { VITE_SUPABASE_REST_URL, VITE_SUPABASE_TOKEN } = import.meta.env;
+const { VITE_SUPABASE_ID, VITE_SUPABASE_TOKEN } = import.meta.env;
 
 const query = async <T>(endpoint: string, options?: QueryOptions) => {
-  const url = new URL(endpoint, VITE_SUPABASE_REST_URL);
+  const url = new URL(endpoint, `https://${VITE_SUPABASE_ID}.supabase.co/rest/v1/`);
   url.searchParams.append('apikey', VITE_SUPABASE_TOKEN);
   Object.entries(options?.qs || {}).forEach(([k, v]) => url.searchParams.set(k, v));
   const response = await fetch(url, { headers: options?.headers });
