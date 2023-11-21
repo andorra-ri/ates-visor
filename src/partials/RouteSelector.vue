@@ -116,7 +116,7 @@ const routes = sort([
   (a, b) => SORTERS[sortBy.value || 'undefined']?.(a, b) || 0,
   (a, b) => a.name.localeCompare(b.name),
 ], filter([
-  route => normalize(route.name).includes(searchFor.value),
+  route => normalize(`${route.name} ${route.zone}`).includes(searchFor.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
 </script>
