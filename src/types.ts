@@ -38,6 +38,7 @@ export type Route = {
   description: string;
   arrival: string;
   departure: string;
+  zone: string;
   grade: Grade;
   duration: number;
   distance: number;
@@ -48,4 +49,4 @@ export type Route = {
   waypoints: Waypoint[];
 };
 
-export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance'>;
+export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance' | 'zone'>;

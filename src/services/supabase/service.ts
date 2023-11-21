@@ -28,7 +28,7 @@ export const getTerrains = async () => {
 };
 
 export const getRoutes = async () => {
-  const fields = ['code', 'name:name_ca', 'grade', 'duration', 'distance', 'vertical_drop', 'orientation', 'circular', 'created_at', 'updated_at'];
+  const fields = ['code', 'name:name_ca', 'grade', 'duration', 'distance', 'vertical_drop', 'orientation', 'circular', 'zone', 'created_at', 'updated_at'];
   const routes = await query<DTO.ListRoute[]>('routes', { qs: { select: fields.join(',') } });
   return Array(ListRoute)
     .parse(routes)
