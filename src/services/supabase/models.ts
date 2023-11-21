@@ -54,6 +54,7 @@ export const Route = z.object({
   description: z.string(),
   departure: z.string(),
   arrival: z.string(),
+  zone: z.string(),
   grade: Grade,
   duration: z.number(),
   distance: z.number(),

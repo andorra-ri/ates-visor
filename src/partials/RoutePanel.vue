@@ -2,7 +2,7 @@
   <section class="panel">
     <details class="panel__content" open>
       <summary class="arrow">
-        <h3>{{ route.name }}</h3>
+        <h3><em>{{ route.zone }}</em>{{ route.name }}</h3>
         <span :class="`chip ${route.grade}`">
           {{ route.grade }}
         </span>

@@ -18,6 +18,7 @@ sorter:
   distance: Distance
   duration: Duration
   grade: Grade
+  zone: Zone
 
 route:
   label: Route
