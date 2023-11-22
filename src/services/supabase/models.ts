@@ -58,7 +58,7 @@ export const Route = z.object({
   grade: Grade,
   duration: z.number(),
   distance: z.number(),
-  verticalDrop: z.number(),
+  elevation: z.number(),
   orientation: z.array(Orientation),
   circular: z.boolean(),
   trails: z.array(Trail),

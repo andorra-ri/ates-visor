@@ -29,7 +29,7 @@ route:
   fields:
     duration: Duration
     distance: Distance
-    drop: Drop
+    elevation: Elevation
     orientation: Orientation
     departure: Departure
     arrival: Arrival

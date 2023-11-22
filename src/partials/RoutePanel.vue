@@ -67,7 +67,7 @@ const { fitTo } = useMap();
 const details = computed(() => [
   { id: 'distance', value: toKm(props.route.distance) },
   { id: 'duration', value: toHours(props.route.duration) },
-  { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
+  { id: 'elevation', value: props.route.elevation, unit: 'm' },
   { id: 'orientation', value: props.route.orientation },
   { id: 'departure', value: props.route.departure },
   { id: 'arrival', value: props.route.arrival },

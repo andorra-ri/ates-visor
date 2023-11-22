@@ -42,11 +42,11 @@ export type Route = {
   grade: Grade;
   duration: number;
   distance: number;
-  verticalDrop: number;
+  elevation: number;
   orientation: Orientation[];
   circular: boolean;
   trails: Trail[];
   waypoints: Waypoint[];
 };
 
-export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance' | 'verticalDrop' | 'zone'>;
+export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance' | 'elevation' | 'zone'>;

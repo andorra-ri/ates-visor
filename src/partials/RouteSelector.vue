@@ -105,7 +105,7 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
   grade: sorters.ON(route => route.grade, sorters.LIST(GRADES)),
   distance: sorters.ON(route => route.distance, sorters.ASC),
   duration: sorters.ON(route => route.duration, sorters.ASC),
-  elevation: sorters.ON(route => route.verticalDrop, sorters.ASC),
+  elevation: sorters.ON(route => route.elevation, sorters.ASC),
   zone: sorters.ON(route => route.zone, sorters.ASC),
 };
 
