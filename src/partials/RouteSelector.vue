@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, toRef } from 'vue';
+import { ref, computed, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
@@ -109,6 +109,8 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
 };
 
 const searchFor = ref<string>('');
+const searchSeed = computed(() => normalize(searchFor.value));
+
 const sortBy = ref<keyof typeof SORTERS>('name');
 const filters = reactive<{ grades: Grade[] }>({ grades: [] });
 
@@ -116,7 +118,7 @@ const routes = sort([
   (a, b) => SORTERS[sortBy.value || 'undefined']?.(a, b) || 0,
   (a, b) => a.name.localeCompare(b.name),
 ], filter([
-  route => normalize(`${route.name} ${route.zone}`).includes(searchFor.value),
+  route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
 </script>
