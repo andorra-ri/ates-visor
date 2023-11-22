@@ -49,4 +49,4 @@ export type Route = {
   waypoints: Waypoint[];
 };
 
-export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance' | 'zone'>;
+export type ListRoute = Pick<Route, 'code' | 'name' | 'grade' | 'duration' | 'distance' | 'verticalDrop' | 'zone'>;

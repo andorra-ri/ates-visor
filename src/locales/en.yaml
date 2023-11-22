@@ -19,6 +19,7 @@ sorter:
   duration: Duration
   grade: Grade
   zone: Zone
+  elevation: Elevation
 
 route:
   label: Route
