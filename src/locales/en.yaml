@@ -18,6 +18,8 @@ sorter:
   distance: Distance
   duration: Duration
   grade: Grade
+  zone: Zone
+  elevation: Elevation
 
 route:
   label: Route
@@ -27,7 +29,7 @@ route:
   fields:
     duration: Duration
     distance: Distance
-    drop: Drop
+    elevation: Elevation
     orientation: Orientation
     departure: Departure
     arrival: Arrival

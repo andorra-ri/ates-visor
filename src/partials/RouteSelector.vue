@@ -58,14 +58,17 @@
     <template #option="{ option }">
       <div class="route-selector__route">
         <span :class="['grade', option.grade]" />
-        {{ option.name }}
+        <span>
+          <em class="note">{{ option.zone }}</em>
+          {{ option.name }}
+        </span>
       </div>
     </template>
   </Selector>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, toRef } from 'vue';
+import { ref, computed, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
@@ -102,9 +105,13 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
   grade: sorters.ON(route => route.grade, sorters.LIST(GRADES)),
   distance: sorters.ON(route => route.distance, sorters.ASC),
   duration: sorters.ON(route => route.duration, sorters.ASC),
+  elevation: sorters.ON(route => route.elevation, sorters.ASC),
+  zone: sorters.ON(route => route.zone, sorters.ASC),
 };
 
 const searchFor = ref<string>('');
+const searchSeed = computed(() => normalize(searchFor.value));
+
 const sortBy = ref<keyof typeof SORTERS>('name');
 const filters = reactive<{ grades: Grade[] }>({ grades: [] });
 
@@ -112,7 +119,7 @@ const routes = sort([
   (a, b) => SORTERS[sortBy.value || 'undefined']?.(a, b) || 0,
   (a, b) => a.name.localeCompare(b.name),
 ], filter([
-  route => normalize(route.name).includes(searchFor.value),
+  route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
 ], toRef(props, 'routes')));
 </script>
@@ -136,6 +143,7 @@ const routes = sort([
 
   &__route {
     display: flex;
+    align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 0.75rem;
     border-radius: 0.125rem;
@@ -154,6 +162,13 @@ const routes = sort([
       margin: 0.25rem 0;
       border-radius: 0.125rem;
       background: var(--color);
+    }
+
+    em.note {
+      display: block;
+      font-size: 0.75em;
+      opacity: 0.5;
+      line-height: 1.25;
     }
   }
 }

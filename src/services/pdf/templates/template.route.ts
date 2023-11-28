@@ -50,13 +50,13 @@ export default (route: Route) => {
             [
               { style: 'h3', text: t('route.fields.duration') },
               { style: 'h3', text: t('route.fields.distance') },
-              { style: 'h3', text: t('route.fields.drop') },
+              { style: 'h3', text: t('route.fields.elevation') },
               { style: 'h3', text: t('route.fields.orientation') },
             ],
             [
               { style: 'metric', text: toHours(route.duration) },
               { style: 'metric', text: toKm(route.distance) },
-              { style: 'metric', text: `${route.verticalDrop}m` },
+              { style: 'metric', text: `${route.elevation}m` },
               { style: 'metric', text: route.orientation.join(', ') },
             ],
             [

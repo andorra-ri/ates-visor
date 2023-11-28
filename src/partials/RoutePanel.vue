@@ -2,7 +2,7 @@
   <section class="panel">
     <details class="panel__content" open>
       <summary class="arrow">
-        <h3>{{ route.name }}</h3>
+        <h3><em>{{ route.zone }}</em>{{ route.name }}</h3>
         <span :class="`chip ${route.grade}`">
           {{ route.grade }}
         </span>
@@ -52,7 +52,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePagination, useMap } from '/@/composables';
-import { pdf } from '/@/services';
+// import { pdf } from '/@/services';
 import { toKm, toHours } from '/@/utils';
 import WaypointModal from './WaypointModal.vue';
 import type { Route } from '/@/types';
@@ -67,7 +67,7 @@ const { fitTo } = useMap();
 const details = computed(() => [
   { id: 'distance', value: toKm(props.route.distance) },
   { id: 'duration', value: toHours(props.route.duration) },
-  { id: 'drop', value: props.route.verticalDrop, unit: 'm' },
+  { id: 'elevation', value: props.route.elevation, unit: 'm' },
   { id: 'orientation', value: props.route.orientation },
   { id: 'departure', value: props.route.departure },
   { id: 'arrival', value: props.route.arrival },
@@ -80,7 +80,7 @@ const routeSteps = computed(() => props.route.description.split('\n'));
 
 const downloadPdf = async () => {
   await fitTo(props.route.trails, { padding: 100 });
-  pdf.createPdf(props.route.name, 'route', props.route);
+  // pdf.createPdf(props.route.name, 'route', props.route);
 };
 </script>
 
