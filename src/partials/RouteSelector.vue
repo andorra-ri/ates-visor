@@ -33,11 +33,9 @@
           <Selector
             v-model="sortBy"
             :options="Object.keys(SORTERS)"
-            clearable>
-            <template #default="{ item }">
-              {{ item ? t(`sorter.${item}`) : t('sort_placeholder') }}
-            </template>
-          </Selector>
+            :placeholder="t('sort_placeholder')"
+            :formatter="sorter => t(`sorter.${sorter}`)"
+            clearable />
         </div>
 
         <!-- Filters -->

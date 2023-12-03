@@ -4,7 +4,10 @@
       <div class="input selector__toggle">
         <slot name="toggle" :item="selected">
           <slot :item="selected">
-            {{ selected || props.placeholder }}
+            <template v-if="selected">
+              {{ props.formatter?.(selected) || selected }}
+            </template>
+            <span v-else class="placeholder">{{ props.placeholder }}</span>
           </slot>
         </slot>
         <span v-if="selected && props.clearable" class="icon clearer" @click="clear" />
@@ -19,7 +22,7 @@
             <input v-model="selected" :value="option" type="radio">
             <slot name="option" :option="option">
               <slot :item="option">
-                {{ option }}
+                {{ props.formatter?.(option) || option }}
               </slot>
             </slot>
           </label>
@@ -41,6 +44,7 @@ defineSlots<{
 
 const props = defineProps<{
   options: T[];
+  formatter?:(item: T) => string;
   placeholder?: string;
   clearable?: boolean;
   emptyText?: string
