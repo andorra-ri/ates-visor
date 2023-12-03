@@ -1,5 +1,8 @@
 <template>
-  <div class="dropdown" @focusin="onOpen" @focusout="onClose">
+  <div
+    :class="['dropdown', { right }]"
+    @focusin="onOpen"
+    @focusout="onClose">
     <div class="dropdown__toggle" tabindex="1">
       <slot name="toggle" />
     </div>
@@ -10,6 +13,10 @@
 </template>
 
 <script setup lang="ts">
+defineProps<{
+  right?: boolean;
+}>();
+
 const isOpen = defineModel<boolean>('open', { default: false });
 
 const onOpen = () => { isOpen.value = true; };
@@ -31,5 +38,7 @@ const onClose = () => { isOpen.value = false; };
     &:focus-within,
     &:hover { display: block; }
   }
+
+  &.right &__panel { right: 0; }
 }
 </style>
