@@ -50,7 +50,15 @@ input[type="search"] {
 
   &__panel { @extend %container; }
 
-  .placeholder { opacity: 0.5 }
+  .selected {
+    flex: 1;
+  }
+
+  .placeholder {
+    opacity: 0.5;
+    flex: 1;
+    white-space: nowrap;
+  }
   
   &__options {
     max-height: 20rem;

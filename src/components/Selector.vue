@@ -4,9 +4,9 @@
       <div class="input selector__toggle">
         <slot name="toggle" :item="selected">
           <slot :item="selected">
-            <template v-if="selected">
+            <span v-if="selected" class="selected">
               {{ props.formatter?.(selected) || selected }}
-            </template>
+            </span>
             <span v-else class="placeholder">{{ props.placeholder }}</span>
           </slot>
         </slot>
