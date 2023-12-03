@@ -33,7 +33,7 @@
           <Selector
             v-model="sortBy"
             :options="Object.keys(SORTERS)"
-            :placeholder="t('sort_placeholder')"
+            :placeholder="t('select')"
             :formatter="sorter => t(`sorter.${sorter}`)"
             clearable />
         </div>

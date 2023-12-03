@@ -1,10 +1,9 @@
 ates: Avalanche Terrain Exposure Scale
 
-search: Search
-search_placeholder: Search
-filter: Filter
+search: Search {0}
+filter: Filter {0}
 sort: Sort
-sort_placeholder: Select
+select: Select {0}
 none: None
 download_pdf: Download PDF
 
@@ -25,7 +24,7 @@ route:
   label: Route
   select_route: Choose a route
   empty: No routes available
-  search_for: Search for routes
+  search_for: Search by name or zone
   fields:
     duration: Duration
     distance: Distance
