@@ -40,16 +40,17 @@
 
         <!-- Filters -->
         <div class="label">
-          <em>{{ t('filter') }}</em>
-          <fieldset class="filter-grade">
-            <label v-for="grade in GRADES" :key="grade">
-              <input
-                v-model="filters.grades"
-                :value="grade"
-                :class="['filter-grade__input', grade]"
-                type="checkbox">
-            </label>
-          </fieldset>
+          <RouteFilters
+            v-model="filters"
+            :routes="props.routes"
+            right>
+            <template #toggler="{ active }">
+              <div class="button button--light button--icon">
+                <span v-if="active" class="badge">{{ active }}</span>
+                <img src="/images/filters.png" class="icon">
+              </div>
+            </template>
+          </RouteFilters>
         </div>
       </aside>
     </template>
@@ -72,6 +73,7 @@ import { Selector } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import type { ListRoute, Grade } from '/@/types';
+import RouteFilters from './RouteFilters.vue';
 
 defineSlots<{
   selected?:(props: { route: ListRoute | undefined }) => void;
@@ -111,7 +113,13 @@ const searchFor = ref<string>('');
 const searchSeed = computed(() => normalize(searchFor.value));
 
 const sortBy = ref<keyof typeof SORTERS>('name');
-const filters = reactive<{ grades: Grade[] }>({ grades: [] });
+const filters = reactive<{
+  grades: Grade[],
+  zone: string,
+}>({
+  grades: [],
+  zone: '',
+});
 
 const routes = sort([
   (a, b) => SORTERS[sortBy.value || 'undefined']?.(a, b) || 0,
@@ -119,6 +127,7 @@ const routes = sort([
 ], filter([
   route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
+  route => !filters.zone || route.zone.includes(filters.zone),
 ], toRef(props, 'routes')));
 </script>
 
@@ -135,6 +144,7 @@ const routes = sort([
 
   &__filters {
     display: flex;
+    align-items: center;
     border-radius: 0.25rem 0.25rem 0 0;
     border-bottom: 1px solid var(--color-border);
   }
@@ -170,33 +180,8 @@ const routes = sort([
     }
   }
 }
-
-.filter-grade {
-  display: flex;
-  gap: 0.125rem;
-
-  &__input {
-    all: unset;
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    background: var(--color, #f0f0f0);
-    border-radius: 0.125rem;
-    cursor: pointer;
-    transform: scale(0.75);
-    opacity: 0.75;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    &:hover { opacity: 1; }
-
-    &:checked {
-      transform: none;
-      opacity: 1;
-    }
-  }
-}
 </style>
 
 <style lang="scss">
-.route-selector .selector__panel { @extend %container-strong }
+.route-selector > .dropdown__panel { @extend %container-strong }
 </style>

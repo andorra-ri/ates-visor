@@ -25,6 +25,7 @@ route:
   select_route: Choose a route
   empty: No routes available
   search_for: Search by name or zone
+  filters: Filters
   fields:
     duration: Duration
     distance: Distance
@@ -32,6 +33,8 @@ route:
     orientation: Orientation
     departure: Departure
     arrival: Arrival
+    grade: Grade
+    zone: Zone
   waypoints: Waypoints
 
 avalanche:

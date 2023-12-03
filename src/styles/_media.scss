@@ -1,7 +1,12 @@
-img { max-width: 100%; }
+img {
+  max-width: 100%;
+  display: inblock-line;
+  vertical-align: middle;
+}
 
 .icon {
   height: 1em;
   width: 1em;
+  max-width: unset;
   display: inline-block;
 }
