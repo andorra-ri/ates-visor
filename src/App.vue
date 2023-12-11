@@ -3,6 +3,7 @@
   <div class="toolbar">
     <RouteSelector
       :routes="routes"
+      :block="!!route"
       @select="selectRoute" />
     <AvalancheNotify />
     <AvalancheRisk :risk="avalancheRisk" />

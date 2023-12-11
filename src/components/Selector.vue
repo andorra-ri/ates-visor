@@ -14,7 +14,7 @@
         <span v-else class="icon chevron" />
       </div>
     </template>
-    <div class="selector__panel">
+    <div v-if="!props.block" class="selector__panel">
       <slot name="topbar" />
       <ul class="selector__options" :data-empty="props.emptyText">
         <li v-for="option, i in props.options" :key="i">
@@ -47,7 +47,8 @@ const props = defineProps<{
   formatter?:(item: T) => string;
   placeholder?: string;
   clearable?: boolean;
-  emptyText?: string
+  emptyText?: string;
+  block?: boolean;
 }>();
 
 const selected = defineModel<T>();
