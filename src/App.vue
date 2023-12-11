@@ -9,7 +9,8 @@
     <AvalancheRisk :risk="avalancheRisk" />
     <RoutePanel
       v-if="route"
-      :route="route" />
+      :route="route"
+      @close="selected = undefined" />
   </div>
 </template>
 

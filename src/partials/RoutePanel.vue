@@ -9,6 +9,9 @@
             <button @click="toggle">
               <img :src="open ? '/images/minimize.svg' : '/images/maximize.svg'">
             </button>
+            <button @click="emit('close')">
+              <img src="/images/close.svg">
+            </button>
           </aside>
         </header>
       </template>
@@ -65,6 +68,10 @@ import type { Route } from '/@/types';
 
 const props = defineProps<{
   route: Route;
+}>();
+
+const emit = defineEmits<{
+  close: [];
 }>();
 
 const { t } = useI18n();
