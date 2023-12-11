@@ -1,6 +1,6 @@
 <template>
   <Dropdown>
-    <template #toggle>
+    <template #toggler>
       <slot name="toggler" :active="active" />
     </template>
     <ul class="popover filters">

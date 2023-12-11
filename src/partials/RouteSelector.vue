@@ -1,13 +1,12 @@
 <template>
   <Selector
     v-model="selected"
-    v-model:open="isOpen"
     :options="routes"
     :empty-text="t('route.empty')"
     class="route-selector"
     clearable>
-    <template #toggle="{ item }">
-      <div class="label toggler">
+    <template #toggler="{ item }">
+      <div class="label">
         <em>{{ t('route.label') }}</em>
         {{ item?.name || t('route.select_route') }}
       </div>
@@ -54,6 +53,8 @@
         </div>
       </aside>
     </template>
+
+    <!-- List of routes -->
     <template #option="{ option }">
       <div class="route-selector__route">
         <span :class="['grade', option.grade]" />
@@ -88,8 +89,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   select: [code: string | undefined];
 }>();
-
-const isOpen = defineModel<boolean>('open', { default: false });
 
 const selected = ref<ListRoute>();
 watch(selected, route => emit('select', route?.code));

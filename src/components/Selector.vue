@@ -1,8 +1,8 @@
 <template>
   <Dropdown class="selector">
-    <template #toggle>
-      <div class="input selector__toggle">
-        <slot name="toggle" :item="selected">
+    <template #toggler>
+      <div class="input">
+        <slot name="toggler" :item="selected">
           <slot :item="selected">
             <span v-if="selected" class="selected">
               {{ props.formatter?.(selected) || selected }}
@@ -37,7 +37,7 @@ import Dropdown from './Dropdown.vue';
 
 defineSlots<{
   default?:(props: { item: T | undefined }) => void;
-  toggle?:(props: { item: T | undefined }) => void;
+  toggler?:(props: { item: T | undefined }) => void;
   topbar?:() => void;
   option?:(props: { option: T }) => void;
 }>();
