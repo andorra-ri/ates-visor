@@ -6,10 +6,10 @@
           <h2><em>{{ route.zone }}</em>{{ route.name }}</h2>
           <span :class="`chip ${route.grade}`">{{ route.grade }}</span>
           <aside class="actions">
-            <button @click="toggle">
+            <button class="button button--light" @click="toggle">
               <img :src="open ? '/images/minimize.svg' : '/images/maximize.svg'">
             </button>
-            <button @click="emit('close')">
+            <button class="button button--light" @click="emit('close')">
               <img src="/images/close.svg">
             </button>
           </aside>
@@ -112,20 +112,7 @@ const downloadPdf = async () => {
     align-items: center;
     gap: 1rem;
 
-    .actions {
-      margin-left: auto;
-
-      button {
-        all: unset;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-
-        &:hover { background: #8881; }
-
-        img { width: 1.25rem; }
-      }
-    }
+    .actions { margin-left: auto; }
   }
 
   &__details {

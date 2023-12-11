@@ -120,8 +120,17 @@ body {
   cursor: pointer;
 
   &--light {
-    background: #8881;
-    color: var(--color-text);
+    all: unset;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    &:hover { background: #8881; }
+
+    img {
+      height: 1rem;
+      width: 1rem;
+    }
   }
 
   &--icon {
