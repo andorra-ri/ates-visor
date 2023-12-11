@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from 'vue';
-import { createMap, useMap, type MapLayerMouseEvent } from '/@/composables';
+import { createMap, useMap, useLayerAdapter, type MapLayerMouseEvent } from '/@/composables';
 import WaypointModal from './WaypointModal.vue';
 import store from '/@/store';
 import type { Waypoint } from '/@/types';
@@ -17,17 +17,18 @@ import config from '/@/config.yaml';
 const { terrain, route } = store;
 
 const { addLayer, createLegend, fitTo, toFeatureCollection } = useMap();
+const { adaptLayer } = useLayerAdapter();
 
-addLayer(config.layers.BORDERS);
+addLayer(adaptLayer(config.layers.BORDERS));
 
 addLayer(computed(() => {
   const source = toFeatureCollection(terrain.value);
-  return { ...config.layers.TERRAIN, source };
+  return adaptLayer({ ...config.layers.TERRAIN, source });
 }));
 
 addLayer(computed(() => {
   const source = toFeatureCollection(route.value?.trails || []);
-  return { ...config.layers.ROUTE, source };
+  return adaptLayer({ ...config.layers.ROUTE, source });
 }));
 
 const waypoint = ref<Waypoint>();
@@ -40,7 +41,7 @@ const onClick = ({ features }: MapLayerMouseEvent) => {
 
 addLayer(computed(() => {
   const source = toFeatureCollection(route.value?.waypoints || []);
-  return { ...config.layers.WAYPOINTS, source, onClick };
+  return adaptLayer({ ...config.layers.WAYPOINTS, source, onClick });
 }));
 
 watchEffect(() => route.value && fitTo(route.value.trails, { padding: 50 }));
