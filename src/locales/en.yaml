@@ -54,6 +54,8 @@ avalanche:
     - name: Extreme
       description: Numerous large natural avalanches are likely, even on moderately steep terrain.
   avaluator:
+    show: Show avaluator
+    hide: Hode avaluator
     not_recommended: Not recommended
     not_recommended_indications: Mountain travel without expert or professional knowledge is discouraged. Despite careful choices, conditions are ripe for avalanche incidents, and persistent exposure heightens the risk of an avalanche encounter.
     extra_caution: Extra caution
