@@ -2,9 +2,9 @@
   <Map />
   <div class="toolbar">
     <RouteSelector
+      v-model="selected"
       :routes="routes"
-      :block="!!route"
-      @select="selectRoute" />
+      :block="!!route" />
     <AvalancheNotify />
     <AvalancheRisk :risk="avalancheRisk" />
     <RoutePanel
@@ -14,11 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
 import store from '/@/store';
+import type { ListRoute } from '/@/types';
 
 const { routes, route, avalancheRisk, selectRoute } = store;
+
+const selected = ref<ListRoute>();
+watch(selected, selectRoute);
 
 onMounted(() => {
   store.loadAvalancheRisk();

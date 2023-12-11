@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watch, toRef } from 'vue';
+import { ref, computed, reactive, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useFilters, useSorters, type Sorter } from '/@/composables';
@@ -86,12 +86,7 @@ const props = defineProps<{
   placeholder?: string;
 }>();
 
-const emit = defineEmits<{
-  select: [code: string | undefined];
-}>();
-
-const selected = ref<ListRoute>();
-watch(selected, route => emit('select', route?.code));
+const selected = defineModel<ListRoute | undefined>({ required: true });
 
 const { t } = useI18n();
 
