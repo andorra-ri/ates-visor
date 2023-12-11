@@ -35,6 +35,11 @@
           class="filter-elevation"
           type="range">
       </li>
+      <li>
+        <button class="button" @click="clear">
+          {{ t('clear', [t('route.filters')]) }}
+        </button>
+      </li>
     </ul>
   </Dropdown>
 </template>
@@ -83,6 +88,12 @@ const active = computed(() => (
   + Number(!!filters.value.zone)
   + Number(+filters.value.elevation !== options.value.elevation?.max)
 ));
+
+const clear = () => {
+  filters.value.grades = [];
+  filters.value.zone = '';
+  filters.value.elevation = options.value.elevation?.max ?? 0;
+};
 
 const { t } = useI18n();
 </script>

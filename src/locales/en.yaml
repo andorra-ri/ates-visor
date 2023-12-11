@@ -4,6 +4,7 @@ search: Search {0}
 filter: Filter {0}
 sort: Sort
 select: Select {0}
+clear: Clear {0}
 none: None
 download_pdf: Download PDF
 

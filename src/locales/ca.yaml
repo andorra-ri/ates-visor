@@ -4,6 +4,7 @@ search: Cerca {0}
 filter: Filtra {0}
 sort: Ordena
 select: Selecciona {0}
+clear: Neteja {0}
 none: Cap
 download_pdf: Descarrega PDF
 
