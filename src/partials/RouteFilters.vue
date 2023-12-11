@@ -21,17 +21,26 @@
         <em>{{ t('route.fields.zone') }}</em>
         <Selector
           v-model="filters.zone"
-          :options="zones"
+          :options="options.zones"
           :placeholder="t('select', [t('route.fields.zone')])"
           class="filter-zone"
           clearable />
+      </li>
+      <li v-if="options.elevation">
+        <em>{{ t('route.fields.elevation') }}</em>
+        <small>{{ filters.elevation }}m</small>
+        <input
+          v-model="filters.elevation"
+          v-bind="options.elevation"
+          class="filter-elevation"
+          type="range">
       </li>
     </ul>
   </Dropdown>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, Selector } from '/@/components';
 import type { ListRoute, Grade } from '/@/types';
@@ -49,11 +58,31 @@ const props = defineProps<{
 const filters = defineModel<{
   grades: Grade[],
   zone: string,
+  elevation: number,
 }>({ required: true });
 
-const zones = computed(() => [...new Set(props.routes.map(route => route.zone))].sort());
+const roundToUpperHundred = (number: number): number => Math.ceil(number / 100) * 100;
 
-const active = computed(() => Number(!!filters.value.grades.length) + Number(!!filters.value.zone));
+const options = computed(() => {
+  const zones = [...new Set(props.routes.map(route => route.zone))].sort();
+  const elevations = props.routes.map(route => route.elevation);
+  const elevation = elevations.length ? {
+    min: roundToUpperHundred(Math.min(...elevations)),
+    max: roundToUpperHundred(Math.max(...elevations)),
+    step: 100,
+  } : undefined;
+  return { zones, elevation };
+});
+
+watch(options, ({ elevation }) => {
+  filters.value.elevation = elevation?.max ?? 0;
+}, { immediate: true });
+
+const active = computed(() => (
+  Number(!!filters.value.grades.length)
+  + Number(!!filters.value.zone)
+  + Number(+filters.value.elevation !== options.value.elevation?.max)
+));
 
 const { t } = useI18n();
 </script>
@@ -72,6 +101,8 @@ const { t } = useI18n();
     }
 
     & + li { border-top: 1px solid #8882; }
+
+    small { opacity: 0.5; }
   }
 }
 
@@ -100,5 +131,5 @@ const { t } = useI18n();
   }
 }
 
-.filter-zone { min-width: 10rem; }
+.filter-zone { min-width: 11rem; }
 </style>

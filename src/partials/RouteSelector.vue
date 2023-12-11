@@ -110,9 +110,11 @@ const sortBy = ref<keyof typeof SORTERS>('name');
 const filters = reactive<{
   grades: Grade[],
   zone: string,
+  elevation: number,
 }>({
   grades: [],
   zone: '',
+  elevation: 0,
 });
 
 const routes = sort([
@@ -122,6 +124,7 @@ const routes = sort([
   route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
   route => !filters.zone || route.zone.includes(filters.zone),
+  route => !filters.elevation || route.elevation <= filters.elevation,
 ], toRef(props, 'routes')));
 </script>
 

@@ -71,3 +71,33 @@ input[type="search"] {
     gap: 0.5rem;
   }
 }
+
+input[type="range"] {
+  width: 7rem;
+  appearance: none;
+  background: none;
+  height: 0.5rem;
+
+  &::-webkit-slider-runnable-track,
+  &::-moz-range-track {
+    appearance: none;
+    background: #8882;
+    height: 100%;
+    border-radius: 0.25rem;
+  }
+
+  &::-moz-range-progress {
+    background: var(--color-primary);
+    height: 100%;
+    border-radius: 0.25rem;
+  }
+
+  &::-webkit-slider-thumb,
+  &::-moz-range-thumb {
+    appearance: none;
+    background: #fff;
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: 0.25rem;
+  }
+}
