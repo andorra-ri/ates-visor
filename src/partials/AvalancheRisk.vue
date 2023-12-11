@@ -11,8 +11,10 @@
           </a>
         </p>
       </div>
-      <details class="avalanche__avaluator">
-        <summary>View the avaluator</summary>
+      <details class="avalanche__avaluator" @toggle="toggleAvaluator">
+        <summary class="button">
+          {{ isAvaluatorVisible ? t('avalanche.avaluator.hide') : t('avalanche.avaluator.show') }}
+        </summary>
         <Avaluator :risk="props.risk" />
       </details>
       <template #toggle="{ open }">
@@ -25,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Modal, Avaluator } from '/@/components';
 
@@ -33,6 +36,12 @@ const { t } = useI18n();
 const props = defineProps<{
   risk: number;
 }>();
+
+const isAvaluatorVisible = ref(false);
+const toggleAvaluator = (event: Event) => {
+  const { open } = event.target as HTMLDetailsElement;
+  isAvaluatorVisible.value = open;
+};
 </script>
 
 <style lang="scss" scoped>
