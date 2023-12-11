@@ -1,12 +1,17 @@
 <template>
   <section class="panel">
-    <details class="panel__content" open>
-      <summary class="arrow">
-        <h2><em>{{ route.zone }}</em>{{ route.name }}</h2>
-        <span :class="`chip ${route.grade}`">
-          {{ route.grade }}
-        </span>
-      </summary>
+    <Expandable open>
+      <template #toggler="{ open, toggle }">
+        <header class="panel__header">
+          <h2><em>{{ route.zone }}</em>{{ route.name }}</h2>
+          <span :class="`chip ${route.grade}`">{{ route.grade }}</span>
+          <aside class="actions">
+            <button @click="toggle">
+              <img :src="open ? '/images/minimize.svg' : '/images/maximize.svg'">
+            </button>
+          </aside>
+        </header>
+      </template>
       <ul class="panel__details">
         <li v-for="detail in details" :key="detail.id" class="label">
           <em>{{ t(`route.fields.${detail.id}`) }}</em>
@@ -38,7 +43,7 @@
           {{ t('download_pdf') }}
         </button>
       </p>
-    </details>
+    </Expandable>
     <WaypointModal
       v-if="waypoint"
       :waypoint="waypoint"
@@ -51,6 +56,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { Expandable } from '/@/components';
 import { usePagination, useMap } from '/@/composables';
 // import { pdf } from '/@/services';
 import { toKm, toHours } from '/@/utils';
@@ -88,36 +94,30 @@ const downloadPdf = async () => {
 .panel {
   position: absolute;
   top: 100%;
-  width: 27rem;
+  width: 25rem;
   margin: 0.5rem 0;
   max-height: 75vh;
   overflow: auto;
+  padding: 1rem;
 
-  &__content {
-    margin: 1rem;
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-    summary {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .actions {
+      margin-left: auto;
 
-      &::after {
-        content: "";
-        height: 0.5rem;
-        width: 0.5rem;
-        flex: 0 0 0.5rem;
-        transform: rotate(45deg);
-        border: 2px solid #8886;
-        border-width: 0 2px 2px 0;
-        margin: -0.25rem 0.25rem 0 auto;
-        transition: all 0.3s ease;
+      button {
+        all: unset;
         cursor: pointer;
-      }
-    }
+        padding: 0.5rem;
+        border-radius: 0.25rem;
 
-    &[open] summary::after {
-      transform: rotate(-135deg);
-      margin: 0.35rem 0.25rem 0 auto;
+        &:hover { background: #8881; }
+
+        img { width: 1.25rem; }
+      }
     }
   }
 
