@@ -48,8 +48,7 @@ input[type="search"] {
 }
 
 .selector {
-  input[type="radio"],
-  input[type="checkbox"] { display: none; }
+  &__input { display: none; }
 
   &__panel { @extend %container; }
 

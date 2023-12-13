@@ -22,7 +22,11 @@
       <ul class="selector__options" :data-empty="props.emptyText">
         <li v-for="option, i in props.options" :key="i">
           <label>
-            <input v-model="selected" :value="option" :type="type">
+            <input
+              v-model="selected"
+              :value="option"
+              :type="type"
+              class="selector__input">
             <slot name="option" :option="option">
               <slot :item="option">
                 <div class="option">
