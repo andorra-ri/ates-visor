@@ -6,8 +6,8 @@ const { VITE_SUPABASE_ID } = import.meta.env;
 export const adaptTerrain = (terrain: DTO.Terrain): Terrain => terrain;
 
 export const adaptListRoute = (route: DTO.ListRoute): ListRoute => {
-  const { code, name, grade, duration, distance, elevation, zone } = route;
-  return { code, name, grade, duration, distance, elevation, zone };
+  const { code, name, grade, duration, distance, elevation, zone, trails } = route;
+  return { code, name, grade, duration, distance, elevation, zone, trails };
 };
 
 export const adaptTrail = (trail: DTO.Trail): Trail => {

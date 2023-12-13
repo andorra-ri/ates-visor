@@ -71,7 +71,6 @@ export const ListRoute = Route.omit({
   description: true,
   departure: true,
   arrival: true,
-  trails: true,
 });
 export type ListRoute = z.infer<typeof ListRoute>;
 
