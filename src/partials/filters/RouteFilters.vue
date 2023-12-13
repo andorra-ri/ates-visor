@@ -1,7 +1,10 @@
 <template>
-  <Dropdown>
+  <Dropdown class="filters">
     <template #toggler>
-      <slot name="toggler" :active="activeFilters" />
+      <div class="button button--light button--icon">
+        <span v-if="activeFilters" class="badge">{{ activeFilters }}</span>
+        <img src="/images/filters.png" class="icon">
+      </div>
     </template>
     <TableList :title="t('route.filters')">
       <template #footer>
@@ -41,9 +44,9 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, TableList } from '/@/components';
 import type { ListRoute, Grade, Orientation } from '/@/types';
-import OrientationPicker from './filters/OrientationPicker.vue';
-import GradePicker from './filters/GradePicker.vue';
-import ZoneSelector from './filters/ZoneSelector.vue';
+import OrientationPicker from './OrientationPicker.vue';
+import GradePicker from './GradePicker.vue';
+import ZoneSelector from './ZoneSelector.vue';
 
 defineSlots<{
   toggler:(props: { active: number }) => void;
@@ -93,3 +96,7 @@ const clear = () => {
 
 const { t } = useI18n();
 </script>
+
+<style lang="scss" scoped>
+.filters { margin: 0.75rem; }
+</style>
