@@ -71,7 +71,7 @@
 import { ref, computed, reactive, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
-import { useFilters, useSorters, type Sorter } from '/@/composables';
+import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import type { ListRoute, Grade } from '/@/types';
 import RouteFilters from './RouteFilters.vue';
@@ -126,6 +126,9 @@ const routes = sort([
   route => !filters.zone || route.zone.includes(filters.zone),
   route => !filters.elevation || route.elevation <= filters.elevation,
 ], toRef(props, 'routes')));
+
+const trails = computed(() => (selected.value ? [] : routes.value.flatMap(route => route.trails)));
+useTrailsMapper(trails);
 </script>
 
 <style lang="scss" scoped>

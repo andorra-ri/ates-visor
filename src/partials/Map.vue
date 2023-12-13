@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from 'vue';
-import { createMap, useMap, useLayerAdapter, type MapLayerMouseEvent } from '/@/composables';
+import { createMap, useMap, useLayerAdapter, useTrailsMapper, type MapLayerMouseEvent } from '/@/composables';
 import WaypointModal from './WaypointModal.vue';
 import store from '/@/store';
 import type { Waypoint } from '/@/types';
@@ -26,10 +26,7 @@ addLayer(computed(() => {
   return adaptLayer({ ...config.layers.TERRAIN, source });
 }));
 
-addLayer(computed(() => {
-  const source = toFeatureCollection(route.value?.trails || []);
-  return adaptLayer({ ...config.layers.ROUTE, source });
-}));
+useTrailsMapper(computed(() => route.value?.trails || []));
 
 const waypoint = ref<Waypoint>();
 const clearWaypoint = () => { waypoint.value = undefined; };
