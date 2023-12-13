@@ -16,7 +16,7 @@
         <SortSelector
           v-model="sortBy"
           :sorters="SORTERS" />
-        <RouteFilters
+        <FiltersList
           v-model="filters"
           :routes="props.routes"
           right />
@@ -34,10 +34,10 @@ import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
-import type { ListRoute, Grade, Orientation } from '/@/types';
+import type { ListRoute, Grade } from '/@/types';
 import SearchBox from './filters/SearchBox.vue';
 import SortSelector from './filters/SortSelector.vue';
-import RouteFilters from './filters/RouteFilters.vue';
+import FiltersList, { type RouteFilters } from './filters/FiltersList.vue';
 import RouteListItem from './RouteListItem.vue';
 
 defineSlots<{
@@ -69,12 +69,7 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
 
 const searchFor = ref<string>('');
 const sortBy = ref<keyof typeof SORTERS>('name');
-const filters = reactive<{
-  grades: Grade[],
-  zone: string[],
-  elevation: number,
-  orientation: Orientation[],
-}>({
+const filters = reactive<RouteFilters>({
   grades: [],
   zone: [],
   elevation: 0,

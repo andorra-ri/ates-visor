@@ -43,10 +43,17 @@
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, TableList } from '/@/components';
-import type { ListRoute, Grade, Orientation } from '/@/types';
 import OrientationPicker from './OrientationPicker.vue';
 import GradePicker from './GradePicker.vue';
 import ZoneSelector from './ZoneSelector.vue';
+import type { ListRoute, Grade, Orientation } from '/@/types';
+
+export type RouteFilters = {
+  grades: Grade[],
+  zone: string[],
+  elevation: number,
+  orientation: Orientation[],
+};
 
 defineSlots<{
   toggler:(props: { active: number }) => void;
@@ -56,12 +63,7 @@ const props = defineProps<{
   routes: ListRoute[],
 }>();
 
-const filters = defineModel<{
-  grades: Grade[],
-  zone: string[],
-  elevation: number,
-  orientation: Orientation[],
-}>({ required: true });
+const filters = defineModel<RouteFilters>({ required: true });
 
 const options = computed(() => {
   const roundToUpperHundred = (number: number): number => Math.ceil(number / 100) * 100;
