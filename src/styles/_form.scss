@@ -48,7 +48,8 @@ input[type="search"] {
 }
 
 .selector {
-  input[type="radio"] { display: none; }
+  input[type="radio"],
+  input[type="checkbox"] { display: none; }
 
   &__panel { @extend %container; }
 
@@ -68,7 +69,17 @@ input[type="search"] {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1px;
+
+    .option {
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+
+      &:hover { background: #8881; }
+    }
+
+    :checked + .option { background: #8883; }
   }
 }
 

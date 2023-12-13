@@ -8,7 +8,7 @@
     <template #toggler="{ item }">
       <div class="label">
         <em>{{ t('route.label') }}</em>
-        {{ item?.name || t('route.select_route') }}
+        {{ (item as ListRoute)?.name || t('route.select_route') }}
       </div>
     </template>
     <template #topbar>
@@ -104,11 +104,11 @@ const searchSeed = computed(() => normalize(searchFor.value));
 const sortBy = ref<keyof typeof SORTERS>('name');
 const filters = reactive<{
   grades: Grade[],
-  zone: string,
+  zone: string[],
   elevation: number,
 }>({
   grades: [],
-  zone: '',
+  zone: [],
   elevation: 0,
 });
 
@@ -118,7 +118,7 @@ const routes = sort([
 ], filter([
   route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
-  route => !filters.zone || route.zone.includes(filters.zone),
+  route => !filters.zone.length || filters.zone.some(zone => route.zone.includes(zone)),
   route => !filters.elevation || route.elevation <= filters.elevation,
 ], toRef(props, 'routes')));
 

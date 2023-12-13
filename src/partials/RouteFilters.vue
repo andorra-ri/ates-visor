@@ -62,7 +62,7 @@ const props = defineProps<{
 
 const filters = defineModel<{
   grades: Grade[],
-  zone: string,
+  zone: string[],
   elevation: number,
 }>({ required: true });
 
@@ -91,7 +91,7 @@ const active = computed(() => (
 
 const clear = () => {
   filters.value.grades = [];
-  filters.value.zone = '';
+  filters.value.zone = [];
   filters.value.elevation = options.value.elevation?.max ?? 0;
 };
 
