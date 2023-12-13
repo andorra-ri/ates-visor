@@ -1,7 +1,7 @@
 <template>
   <Dropdown>
     <template #toggler>
-      <slot name="toggler" :active="active" />
+      <slot name="toggler" :active="activeFilters" />
     </template>
     <TableList :title="t('route.filters')">
       <template #footer>
@@ -60,9 +60,8 @@ const filters = defineModel<{
   orientation: Orientation[],
 }>({ required: true });
 
-const roundToUpperHundred = (number: number): number => Math.ceil(number / 100) * 100;
-
 const options = computed(() => {
+  const roundToUpperHundred = (number: number): number => Math.ceil(number / 100) * 100;
   const zones = [...new Set(props.routes.map(route => route.zone))].sort();
   const elevations = props.routes.map(route => route.elevation);
   const elevation = elevations.length ? {
@@ -77,12 +76,13 @@ watch(options, ({ elevation }) => {
   filters.value.elevation = elevation?.max ?? 0;
 }, { immediate: true });
 
-const active = computed(() => (
-  Number(!!filters.value.grades.length)
-  + Number(!!filters.value.zone.length)
-  + Number(+filters.value.elevation !== options.value.elevation?.max)
-  + Number(!!filters.value.orientation.length)
-));
+const activeFilters = computed(() => {
+  const gradesSelected = !!filters.value.grades.length;
+  const zoneSelected = !!filters.value.zone.length;
+  const elevationSelected = +filters.value.elevation !== options.value.elevation?.max;
+  const orientationSelected = !!filters.value.orientation.length;
+  return +gradesSelected + +zoneSelected + +elevationSelected + +orientationSelected;
+});
 
 const clear = () => {
   filters.value.grades = [];
