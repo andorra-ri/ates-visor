@@ -5,6 +5,12 @@
       <em class="note">{{ props.route.zone }}</em>
       {{ props.route.name }}
     </span>
+    <ul class="details">
+      <li>
+        <img src="/images/up-down.svg">
+        {{ props.route.elevation }}m
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -48,6 +54,24 @@ const props = defineProps<{
     font-size: 0.75em;
     opacity: 0.5;
     line-height: 1.25;
+  }
+
+  .details {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: auto;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.125rem;
+      font-size: 0.9rem;
+
+      img {
+        height: 0.8rem;
+        opacity: 0.5;
+      }
+    }
   }
 }
 </style>
