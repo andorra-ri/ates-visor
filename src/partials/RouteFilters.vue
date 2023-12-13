@@ -104,6 +104,7 @@ const clear = () => {
   filters.value.grades = [];
   filters.value.zone = [];
   filters.value.elevation = options.value.elevation?.max ?? 0;
+  filters.value.orientation = [];
 };
 
 const { t } = useI18n();
