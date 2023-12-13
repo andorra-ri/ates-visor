@@ -11,12 +11,9 @@
       </li>
       <li>
         <em>{{ t('route.fields.zone') }}</em>
-        <Selector
+        <ZoneSelector
           v-model="filters.zone"
-          :options="options.zones"
-          :placeholder="t('select', [t('route.fields.zone')])"
-          class="filter-zone"
-          clearable />
+          :zones="options.zones" />
       </li>
       <li v-if="options.elevation">
         <em>{{ t('route.fields.elevation') }}</em>
@@ -43,10 +40,11 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Dropdown, Selector } from '/@/components';
+import { Dropdown } from '/@/components';
 import type { ListRoute, Grade, Orientation } from '/@/types';
 import OrientationPicker from './filters/OrientationPicker.vue';
 import GradePicker from './filters/GradePicker.vue';
+import ZoneSelector from './filters/ZoneSelector.vue';
 
 defineSlots<{
   toggler:(props: { active: number }) => void;
@@ -115,6 +113,4 @@ const { t } = useI18n();
     small { opacity: 0.5; }
   }
 }
-
-.filter-zone { min-width: 11rem; }
 </style>
