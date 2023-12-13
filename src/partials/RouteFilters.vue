@@ -3,8 +3,12 @@
     <template #toggler>
       <slot name="toggler" :active="active" />
     </template>
-    <ul class="popover filters">
-      <li><h3>{{ t('route.filters') }}</h3></li>
+    <TableList :title="t('route.filters')">
+      <template #footer>
+        <button class="button" @click="clear">
+          {{ t('clear', [t('route.filters')]) }}
+        </button>
+      </template>
       <li>
         <em>{{ t('route.fields.grade') }}</em>
         <GradePicker v-model="filters.grades" />
@@ -28,19 +32,14 @@
         <em>{{ t('route.fields.orientation') }}</em>
         <OrientationPicker v-model="filters.orientation" />
       </li>
-      <li>
-        <button class="button" @click="clear">
-          {{ t('clear', [t('route.filters')]) }}
-        </button>
-      </li>
-    </ul>
+    </TableList>
   </Dropdown>
 </template>
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Dropdown } from '/@/components';
+import { Dropdown, TableList } from '/@/components';
 import type { ListRoute, Grade, Orientation } from '/@/types';
 import OrientationPicker from './filters/OrientationPicker.vue';
 import GradePicker from './filters/GradePicker.vue';
@@ -94,23 +93,3 @@ const clear = () => {
 
 const { t } = useI18n();
 </script>
-
-<style lang="scss" scoped>
-.filters {
-  li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem;
-
-    em {
-      flex: 1;
-      color: #888;
-    }
-
-    & + li { border-top: 1px solid #8882; }
-
-    small { opacity: 0.5; }
-  }
-}
-</style>
