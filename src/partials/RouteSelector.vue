@@ -67,7 +67,7 @@ import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
-import type { ListRoute, Grade } from '/@/types';
+import type { ListRoute, Grade, Orientation } from '/@/types';
 import RouteFilters from './RouteFilters.vue';
 import RouteListItem from './RouteListItem.vue';
 
@@ -106,10 +106,12 @@ const filters = reactive<{
   grades: Grade[],
   zone: string[],
   elevation: number,
+  orientation: Orientation[],
 }>({
   grades: [],
   zone: [],
   elevation: 0,
+  orientation: [],
 });
 
 const routes = sort([
@@ -120,6 +122,8 @@ const routes = sort([
   route => !filters.grades.length || filters.grades.includes(route.grade),
   route => !filters.zone.length || filters.zone.some(zone => route.zone.includes(zone)),
   route => !filters.elevation || route.elevation <= filters.elevation,
+  route => !filters.orientation.length
+    || filters.orientation.some(o => route.orientation.includes(o)),
 ], toRef(props, 'routes')));
 
 const trails = computed(() => (selected.value ? [] : routes.value.flatMap(route => route.trails)));

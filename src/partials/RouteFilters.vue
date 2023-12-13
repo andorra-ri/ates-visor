@@ -36,6 +36,15 @@
           type="range">
       </li>
       <li>
+        <em>{{ t('route.fields.orientation') }}</em>
+        <fieldset class="filter-orientation">
+          <label v-for="orientation in ORIENTATIONS" :key="orientation">
+            <input v-model="filters.orientation" :value="orientation" type="checkbox">
+            <span class="chip">{{ orientation }}</span>
+          </label>
+        </fieldset>
+      </li>
+      <li>
         <button class="button" @click="clear">
           {{ t('clear', [t('route.filters')]) }}
         </button>
@@ -48,9 +57,10 @@
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, Selector } from '/@/components';
-import type { ListRoute, Grade } from '/@/types';
+import type { ListRoute, Grade, Orientation } from '/@/types';
 
 const GRADES: Grade[] = ['SIMPLE', 'CHALLENGING', 'COMPLEX'];
+const ORIENTATIONS: Orientation[] = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
 
 defineSlots<{
   toggler:(props: { active: number }) => void;
@@ -64,6 +74,7 @@ const filters = defineModel<{
   grades: Grade[],
   zone: string[],
   elevation: number,
+  orientation: Orientation[],
 }>({ required: true });
 
 const roundToUpperHundred = (number: number): number => Math.ceil(number / 100) * 100;
@@ -143,4 +154,14 @@ const { t } = useI18n();
 }
 
 .filter-zone { min-width: 11rem; }
+
+.filter-orientation {
+  .chip { cursor: pointer; }
+
+  :checked + .chip {
+    --color: var(--color-primary);
+
+    font-size: 1rem;
+  }
+}
 </style>
