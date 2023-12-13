@@ -158,6 +158,8 @@ const { t } = useI18n();
 .filter-orientation {
   .chip { cursor: pointer; }
 
+  input { display: none; }
+
   :checked + .chip {
     --color: var(--color-primary);
 
