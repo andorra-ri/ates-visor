@@ -81,7 +81,7 @@ const clear = () => {
   .icon { margin-left: auto; }
 
   &__placeholder {
-    opacity: 0.25;
+    opacity: 0.35;
     white-space: nowrap;
   }
 

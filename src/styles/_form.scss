@@ -16,7 +16,7 @@
 input[type="text"],
 input[type="search"] {
   all: unset;
-  &::placeholder { opacity: 0.25; }
+  &::placeholder { opacity: 0.35; }
 }
 
 .input {
