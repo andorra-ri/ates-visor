@@ -1,11 +1,11 @@
 <template>
   <div class="dropdown">
-    <div class="toggler" tabindex="0">
+    <div class="dropdown__toggler" tabindex="0">
       <slot name="toggler">
         {{ props.label || 'Dropdown' }}
       </slot>
     </div>
-    <div class="container">
+    <div class="dropdown__container">
       <slot />
     </div>
   </div>
@@ -22,19 +22,19 @@ const props = defineProps<{
 }>();
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .dropdown {
   display: inline-block;
   position: relative;
   vertical-align: middle;
   overflow: visible;
 
-  .toggler {
+  &__toggler {
     display: flex;
     align-items: center;
   }
 
-  .container {
+  &__container {
     position: absolute;
     top: 100%;
     left: 0;
@@ -42,29 +42,28 @@ const props = defineProps<{
     box-sizing: border-box;
     display: none;
     margin: 0.125rem 0;
+    background: var(--color-bg);
+    box-shadow:
+      0 0 0 1px var(--color-border),
+      0 0.25rem 0.75rem 0 var(--color-border);
+    border-radius: 0.25rem;
   }
 
-  &[top] > .container {
+  &[top] > &__container {
     bottom: 100%;
     top: unset;
   }
 
-  &[right] > .container {
+  &[right] > &__container {
     left: unset;
     right: 0;
   }
 
   &[block] { width: 100%; }
+  &[disabled] { cursor: not-allowed; }
+  &[disabled] &__container { display: none !important; }
 
-  &[disabled] {
-    cursor: not-allowed;
-
-    .container { display: none !important; }
-  }
-
-  .container:hover,
-  .toggler:focus-within + .container {
-    display: block;
-  }
+  &__container:hover,
+  &__toggler:focus-within + &__container { display: block; }
 }
 </style>

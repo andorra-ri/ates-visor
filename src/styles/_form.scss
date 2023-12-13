@@ -16,7 +16,7 @@
 input[type="text"],
 input[type="search"] {
   all: unset;
-  &::placeholder { opacity: 0.25; }
+  &::placeholder { opacity: 0.35; }
 }
 
 .input {
@@ -28,6 +28,7 @@ input[type="search"] {
   .icon {
     height: 1em;
     width: 1em;
+    flex: 0 0 1rem;
     display: block;
     opacity: 0.5;
     background-position: 50% 50%;
@@ -44,41 +45,6 @@ input[type="search"] {
   .chevron {
     margin-right: 0.5rem;
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>');
-  }
-}
-
-.selector {
-  &__input { display: none; }
-
-  &__panel { @extend %container; }
-
-  .selected {
-    flex: 1;
-  }
-
-  .placeholder {
-    opacity: 0.5;
-    flex: 1;
-    white-space: nowrap;
-  }
-  
-  &__options {
-    max-height: 20rem;
-    overflow: auto;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-
-    .option {
-      padding: 0.25rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-
-      &:hover { background: #8881; }
-    }
-
-    :checked + .option { background: #8883; }
   }
 }
 

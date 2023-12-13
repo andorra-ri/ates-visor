@@ -4,10 +4,8 @@
       <div class="input">
         <slot name="toggler" :item="selected">
           <slot :item="selected">
-            <span v-if="isSelected(selected)" class="selected">
-              {{ toLabel(selected) }}
-            </span>
-            <span v-else class="placeholder">{{ props.placeholder }}</span>
+            <span v-if="isSelected(selected)">{{ toLabel(selected) }}</span>
+            <span v-else class="selector__placeholder">{{ props.placeholder }}</span>
           </slot>
         </slot>
         <span
@@ -22,14 +20,10 @@
       <ul class="selector__options" :data-empty="props.emptyText">
         <li v-for="option, i in props.options" :key="i">
           <label>
-            <input
-              v-model="selected"
-              :value="option"
-              :type="type"
-              class="selector__input">
+            <input v-model="selected" :value="option" :type="type">
             <slot name="option" :option="option">
               <slot :item="option">
-                <div class="option">
+                <div class="selector__option">
                   {{ props.formatter?.(option) || option }}
                 </div>
               </slot>
@@ -79,3 +73,36 @@ const clear = () => {
   selected.value = Array.isArray(selected.value) ? [] : undefined;
 };
 </script>
+
+<style lang="scss" scoped>
+.selector {
+  input { display: none; }
+
+  .icon { margin-left: auto; }
+
+  &__placeholder {
+    opacity: 0.35;
+    white-space: nowrap;
+  }
+
+  &__options {
+    max-height: 20rem;
+    overflow: auto;
+    padding: 0.5rem;
+  }
+
+  &__option {
+    margin: 1px 0;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:hover { background: #8882; }
+
+    :checked + & {
+      background: var(--color-primary);
+      color: #fff;
+    }
+  }
+}
+</style>

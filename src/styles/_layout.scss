@@ -61,14 +61,6 @@ body {
   }
 }
 
-.popover {
-  background: var(--color-bg);
-  box-shadow:
-    0 0 0 1px var(--color-border),
-    0 0.25rem 0.75rem 0 var(--color-border);
-  border-radius: 0.25rem;
-}
-
 .panel { @extend %container-strong; }
 
 .modal {
@@ -150,3 +142,4 @@ body {
   right: 0;
   transform: translate(50%, -50%);
 }
+
