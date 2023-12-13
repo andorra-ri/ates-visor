@@ -18,7 +18,7 @@ map:
     Styles:
       position: top-right
       styles:
-        - name: Mapbox Outdoors
+        - name: Outdoors
           url: mapbox://styles/markusand/clb421dmn000415qgh2579028
           label: Topogràfic
         - name: Mapbox Satellite
