@@ -96,8 +96,9 @@ watch(options, ({ elevation }) => {
 
 const active = computed(() => (
   Number(!!filters.value.grades.length)
-  + Number(!!filters.value.zone)
+  + Number(!!filters.value.zone.length)
   + Number(+filters.value.elevation !== options.value.elevation?.max)
+  + Number(!!filters.value.orientation.length)
 ));
 
 const clear = () => {
