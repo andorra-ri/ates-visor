@@ -7,15 +7,7 @@
       <li><h3>{{ t('route.filters') }}</h3></li>
       <li>
         <em>{{ t('route.fields.grade') }}</em>
-        <fieldset class="filter-grade">
-          <label v-for="grade in GRADES" :key="grade">
-            <input
-              v-model="filters.grades"
-              :value="grade"
-              :class="['filter-grade__input', grade]"
-              type="checkbox">
-          </label>
-        </fieldset>
+        <GradePicker v-model="filters.grades" />
       </li>
       <li>
         <em>{{ t('route.fields.zone') }}</em>
@@ -58,9 +50,8 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, Selector } from '/@/components';
 import type { ListRoute, Grade, Orientation } from '/@/types';
-
-const GRADES: Grade[] = ['SIMPLE', 'CHALLENGING', 'COMPLEX'];
 const ORIENTATIONS: Orientation[] = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
+import GradePicker from './filters/GradePicker.vue';
 
 defineSlots<{
   toggler:(props: { active: number }) => void;
@@ -127,31 +118,6 @@ const { t } = useI18n();
     & + li { border-top: 1px solid #8882; }
 
     small { opacity: 0.5; }
-  }
-}
-
-.filter-grade {
-  display: flex;
-  gap: 0.125rem;
-
-  &__input {
-    all: unset;
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    background: var(--color, #f0f0f0);
-    border-radius: 0.125rem;
-    cursor: pointer;
-    transform: scale(0.75);
-    opacity: 0.75;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    &:hover { opacity: 1; }
-
-    &:checked {
-      transform: none;
-      opacity: 1;
-    }
   }
 }
 
