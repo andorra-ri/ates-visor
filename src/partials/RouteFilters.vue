@@ -29,12 +29,7 @@
       </li>
       <li>
         <em>{{ t('route.fields.orientation') }}</em>
-        <fieldset class="filter-orientation">
-          <label v-for="orientation in ORIENTATIONS" :key="orientation">
-            <input v-model="filters.orientation" :value="orientation" type="checkbox">
-            <span class="chip">{{ orientation }}</span>
-          </label>
-        </fieldset>
+        <OrientationPicker v-model="filters.orientation" />
       </li>
       <li>
         <button class="button" @click="clear">
@@ -50,7 +45,7 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Dropdown, Selector } from '/@/components';
 import type { ListRoute, Grade, Orientation } from '/@/types';
-const ORIENTATIONS: Orientation[] = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
+import OrientationPicker from './filters/OrientationPicker.vue';
 import GradePicker from './filters/GradePicker.vue';
 
 defineSlots<{
@@ -122,16 +117,4 @@ const { t } = useI18n();
 }
 
 .filter-zone { min-width: 11rem; }
-
-.filter-orientation {
-  .chip { cursor: pointer; }
-
-  input { display: none; }
-
-  :checked + .chip {
-    --color: var(--color-primary);
-
-    font-size: 1rem;
-  }
-}
 </style>
