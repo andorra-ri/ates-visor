@@ -56,13 +56,7 @@
 
     <!-- List of routes -->
     <template #option="{ option }">
-      <div class="route-selector__route">
-        <span :class="['grade', option.grade]" />
-        <span>
-          <em class="note">{{ option.zone }}</em>
-          {{ option.name }}
-        </span>
-      </div>
+      <RouteListItem :route="option" />
     </template>
   </Selector>
 </template>
@@ -75,6 +69,7 @@ import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composa
 import { normalize } from '/@/utils';
 import type { ListRoute, Grade } from '/@/types';
 import RouteFilters from './RouteFilters.vue';
+import RouteListItem from './RouteListItem.vue';
 
 defineSlots<{
   selected?:(props: { route: ListRoute | undefined }) => void;
@@ -147,37 +142,6 @@ useTrailsMapper(trails);
     align-items: center;
     border-radius: 0.25rem 0.25rem 0 0;
     border-bottom: 1px solid var(--color-border);
-  }
-
-  &__route {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.125rem;
-    cursor: pointer;
-
-    :checked + &  {
-      background: #f4f4f4;
-      box-shadow: 0 0 0 0.125rem #f4f4f4;
-    }
-
-    .grade {
-      display: inline-block;
-      flex: 0 0 0.5rem;
-      height: 0.5rem;
-      width: 0.5rem;
-      margin: 0.25rem 0;
-      border-radius: 0.125rem;
-      background: var(--color);
-    }
-
-    em.note {
-      display: block;
-      font-size: 0.75em;
-      opacity: 0.5;
-      line-height: 1.25;
-    }
   }
 }
 </style>
