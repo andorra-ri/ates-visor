@@ -32,12 +32,7 @@ const props = defineProps<{
   border-radius: 0.25rem;
   cursor: pointer;
 
-  &:hover { background: #8882; }
-
-  :checked + &  {
-    background: #f4f4f4;
-    box-shadow: 0 0 0 0.125rem #f4f4f4;
-  }
+  &:hover { background: #8881; }
 
   .grade {
     display: inline-block;
