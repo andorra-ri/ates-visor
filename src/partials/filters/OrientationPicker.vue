@@ -16,6 +16,8 @@ const orientations = defineModel<Orientation[]>({ required: true });
 </script>
 
 <style lang="scss" scoped>
+.picker { display: flex; }
+
 .chip {
   --color: #888b;
 
