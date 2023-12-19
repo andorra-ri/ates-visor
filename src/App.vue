@@ -1,6 +1,12 @@
 <template>
   <Map />
   <div class="toolbar">
+    <a href="https://www.ari.ad" target="blank">
+      <img
+        src="/images/logo_ari.png"
+        alt="Andorra Recerca + Innovació"
+        class="brand">
+    </a>
     <RouteSelector
       v-model="selected"
       :routes="routes"
