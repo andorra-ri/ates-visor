@@ -72,7 +72,7 @@ const sortBy = ref<keyof typeof SORTERS>('name');
 const filters = reactive<RouteFilters>({
   grades: [],
   zone: [],
-  elevation: 0,
+  elevation: [0, 0],
   orientation: [],
 });
 
@@ -83,7 +83,7 @@ const routes = sort([
   route => normalize(`${route.name} ${route.zone}`).includes(searchFor.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
   route => !filters.zone.length || filters.zone.some(zone => route.zone.includes(zone)),
-  route => !filters.elevation || route.elevation <= filters.elevation,
+  route => route.elevation >= filters.elevation[0] && route.elevation <= filters.elevation[1],
   route => !filters.orientation.length
     || filters.orientation.some(o => route.orientation.includes(o)),
 ], toRef(props, 'routes')));

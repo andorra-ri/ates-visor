@@ -1,3 +1,5 @@
+@import 'vue-slider-component/theme/default.css';
+
 .label {
   display: inline-block;
   flex: 1;
@@ -97,43 +99,17 @@ input[type="range"] {
   }
 }
 
-/*
-%range-track {
-  appearance: none;
-  background: #8882;
-  height: 100%;
-  border-radius: 0.25rem;
-}
-
-input[type="range"] {
-  width: 7rem;
-  appearance: none;
-  background: none;
-  height: 0.5rem;
-
-  &::-webkit-slider-runnable-track { @extend %range-track; }
-  &::-moz-range-track { @extend %range-track }
-
-  &::-moz-range-progress {
-    background: var(--color-primary);
-    height: 100%;
-    border-radius: 0.25rem;
+.vue-slider {
+  .vue-slider-rail {
+    background-color: #8884;
+    border-radius: 15px;
   }
 
-  &::-webkit-slider-thumb {
-    appearance: none;
-    background: #fff;
-    height: 1rem;
-    width: 0.5rem;
-    border-radius: 0.25rem;
-  }
+  .vue-slider-process { background-color: var(--color-primary); }
 
-  &::-moz-range-thumb {
-    appearance: none;
-    background: #fff;
-    height: 1rem;
-    width: 0.5rem;
-    border-radius: 0.25rem;
+  .vue-slider-dot-tooltip-inner {
+    padding: 0.5rem;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
   }
 }
-*/
