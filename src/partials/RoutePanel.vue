@@ -41,11 +41,11 @@
           </li>
         </ul>
       </aside>
-      <p>
+      <!--p>
         <button class="button" @click="downloadPdf">
           {{ t('download_pdf') }}
         </button>
-      </p>
+      </p-->
     </Expandable>
     <WaypointModal
       v-if="waypoint"
