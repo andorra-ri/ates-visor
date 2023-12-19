@@ -23,13 +23,11 @@
           :zones="options.zones" />
       </li>
       <li v-if="options.elevation">
-        <em>{{ t('route.fields.elevation') }}</em>
-        <small>{{ filters.elevation }}m</small>
-        <input
+        <em class="a">{{ t('route.fields.elevation') }}</em>
+        <VueSlider
           v-model="filters.elevation"
           v-bind="options.elevation"
-          class="filter-elevation"
-          type="range">
+          class="range-filter" />
       </li>
       <li>
         <em>{{ t('route.fields.orientation') }}</em>
@@ -42,6 +40,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import VueSlider from 'vue-slider-component';
 import { Dropdown, TableList } from '/@/components';
 import OrientationPicker from './OrientationPicker.vue';
 import GradePicker from './GradePicker.vue';
@@ -51,7 +50,7 @@ import type { ListRoute, Grade, Orientation } from '/@/types';
 export type RouteFilters = {
   grades: Grade[],
   zone: string[],
-  elevation: number,
+  elevation: [number, number],
   orientation: Orientation[],
 };
 
@@ -72,13 +71,14 @@ const options = computed(() => {
   const elevation = elevations.length ? {
     min: roundToUpperHundred(Math.min(...elevations)),
     max: roundToUpperHundred(Math.max(...elevations)),
-    step: 100,
+    interval: 100,
+    'tooltip-formatter': (value: number) => `${value}m`,
   } : undefined;
   return { zones, elevation };
 });
 
 watch(options, ({ elevation }) => {
-  filters.value.elevation = elevation?.max ?? 0;
+  filters.value.elevation = [0, elevation?.max ?? 0];
 }, { immediate: true });
 
 const activeFilters = computed(() => {
@@ -92,7 +92,7 @@ const activeFilters = computed(() => {
 const clear = () => {
   filters.value.grades = [];
   filters.value.zone = [];
-  filters.value.elevation = options.value.elevation?.max ?? 0;
+  filters.value.elevation = [0, options.value.elevation?.max ?? 0];
   filters.value.orientation = [];
 };
 
@@ -101,4 +101,6 @@ const { t } = useI18n();
 
 <style lang="scss" scoped>
 .filters { margin: 0.75rem; }
+
+.range-filter { flex: 1; }
 </style>
