@@ -85,6 +85,7 @@ layers:
 
   ROUTE:
     id: route
+    under: decisions
     images:
       ascend: /images/map/sprite_arrow_red.png
     layers:
@@ -112,6 +113,7 @@ layers:
       alert: /images/map/alert.png
     layers:
       - id: decisions
+        under: alerts
         type: circle
         paint:
           circle-color: '#d90429'
