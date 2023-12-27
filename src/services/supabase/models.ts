@@ -79,7 +79,7 @@ export const Waypoint = z.object({
   kind: z.enum(['DECISION', 'ALERT']),
   name: z.string(),
   description: z.string(),
-  routeCodes: z.string().array(),
+  order: z.number(),
   geometry: Point,
 });
 export type Waypoint = z.infer<typeof Waypoint>;

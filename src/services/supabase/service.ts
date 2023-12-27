@@ -48,9 +48,11 @@ export const getRoute = async (code: string) => {
   const fetchWaypoints = async () => {
     const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
     const waypoints = await query<DTO.Waypoint[]>('waypoints', {
-      qs: { select, route_codes: `cs.{${code}}` },
+      qs: { select, route_code: `eq.${code}` },
     });
-    return Array(Waypoint).parse(waypoints);
+    return Array(Waypoint)
+      .parse(waypoints)
+      .sort((a, b) => a.order - b.order);
   };
 
   const [route, waypoints] = await Promise.all([fetchRoute(), fetchWaypoints()]);
