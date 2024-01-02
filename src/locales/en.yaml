@@ -17,7 +17,7 @@ sorter:
   name: Name
   distance: Distance
   duration: Duration
-  grade: Grade
+  grade: Type
   zone: Zone
   elevation: Elevation
 
@@ -34,7 +34,7 @@ route:
     orientation: Orientation
     departure: Departure
     arrival: Arrival
-    grade: Grade
+    grade: Type
     zone: Zone
   waypoints: Waypoints
 

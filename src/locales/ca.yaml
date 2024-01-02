@@ -17,7 +17,7 @@ sorter:
   name: Nom
   distance: Distància
   duration: Durada
-  grade: Grau
+  grade: Tipus
   zone: Zona
   elevation: Desnivell
 
@@ -34,7 +34,7 @@ route:
     orientation: Orientació
     departure: Sortida
     arrival: Arribada
-    grade: Grau
+    grade: Tipus
     zone: Zona
   waypoints: Punts de pas
 
