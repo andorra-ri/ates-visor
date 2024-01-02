@@ -78,21 +78,24 @@ const options = computed(() => {
 });
 
 watch(options, ({ elevation }) => {
-  filters.value.elevation = [0, elevation?.max ?? 0];
+  filters.value.elevation = [elevation?.min ?? 0, elevation?.max ?? 0];
 }, { immediate: true });
 
 const activeFilters = computed(() => {
-  const gradesSelected = !!filters.value.grades.length;
-  const zoneSelected = !!filters.value.zone.length;
-  const elevationSelected = +filters.value.elevation !== options.value.elevation?.max;
-  const orientationSelected = !!filters.value.orientation.length;
+  const { grades, zone, elevation, orientation } = filters.value;
+  const { min = -Infinity, max = Infinity } = options.value.elevation || {};
+  const gradesSelected = !!grades.length;
+  const zoneSelected = !!zone.length;
+  const elevationSelected = +(elevation[0] !== min || elevation[1] !== max);
+  const orientationSelected = !!orientation.length;
   return +gradesSelected + +zoneSelected + +elevationSelected + +orientationSelected;
 });
 
 const clear = () => {
+  const { min = 0, max = 0 } = options.value.elevation || {};
   filters.value.grades = [];
   filters.value.zone = [];
-  filters.value.elevation = [0, options.value.elevation?.max ?? 0];
+  filters.value.elevation = [min, max];
   filters.value.orientation = [];
 };
 
