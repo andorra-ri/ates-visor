@@ -28,7 +28,7 @@ export const getTerrains = async () => {
 };
 
 export const getRoutes = async () => {
-  const fields = ['code', 'name:name_ca', 'grade', 'duration', 'distance', 'elevation', 'orientation', 'circular', 'zone', 'created_at', 'updated_at'];
+  const fields = ['code', 'name:name_ca', 'grade', 'duration', 'distance', 'elevation', 'orientation', 'circular', 'zone', 'created_at', 'updated_at', 'trails'];
   const routes = await query<DTO.ListRoute[]>('routes', { qs: { select: fields.join(',') } });
   return Array(ListRoute)
     .parse(routes)
@@ -48,9 +48,11 @@ export const getRoute = async (code: string) => {
   const fetchWaypoints = async () => {
     const select = ['name:name_ca', 'description:description_ca', '*'].join(',');
     const waypoints = await query<DTO.Waypoint[]>('waypoints', {
-      qs: { select, route_codes: `cs.{${code}}` },
+      qs: { select, route_code: `eq.${code}` },
     });
-    return Array(Waypoint).parse(waypoints);
+    return Array(Waypoint)
+      .parse(waypoints)
+      .sort((a, b) => a.order - b.order);
   };
 
   const [route, waypoints] = await Promise.all([fetchRoute(), fetchWaypoints()]);

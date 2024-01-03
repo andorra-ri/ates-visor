@@ -1,35 +1,69 @@
 <template>
-  <div class="dropdown" @focusin="onOpen" @focusout="onClose">
-    <div class="dropdown__toggle" tabindex="1">
-      <slot name="toggle" />
+  <div class="dropdown">
+    <div class="dropdown__toggler" tabindex="0">
+      <slot name="toggler">
+        {{ props.label || 'Dropdown' }}
+      </slot>
     </div>
-    <div class="dropdown__panel" tabindex="1">
+    <div class="dropdown__container">
       <slot />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const isOpen = defineModel<boolean>('open', { default: false });
+defineSlots<{
+  default?:(props: object) => void;
+  toggler?:(props: object) => void;
+}>();
 
-const onOpen = () => { isOpen.value = true; };
-const onClose = () => { isOpen.value = false; };
+const props = defineProps<{
+  label?: string;
+}>();
 </script>
 
 <style lang="scss" scoped>
 .dropdown {
+  display: inline-block;
   position: relative;
+  vertical-align: middle;
+  overflow: visible;
 
-  &__panel {
+  &__toggler {
+    display: flex;
+    align-items: center;
+  }
+
+  &__container {
     position: absolute;
     top: 100%;
-    margin: 0.25rem 0;
-    z-index: 1;
+    left: 0;
+    z-index: 2;
+    box-sizing: border-box;
     display: none;
-
-    :focus + &,
-    &:focus-within,
-    &:hover { display: block; }
+    margin: 0.125rem 0;
+    background: var(--color-bg);
+    box-shadow:
+      0 0 0 1px var(--color-border),
+      0 0.25rem 0.75rem 0 var(--color-border);
+    border-radius: 0.25rem;
   }
+
+  &[top] > &__container {
+    bottom: 100%;
+    top: unset;
+  }
+
+  &[right] > &__container {
+    left: unset;
+    right: 0;
+  }
+
+  &[block] { width: 100%; }
+  &[disabled] { cursor: not-allowed; }
+  &[disabled] &__container { display: none !important; }
+
+  &__container:hover,
+  &__toggler:focus-within + &__container { display: block; }
 }
 </style>

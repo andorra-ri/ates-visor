@@ -50,7 +50,6 @@ body {
 
     img {
       height: 1.5rem;
-      opacity: 0.4;
       transition: all 0.3s ease;
     }
 
@@ -103,10 +102,43 @@ body {
 }
 
 .button {
-  all: unset;
+  appearance: none;
+  border: 0;
   background: var(--color-primary);
   color: #fff;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 0.25rem;
   cursor: pointer;
+
+  &--light {
+    all: unset;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    &:hover { background: #8881; }
+
+    img {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  &--icon {
+    padding: 0.5rem;
+  }
 }
+
+.badge {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  background: #bc4749;
+  color: #fff;
+  position: absolute;
+  font-size: 0.75rem;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+

@@ -1,10 +1,10 @@
 ates: Avalanche Terrain Exposure Scale
 
-search: Search
-search_placeholder: Search
-filter: Filter
+search: Search {0}
+filter: Filter {0}
 sort: Sort
-sort_placeholder: Select
+select: Select {0}
+clear: Clear {0}
 none: None
 download_pdf: Download PDF
 
@@ -17,7 +17,7 @@ sorter:
   name: Name
   distance: Distance
   duration: Duration
-  grade: Grade
+  grade: Type
   zone: Zone
   elevation: Elevation
 
@@ -25,7 +25,8 @@ route:
   label: Route
   select_route: Choose a route
   empty: No routes available
-  search_for: Search for routes
+  search_for: Search by name or zone
+  filters: Filters
   fields:
     duration: Duration
     distance: Distance
@@ -33,6 +34,8 @@ route:
     orientation: Orientation
     departure: Departure
     arrival: Arrival
+    grade: Type
+    zone: Zone
   waypoints: Waypoints
 
 avalanche:
@@ -52,6 +55,8 @@ avalanche:
     - name: Extreme
       description: Numerous large natural avalanches are likely, even on moderately steep terrain.
   avaluator:
+    show: Show avaluator
+    hide: Hode avaluator
     not_recommended: Not recommended
     not_recommended_indications: Mountain travel without expert or professional knowledge is discouraged. Despite careful choices, conditions are ripe for avalanche incidents, and persistent exposure heightens the risk of an avalanche encounter.
     extra_caution: Extra caution

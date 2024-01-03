@@ -15,7 +15,7 @@
     </template>
     <h3 v-if="waypoint.description">{{ waypoint.name }}</h3>
     <p>{{ waypoint.description || waypoint.name }}</p>
-    <template #toggle="{ open }">
+    <template #toggler="{ open }">
       <slot :open="open" />
     </template>
   </Modal>

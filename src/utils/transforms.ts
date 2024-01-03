@@ -1,4 +1,4 @@
-export const toKm = (meters: number, digits = 1) => `${Math.round(meters / 100).toFixed(digits)}km`;
+export const toKm = (meters: number, digits = 1) => `${(meters / 1000).toFixed(digits)}km`;
 
 export const toHours = (minutes: number) => {
   const hours = Math.floor(minutes / 60);

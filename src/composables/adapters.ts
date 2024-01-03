@@ -7,7 +7,7 @@ type Metadata = {
   labels?: Record<string, string | false>;
 };
 
-export default () => {
+export const useLayerAdapter = () => {
   const { t, te } = useI18n();
 
   const localizeMetadata = (metadata: Metadata) => {
@@ -22,7 +22,7 @@ export default () => {
     };
   };
 
-  const adaptLayers = <T extends { layers: LayerOptions[] }>(options: T) => {
+  const adaptLayer = <T extends { layers: LayerOptions[] }>(options: T) => {
     const layers = options.layers.map(layer => {
       const metadata = layer.metadata ? localizeMetadata(layer.metadata) : undefined;
       return { ...layer, metadata };
@@ -30,5 +30,5 @@ export default () => {
     return { ...options, layers };
   };
 
-  return { adaptLayers };
+  return { adaptLayer };
 };

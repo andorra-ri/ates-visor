@@ -1,0 +1,80 @@
+ates: Escala d'Exposició al Terreny d'Allaus
+
+search: Cerca {0}
+filter: Filtra {0}
+sort: Ordena
+select: Selecciona {0}
+clear: Neteja {0}
+none: Cap
+download_pdf: Descarrega PDF
+
+grade:
+  SIMPLE: Simple
+  CHALLENGING: Exigent
+  COMPLEX: Complex
+
+sorter:
+  name: Nom
+  distance: Distància
+  duration: Durada
+  grade: Tipus
+  zone: Zona
+  elevation: Desnivell
+
+route:
+  label: Ruta
+  select_route: Tria una ruta
+  empty: No hi ha rutes disponibles
+  search_for: Cerca per nom o zona
+  filters: Filtres
+  fields:
+    duration: Durada
+    distance: Distància
+    elevation: Desnivell
+    orientation: Orientació
+    departure: Sortida
+    arrival: Arribada
+    grade: Tipus
+    zone: Zona
+  waypoints: Punts de pas
+
+avalanche:
+  bulletin: Butlletí de Perill d'Allaus
+  bulletin_url: http://meteo.ad/ca/estat-de-la-neu
+  risk:
+    - name: No disponible
+      description: No hi ha informació disponible
+    - name: Feble
+      description: El desencadenament d'allaus és possible en alguns pendents drets, en general per una sobrecàrrega forta. Poden haver-hi caigudes espontànies de petites allaus.
+    - name: Moderat
+      description: És possible el desencadenament d'allaus sobretot per una sobrecàrrega forta i en alguns pendents d'orientació i altitud indicats. No s'esperen caigudes espontànies d'allaus de grans dimensions.
+    - name: Marcat
+      description: És possible el desencadenament d'allaus fins i tot per una sobrecàrrega feble en nombrosos pendents, sobretot en aquells generalment descrits en el butlletí. En algunes situacions són possibles les caigudes espontànies d'allaus que poden ser de mida mitjana i, de vegades, grans.
+    - name: Fort
+      description: És probable el desencadenament d'allaus fins i tot per una sobrecàrrega feble i sobretot en nombrosos pendents. En algunes coasions s'han d'esperar nombroses caigudes espontànies d'allaus de mida mitjana i, de vegades, grans.
+    - name: Extrem
+      description: Hi ha nombroses caigudes espontànies de grans allaus, fins i tot en pendents poc drets.
+  avaluator:
+    show: Mostra avaluador
+    hide: Amaga avaluador
+    not_recommended: No recomanat
+    not_recommended_indications: No es recomana circular per la muntanya sense coneixements de nivell professional o expert sobre la neu i les allaus. Condicions idònies perquè hi hagi accidents per allaus.
+    extra_caution: Precaució extra
+    extra_caution_indications: Les allaus són possibles per causes humanes o naturals, i els accidents són freqüents. Es requereix un nivell avançat de comprensió del perill d'allaus existent.
+    caution: Precaució
+    caution_indications: Les condicions són adequades per circular per terreny d'allaus, i els accidents són generalment infreqüents. Cal saber reconèixer el perill i tenir les habilitats de circulació amb seguretat de rescat.
+  notify: Notifica
+
+map:
+  legend:
+    borders:
+      title: Límits
+    terrain:
+      title: Terreny
+      simple: Simple
+      challenging: Exigent
+      complex: Complex
+    route:
+      title: Rutes
+      ascend: Pujada
+      descend: Baixada

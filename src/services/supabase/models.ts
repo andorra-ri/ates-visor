@@ -40,7 +40,6 @@ export const Trail = z.object({
   id: z.number(),
   main: z.boolean(),
   down: z.boolean(),
-  duration: z.number(),
   routeCode: z.string(),
   geometry: LineString,
   updatedAt: z.string(),
@@ -71,7 +70,6 @@ export const ListRoute = Route.omit({
   description: true,
   departure: true,
   arrival: true,
-  trails: true,
 });
 export type ListRoute = z.infer<typeof ListRoute>;
 
@@ -80,7 +78,7 @@ export const Waypoint = z.object({
   kind: z.enum(['DECISION', 'ALERT']),
   name: z.string(),
   description: z.string(),
-  routeCodes: z.string().array(),
+  order: z.number(),
   geometry: Point,
 });
 export type Waypoint = z.infer<typeof Waypoint>;

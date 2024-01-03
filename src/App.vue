@@ -1,25 +1,35 @@
 <template>
   <Map />
   <div class="toolbar">
+    <a href="https://www.ari.ad" target="blank">
+      <img
+        src="/images/logo_ari.png"
+        alt="Andorra Recerca + Innovació"
+        class="brand">
+    </a>
     <RouteSelector
-      v-model:open="isOpenSelector"
+      v-model="selected"
       :routes="routes"
-      @select="selectRoute" />
+      :block="!!route" />
     <AvalancheNotify />
     <AvalancheRisk :risk="avalancheRisk" />
     <RoutePanel
-      v-if="!isOpenSelector && route"
-      :route="route" />
+      v-if="route"
+      :route="route"
+      @close="selected = undefined" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
 import store from '/@/store';
+import type { ListRoute } from '/@/types';
 
 const { routes, route, avalancheRisk, selectRoute } = store;
-const isOpenSelector = ref(false);
+
+const selected = ref<ListRoute>();
+watch(selected, selectRoute);
 
 onMounted(() => {
   store.loadAvalancheRisk();

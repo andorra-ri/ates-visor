@@ -7,7 +7,7 @@ map:
   minZoom: 10
   maxZoom: 16
   maxBounds: [[1.3, 42.3], [1.8, 42.8]]
-  style: mapbox://styles/markusand/clb421dmn000415qgh2579028
+  style: mapbox://styles/ari-infraestructura/clqp6lst200v001nwa4gw7c0d
 
   legend:
     toggler: true
@@ -18,8 +18,8 @@ map:
     Styles:
       position: top-right
       styles:
-        - name: Mapbox Outdoors
-          url: mapbox://styles/markusand/clb421dmn000415qgh2579028
+        - name: Outdoors
+          url: mapbox://styles/ari-infraestructura/clqp6lst200v001nwa4gw7c0d
           label: Topogràfic
         - name: Mapbox Satellite
           url: mapbox://styles/mapbox/satellite-v9
@@ -85,6 +85,7 @@ layers:
 
   ROUTE:
     id: route
+    under: decisions
     images:
       ascend: /images/map/sprite_arrow_red.png
     layers:
@@ -112,6 +113,7 @@ layers:
       alert: /images/map/alert.png
     layers:
       - id: decisions
+        under: alerts
         type: circle
         paint:
           circle-color: '#d90429'

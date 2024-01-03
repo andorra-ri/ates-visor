@@ -8,7 +8,7 @@ export const BROWSER_LOCALE = Intl.DateTimeFormat().resolvedOptions().locale.spl
 const i18n = createI18n({
   legacy: false,
   locale: BROWSER_LOCALE,
-  fallbackLocale: 'en',
+  fallbackLocale: 'ca',
   messages,
 });
 

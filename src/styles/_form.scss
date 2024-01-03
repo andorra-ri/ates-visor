@@ -1,5 +1,8 @@
+@import 'vue-slider-component/theme/default.css';
+
 .label {
   display: inline-block;
+  flex: 1;
   padding: 0.75rem;
 
   & > em {
@@ -15,10 +18,11 @@
 input[type="text"],
 input[type="search"] {
   all: unset;
-  &::placeholder { opacity: 0.25; }
+  &::placeholder { opacity: 0.35; }
 }
 
 .input {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -26,6 +30,7 @@ input[type="search"] {
   .icon {
     height: 1em;
     width: 1em;
+    flex: 0 0 1rem;
     display: block;
     opacity: 0.5;
     background-position: 50% 50%;
@@ -45,17 +50,66 @@ input[type="search"] {
   }
 }
 
-.selector {
-  input[type="radio"] { display: none; }
+// ! Can't combine selectors or reuse placeholders
+input[type="range"] {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
 
-  &__panel { @extend %container; }
+  /******** Chrome, Safari, Opera and Edge Chromium styles ********/
+  &::-webkit-slider-runnable-track {
+    background-color: #8882;
+    border-radius: 0.125rem;
+    height: 0.5rem;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -0.375rem;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    height: 1.25rem;
+    width: 0.75rem;
+    box-shadow:
+      0 0 0 1px #8888;
+  }
+
+
+  /*********** Firefox styles ***********/
+  &::-moz-range-track,
+  &::-moz-range-progress {
+    background-color: #ebebeb;
+    border-radius: 0.125rem;
+    height: 0.5rem;
+  }
+
+  &::-moz-range-progress { background: var(--color-primary); }
   
-  &__options {
-    max-height: 20rem;
-    overflow: auto;
+  &::-moz-range-thumb {
+    appearance: none;
+    margin-top: -0.375rem;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    height: 1.25rem;
+    width: 0.75rem;
+    border: 0;
+    box-shadow:
+      0 0 0 1px #8888;
+  }
+}
+
+.vue-slider {
+  .vue-slider-rail {
+    background-color: #8884;
+    border-radius: 15px;
+  }
+
+  .vue-slider-process { background-color: var(--color-primary); }
+
+  .vue-slider-dot-tooltip-inner {
     padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
   }
 }

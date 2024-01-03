@@ -1,79 +1,44 @@
 <template>
   <Selector
     v-model="selected"
-    v-model:open="isOpen"
     :options="routes"
     :empty-text="t('route.empty')"
-    class="route-selector"
     clearable>
-    <template #toggle="{ item }">
-      <div class="label toggler">
+    <template #toggler="{ item }">
+      <div class="label">
         <em>{{ t('route.label') }}</em>
-        {{ item?.name || t('route.select_route') }}
+        {{ (item as ListRoute)?.name || t('route.select_route') }}
       </div>
     </template>
     <template #topbar>
-      <aside class="route-selector__filters">
-        <!-- Searcher -->
-        <label class="label">
-          <em>{{ t('search') }}</em>
-          <div class="input">
-            <span class="icon magnifier" />
-            <input
-              v-model="searchFor"
-              :placeholder="t('route.search_for')"
-              size="15"
-              type="text">
-          </div>
-        </label>
-
-        <!-- Sorter -->
-        <div class="label">
-          <em>{{ t('sort') }}</em>
-          <Selector
-            v-model="sortBy"
-            :options="Object.keys(SORTERS)"
-            clearable>
-            <template #default="{ item }">
-              {{ item ? t(`sorter.${item}`) : t('sort_placeholder') }}
-            </template>
-          </Selector>
-        </div>
-
-        <!-- Filters -->
-        <div class="label">
-          <em>{{ t('filter') }}</em>
-          <fieldset class="filter-grade">
-            <label v-for="grade in GRADES" :key="grade">
-              <input
-                v-model="filters.grades"
-                :value="grade"
-                :class="['filter-grade__input', grade]"
-                type="checkbox">
-            </label>
-          </fieldset>
-        </div>
+      <aside class="topbar">
+        <SearchBox v-model="searchFor" />
+        <SortSelector
+          v-model="sortBy"
+          :sorters="SORTERS" />
+        <FiltersList
+          v-model="filters"
+          :routes="props.routes"
+          right />
       </aside>
     </template>
     <template #option="{ option }">
-      <div class="route-selector__route">
-        <span :class="['grade', option.grade]" />
-        <span>
-          <em class="note">{{ option.zone }}</em>
-          {{ option.name }}
-        </span>
-      </div>
+      <RouteListItem :route="option" />
     </template>
   </Selector>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watch, toRef } from 'vue';
+import { ref, computed, reactive, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
-import { useFilters, useSorters, type Sorter } from '/@/composables';
+import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
 import type { ListRoute, Grade } from '/@/types';
+import SearchBox from './filters/SearchBox.vue';
+import SortSelector from './filters/SortSelector.vue';
+import FiltersList, { type RouteFilters } from './filters/FiltersList.vue';
+import RouteListItem from './RouteListItem.vue';
 
 defineSlots<{
   selected?:(props: { route: ListRoute | undefined }) => void;
@@ -85,14 +50,7 @@ const props = defineProps<{
   placeholder?: string;
 }>();
 
-const emit = defineEmits<{
-  select: [code: string | undefined];
-}>();
-
-const isOpen = defineModel<boolean>('open', { default: false });
-
-const selected = ref<ListRoute>();
-watch(selected, route => emit('select', route?.code));
+const selected = defineModel<ListRoute | undefined>({ required: true });
 
 const { t } = useI18n();
 
@@ -110,22 +68,32 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
 };
 
 const searchFor = ref<string>('');
-const searchSeed = computed(() => normalize(searchFor.value));
-
 const sortBy = ref<keyof typeof SORTERS>('name');
-const filters = reactive<{ grades: Grade[] }>({ grades: [] });
+const filters = reactive<RouteFilters>({
+  grades: [],
+  zone: [],
+  elevation: [0, 0],
+  orientation: [],
+});
 
 const routes = sort([
   (a, b) => SORTERS[sortBy.value || 'undefined']?.(a, b) || 0,
   (a, b) => a.name.localeCompare(b.name),
 ], filter([
-  route => normalize(`${route.name} ${route.zone}`).includes(searchSeed.value),
+  route => normalize(`${route.name} ${route.zone}`).includes(searchFor.value),
   route => !filters.grades.length || filters.grades.includes(route.grade),
+  route => !filters.zone.length || filters.zone.some(zone => route.zone.includes(zone)),
+  route => route.elevation >= filters.elevation[0] && route.elevation <= filters.elevation[1],
+  route => !filters.orientation.length
+    || filters.orientation.some(o => route.orientation.includes(o)),
 ], toRef(props, 'routes')));
+
+const trails = computed(() => (selected.value ? [] : routes.value.flatMap(route => route.trails)));
+useTrailsMapper(trails);
 </script>
 
 <style lang="scss" scoped>
-.route-selector {
+.selector {
   width: 20rem;
 
   .toggler {
@@ -134,71 +102,12 @@ const routes = sort([
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  &__filters {
-    display: flex;
-    border-radius: 0.25rem 0.25rem 0 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  &__route {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.125rem;
-    cursor: pointer;
-
-    :checked + &  {
-      background: #f4f4f4;
-      box-shadow: 0 0 0 0.125rem #f4f4f4;
-    }
-
-    .grade {
-      display: inline-block;
-      flex: 0 0 0.5rem;
-      height: 0.5rem;
-      width: 0.5rem;
-      margin: 0.25rem 0;
-      border-radius: 0.125rem;
-      background: var(--color);
-    }
-
-    em.note {
-      display: block;
-      font-size: 0.75em;
-      opacity: 0.5;
-      line-height: 1.25;
-    }
-  }
 }
 
-.filter-grade {
+.topbar {
   display: flex;
-  gap: 0.125rem;
-
-  &__input {
-    all: unset;
-    display: inline-block;
-    height: 1rem;
-    width: 1rem;
-    background: var(--color, #f0f0f0);
-    border-radius: 0.125rem;
-    cursor: pointer;
-    transform: scale(0.75);
-    opacity: 0.75;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    &:hover { opacity: 1; }
-
-    &:checked {
-      transform: none;
-      opacity: 1;
-    }
-  }
+  align-items: center;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border-bottom: 1px solid var(--color-border);
 }
-</style>
-
-<style lang="scss">
-.route-selector .selector__panel { @extend %container-strong }
 </style>
