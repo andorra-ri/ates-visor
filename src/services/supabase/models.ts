@@ -40,7 +40,6 @@ export const Trail = z.object({
   id: z.number(),
   main: z.boolean(),
   down: z.boolean(),
-  duration: z.number(),
   routeCode: z.string(),
   geometry: LineString,
   updatedAt: z.string(),
