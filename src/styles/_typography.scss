@@ -43,3 +43,11 @@ h3 { font-size: 1rem; }
   // Hack to improve chip readibility with SIMPLE color
   &.SIMPLE { --color: #89ae51 !important; }
 }
+
+.warning {
+  color: #eea602;
+  background: #fefae0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #eea60244;
+  border-radius: 0.25rem; 
+}

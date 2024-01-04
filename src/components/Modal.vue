@@ -4,6 +4,7 @@
     v-bind="$attrs"
     :style="`width:${size}`"
     class="modal"
+    @cancel="onCancel"
     @close="closeModal">
     <slot name="close" :close="closeModal">
       <button
@@ -62,6 +63,8 @@ const toggleModal = (toOpen = !modal.value?.open) => {
   if (toOpen) openModal();
   else closeModal();
 };
+
+const onCancel = (event: Event) => !props.closeable && event.preventDefault();
 
 watch(() => props.open, toggleModal, { immediate: true });
 
