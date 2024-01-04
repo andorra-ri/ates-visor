@@ -1,3 +1,5 @@
+export * from './use.storage';
+
 export * from './map';
 export * from './adapters';
 

@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, toRef } from 'vue';
+import { ref, computed, reactive, watch, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
@@ -89,7 +89,10 @@ const routes = sort([
 ], toRef(props, 'routes')));
 
 const trails = computed(() => (selected.value ? [] : routes.value.flatMap(route => route.trails)));
-useTrailsMapper(trails);
+const { clicked } = useTrailsMapper(trails);
+watch(clicked, routeCode => {
+  if (routeCode) selected.value = props.routes.find(route => route.code === routeCode);
+});
 </script>
 
 <style lang="scss" scoped>

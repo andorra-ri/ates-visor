@@ -18,11 +18,12 @@
       :route="route"
       @close="selected = undefined" />
   </div>
+  <Disclaimer />
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
-import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel } from '/@/partials';
+import { Map, RouteSelector, AvalancheRisk, AvalancheNotify, RoutePanel, Disclaimer } from '/@/partials';
 import store from '/@/store';
 import type { ListRoute } from '/@/types';
 

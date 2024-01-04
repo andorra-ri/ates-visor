@@ -50,55 +50,6 @@ input[type="search"] {
   }
 }
 
-// ! Can't combine selectors or reuse placeholders
-input[type="range"] {
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-  outline: none;
-
-  /******** Chrome, Safari, Opera and Edge Chromium styles ********/
-  &::-webkit-slider-runnable-track {
-    background-color: #8882;
-    border-radius: 0.125rem;
-    height: 0.5rem;
-  }
-
-  &::-webkit-slider-thumb {
-    appearance: none;
-    margin-top: -0.375rem;
-    background-color: #fff;
-    border-radius: 0.25rem;
-    height: 1.25rem;
-    width: 0.75rem;
-    box-shadow:
-      0 0 0 1px #8888;
-  }
-
-
-  /*********** Firefox styles ***********/
-  &::-moz-range-track,
-  &::-moz-range-progress {
-    background-color: #ebebeb;
-    border-radius: 0.125rem;
-    height: 0.5rem;
-  }
-
-  &::-moz-range-progress { background: var(--color-primary); }
-  
-  &::-moz-range-thumb {
-    appearance: none;
-    margin-top: -0.375rem;
-    background-color: #fff;
-    border-radius: 0.25rem;
-    height: 1.25rem;
-    width: 0.75rem;
-    border: 0;
-    box-shadow:
-      0 0 0 1px #8888;
-  }
-}
-
 .vue-slider {
   .vue-slider-rail {
     background-color: #8884;

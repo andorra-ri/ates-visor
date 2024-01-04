@@ -1,5 +1,13 @@
 ates: Avalanche Terrain Exposure Scale
 
+disclaimer:
+  exepmption: Disclaimer
+  warning: The practice of mountain routes may involve risks, and it is your responsibility to take all necessary precautions to ensure your safety and integrity.
+  responsibility: The information provided on this page is for guidance purposes only and is not binding. Although it can assist you during your route, this information does not replace the need for experience, training, or professional guidance to plan your excursion. Consequently, this page assumes no responsibility for your safety during the journey.
+  acceptance: By browsing or using this website, the user confirms having read and understood this statement.
+  accept: I accept
+
+
 search: Search {0}
 filter: Filter {0}
 sort: Sort
