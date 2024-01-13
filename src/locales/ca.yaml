@@ -47,7 +47,7 @@ route:
 
 avalanche:
   bulletin: Butlletí de Perill d'Allaus
-  bulletin_url: http://meteo.ad/ca/estat-de-la-neu
+  bulletin_url: https://www.meteo.ad/estatneu
   risk:
     - name: No disponible
       description: No hi ha informació disponible
