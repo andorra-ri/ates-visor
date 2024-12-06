@@ -1,0 +1,87 @@
+ates: Escalera de exposiciones al terreno de aludes
+
+disclaimer:
+  exemption: Exención de responsabilidad
+  warning: La práctica de rutas de montaña puede comportar riesgos, siendo su responsabilidad tomar todas las precauciones necesarias para garantizar su seguridad e integridad.
+  responsibility: La informació proporcionada en aquesta pàgina té un caràcter orientatiu i no és vinculant. Tot i que pot guiar-lo durant la seva ruta, aquesta informació no substitueix la necessitat d'experiència, formació o acompanyament professional per planificar la seva excursió. En conseqüència, aquesta pàgina no assumeix cap responsabilitat per la seva seguretat durant el recorregut.
+  acceptance: La información proporcionada en esta página tiene carácter orientativo y no es vinculante. Aunque puede guiarle durante su ruta, esta información no sustituye la necesidad de experiencia, formación o acompañamiento profesional para planificar su excursión. En consecuencia, esta página no asume responsabilidad alguna por su seguridad durante el recorrido.
+  accept: Acepto
+
+search: Buscar {0}
+filter: Filtrar {0}
+sort: Ordenar
+select: Seleccionar {0}
+clear: Limpiar {0}
+none: Ninguno
+download_pdf: Descargar PDF
+
+grade:
+  SIMPLE: Simple
+  CHALLENGING: Exigente
+  COMPLEX: Complejo
+
+sorter:
+  name: Nombre
+  distance: Distancia
+  duration: Tiempo
+  grade: Tipus
+  zone: Zona
+  elevation: Desnivel
+
+route:
+  label: Ruta
+  select_route: Escoja una ruta
+  empty: No hay rutas disponibles
+  search_for: Búsqueda por nombre o zona
+  filters: Filtros
+  fields:
+    duration: Tiempo
+    distance: Distancia
+    elevation: Desnivell
+    orientation: Orientación
+    departure: Salida
+    arrival: Llegada
+    grade: Tipo
+    zone: Zona
+  waypoints: Puntos de paso
+
+avalanche:
+  bulletin: Boletín de Peligro de Aludes
+  bulletin_url: https://www.meteo.ad/estatneu
+  risk:
+    - name: No disponible
+      description: No hay información disponible
+    - name: Débil
+      description: El desencadenamiento de aludes es posible en algunas pendientes de pie, por lo general por una sobrecarga fuerte. Pueden haber caídas espontáneas de pequeños aludes.
+    - name: Moderado
+      description: Es posible el desencadenamiento de aludes sobre todo por una sobrecarga fuerte y en algunas pendientes de orientación y altitud indicadas. No se esperan caídas espontáneas de aludes de gran tamaño.
+    - name: Marcado
+      description: Es posible el desencadenamiento de aludes incluso por una sobrecarga débil en numerosas pendientes, sobre todo en aquellos generalmente descritos en el boletín. En algunas situaciones son posibles las caídas espontáneas de aludes que pueden ser de tamaño medio y, en ocasiones, grandes.
+    - name: Fuerte
+      description: Es probable el desencadenamiento de aludes incluso por una sobrecarga débil y sobre todo en numerosas pendientes. En algunas coasiones deben esperarse numerosas caídas espontáneas de aludes de tamaño medio y, en ocasiones, grandes.
+    - name: Extremo
+      description: Hay numerosas caídas espontáneas de grandes aludes, incluso en pendientes poco empinadas.
+  avaluator:
+    show: Muestra evaluador
+    hide: Esconde evaluador
+    not_recommended: No recomendado
+    not_recommended_indications: No se recomienda circular por la montaña sin conocimientos de nivel profesional o experto sobre la nieve y los aludes. Condiciones idóneas para que existan accidentes por aludes.
+    extra_caution: Precaución extra
+    extra_caution_indications: Los aludes son posibles por causas humanas o naturales, y los accidentes son frecuentes. Se requiere un nivel avanzado de comprensión del peligro de aludes existente.
+    caution: Precaución
+    caution_indications: Las condiciones son adecuadas para circular por terreno de aludes, y los accidentes son generalmente infrecuentes.
+  notify: Notifica
+
+map:
+  legend:
+    borders:
+      title: Límites
+    terrain:
+      title: Terreno
+      simple: Simple
+      challenging: Exigente
+      complex: Complejo
+    route:
+      title: Rutas
+      ascend: Subida
+      descend: Bajada

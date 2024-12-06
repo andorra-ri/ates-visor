@@ -1,0 +1,87 @@
+ates: Escalier d'exposition au terrain d'avalanches
+
+disclaimer:
+  exemption: Exemption de responsabilité
+  warning: La pratique des itinéraires de montagne peut comporter des risques. Il est de votre responsabilité de prendre toutes les précautions nécessaires pour garantir votre sécurité et votre intégrité.
+  responsibility: Les informations fournies sur cette page ont un caractère indicatif et ne sont pas contraignantes. Bien qu'elles puissent vous guider lors de votre parcours, ces informations ne remplacent pas l'expérience, la formation ou l'accompagnement professionnel nécessaires pour planifier votre excursion. En conséquence, cette page décline toute responsabilité pour votre sécurité durant le parcours.
+  acceptance: Les informations fournies sur cette page ont un caractère indicatif et ne sont pas contraignantes. Bien qu'elles puissent vous guider lors de votre parcours, ces informations ne remplacent pas l'expérience, la formation ou l'accompagnement professionnel nécessaires pour planifier votre excursion. En conséquence, cette page décline toute responsabilité pour votre sécurité durant le parcours.
+  accept: J'accepte
+
+search: Rechercher {0}
+filter: Filtrer {0}
+sort: Trier
+select: Sélectionner {0}
+clear: Effacer {0}
+none: Aucun
+download_pdf: Télécharger PDF
+
+grade:
+  SIMPLE: Simple
+  CHALLENGING: Exigeant
+  COMPLEX: Complexe
+
+sorter:
+  name: Nom
+  distance: Distance
+  duration: Temps
+  grade: Type
+  zone: Zone
+  elevation: Dénivelé
+
+route:
+  label: Itinéraire
+  select_route: Choisissez un itinéraire
+  empty: Aucun itinéraire disponible
+  search_for: Recherche par nom ou zone
+  filters: Filtres
+  fields:
+    duration: Temps
+    distance: Distance
+    elevation: Dénivelé
+    orientation: Orientation
+    departure: Départ
+    arrival: Arrivée
+    grade: Type
+    zone: Zone
+  waypoints: Points de passage
+
+avalanche:
+  bulletin: Bulletin de Risque d'Avalanches
+  bulletin_url: https://www.meteo.ad/estatneu
+  risk:
+    - name: Non disponible
+      description: Aucune information disponible
+    - name: Faible
+      description: Le déclenchement d'avalanches est possible sur certaines pentes raides, généralement par une surcharge forte. De petites avalanches spontanées peuvent se produire.
+    - name: Modéré
+      description: Le déclenchement d'avalanches est possible, surtout avec une surcharge forte, sur certaines pentes d'orientation et d'altitude indiquées. Aucune avalanche spontanée de grande taille n'est attendue.
+    - name: Marqué
+      description: Le déclenchement d'avalanches est possible même avec une surcharge faible sur de nombreuses pentes, en particulier celles décrites dans le bulletin. Des avalanches spontanées de taille moyenne, parfois grandes, peuvent survenir.
+    - name: Fort
+      description: Le déclenchement d'avalanches est probable même avec une surcharge faible, surtout sur de nombreuses pentes. Des avalanches spontanées de taille moyenne, parfois grandes, doivent être attendues.
+    - name: Extrême
+      description: De nombreuses avalanches spontanées de grande taille se produisent, même sur des pentes peu raides.
+  avaluator:
+    show: Montrer l'évaluateur
+    hide: Cacher l'évaluateur
+    not_recommended: Non recommandé
+    not_recommended_indications: Il n'est pas recommandé de circuler en montagne sans connaissances professionnelles ou expertes sur la neige et les avalanches. Conditions idéales pour des accidents d'avalanches.
+    extra_caution: Prudence accrue
+    extra_caution_indications: Les avalanches sont possibles pour des raisons humaines ou naturelles, et les accidents sont fréquents. Un niveau avancé de compréhension des risques d'avalanches est requis.
+    caution: Prudence
+    caution_indications: Les conditions sont adaptées pour circuler en terrain d'avalanches, et les accidents sont généralement rares.
+  notify: Notifier
+
+map:
+  legend:
+    borders:
+      title: Frontières
+    terrain:
+      title: Terrain
+      simple: Simple
+      challenging: Exigeant
+      complex: Complexe
+    route:
+      title: Itinéraires
+      ascend: Montée
+      descend: Descente
