@@ -1,14 +1,12 @@
 const CORS_PROXY = 'https://corsproxy.io/?';
-const AVALANCHE_URL = 'https://www.meteo.ad/xml/neige.xml';
+const AVALANCHE_URL = '/.netlify/functions/neige';
 const NODE_SELECTOR = 'neige[data="europeu"]';
 const ATTRIBUTE = 'idstate';
 
 const parser = new window.DOMParser();
 
 export const getAvalancheRisk = async () => {
-  const timestamp = Math.floor(Date.now() / 1000);
-  const url = `${CORS_PROXY}${encodeURIComponent(AVALANCHE_URL)}?d=${timestamp}`;
-  const response = await fetch(url);
+  const response = await fetch(AVALANCHE_URL);
   if (!response.ok) throw new Error(response.statusText);
   const data = await response.text();
   const xml = parser.parseFromString(data, 'text/xml');
