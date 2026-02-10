@@ -113,13 +113,13 @@ const { t } = useI18n();
 .item-description {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem; // espacio vertical entre fila y descripción
+  gap: 0.25rem;
 }
 
 .filter-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem; // espacio entre em y picker
+  gap: 0.5rem;
 }
 
 .description-block {
