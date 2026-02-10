@@ -40,6 +40,7 @@ route:
     distance: Distance
     elevation: Elevation
     orientation: Orientation
+    orientation_description: Show only routes that include at least one selected orientation and none deselected
     departure: Departure
     arrival: Arrival
     grade: Type
