@@ -29,9 +29,12 @@
           v-bind="options.elevation"
           class="range-filter" />
       </li>
-      <li>
-        <em>{{ t('route.fields.orientation') }}</em>
-        <OrientationPicker v-model="filters.orientation" />
+      <li class="item-description">
+        <div class="filter-row">
+          <em>{{ t('route.fields.orientation') }}</em>
+          <OrientationPicker v-model="filters.orientation" />
+        </div>
+        <p class="description-block">{{t('route.fields.orientation_description') }}</p>
       </li>
     </TableList>
   </Dropdown>
@@ -106,4 +109,22 @@ const { t } = useI18n();
 .filters { margin: 0.75rem; }
 
 .range-filter { flex: 1; }
+
+.item-description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; // espacio vertical entre fila y descripción
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // espacio entre em y picker
+}
+
+.description-block {
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin: 0;
+}
 </style>

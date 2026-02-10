@@ -39,6 +39,7 @@ route:
     distance: Distància
     elevation: Desnivell
     orientation: Orientació
+    orientation_description: Mostra només rutes que inclouen almenys una orientació seleccionada i cap deseleccionada
     departure: Sortida
     arrival: Arribada
     grade: Tipus

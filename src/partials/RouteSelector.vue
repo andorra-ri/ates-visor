@@ -34,7 +34,7 @@ import { useI18n } from 'vue-i18n';
 import { Selector } from '/@/components';
 import { useTrailsMapper, useFilters, useSorters, type Sorter } from '/@/composables';
 import { normalize } from '/@/utils';
-import type { ListRoute, Grade } from '/@/types';
+import type { ListRoute, Grade, Orientation } from '/@/types';
 import SearchBox from './filters/SearchBox.vue';
 import SortSelector from './filters/SortSelector.vue';
 import FiltersList, { type RouteFilters } from './filters/FiltersList.vue';
@@ -69,11 +69,12 @@ const SORTERS: Record<string, Sorter<ListRoute>> = {
 
 const searchFor = ref<string>('');
 const sortBy = ref<keyof typeof SORTERS>('name');
+const allOrientation: Orientation[] = ['N','NE','E','SE','S','SO','O','NO']
 const filters = reactive<RouteFilters>({
   grades: [],
   zone: [],
   elevation: [0, 0],
-  orientation: [],
+  orientation: allOrientation,
 });
 
 const routes = sort([
@@ -84,8 +85,9 @@ const routes = sort([
   route => !filters.grades.length || filters.grades.includes(route.grade),
   route => !filters.zone.length || filters.zone.some(zone => route.zone.includes(zone)),
   route => route.elevation >= filters.elevation[0] && route.elevation <= filters.elevation[1],
-  route => !filters.orientation.length
-    || filters.orientation.some(o => route.orientation.includes(o)),
+  route => route.orientation.some(o => filters.orientation.includes(o)) &&
+    !route.orientation.some(o => !filters.orientation.includes(o) && allOrientation.includes(o))
+ 
 ], toRef(props, 'routes')));
 
 const trails = computed(() => (selected.value ? [] : routes.value.flatMap(route => route.trails)));
