@@ -1,4 +1,5 @@
-export const getLocale = () => Intl.DateTimeFormat().resolvedOptions().locale.split('-')[0] ?? 'ca';
+// export const getLocale = () => Intl.DateTimeFormat().resolvedOptions().locale.split('-')[0] ?? 'ca';
+export const getLocale = () => 'ca';
 
 export const getLocaleField = (field: string): string => {
   console.log(`${field}_${getLocale()}`);
